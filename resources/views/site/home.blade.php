@@ -117,7 +117,6 @@
                                 <img src="@if(Storage::exists($instructor->instructor_image)){{ Storage::url($instructor->instructor_image) }}@else{{ asset('backend/assets/images/course_detail_thumb.jpg') }}@endif">
                                 <div class="col-md-12">
                                     <h6 class="instructor-title">{{ $instructor->first_name.' '.$instructor->last_name }}</h6>
-                                    <p>{!! mb_strimwidth($instructor->biography, 0, 120, ".....") !!}</p>
                                 </div>
                             </main>
                         </a>

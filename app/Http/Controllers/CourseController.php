@@ -41,6 +41,8 @@ class CourseController extends Controller
                     ->select('courses.*', 'instructors.first_name', 'instructors.last_name')
                     ->join('instructors', 'instructors.id', '=', 'courses.instructor_id')
                     ->join('course_taken', 'course_taken.course_id', '=', 'courses.id')
+                    ->groupBy('instructors.first_name')
+                    ->groupBy('instructors.last_name')
                     ->where('course_taken.user_id',$user_id)->get();
         
         return view('site.course.my-courses', compact('courses'));
@@ -222,6 +224,8 @@ class CourseController extends Controller
                     ->selectRaw('AVG(course_ratings.rating) AS average_rating')
                     ->leftJoin('course_ratings', 'course_ratings.course_id', '=', 'courses.id')
                     ->join('instructors', 'instructors.id', '=', 'courses.instructor_id')
+                    ->groupBy('instructors.first_name')
+                    ->groupBy('instructors.last_name')
                     ->where('courses.is_active',1);
         //filter categories as per user selected                
         if($category_search) {

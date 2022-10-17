@@ -37,6 +37,8 @@ class HomeController extends Controller
                     ->join('instructors', 'instructors.id', '=', 'courses.instructor_id')
                     ->where('courses.is_active',1)
                     ->groupBy('courses.id')
+                    ->groupBy('instructors.first_name')
+                    ->groupBy('instructors.last_name')
                     ->limit(8)
                     ->orderBy('courses.updated_at', 'desc')
                     ->get();
@@ -48,6 +50,8 @@ class HomeController extends Controller
                     ->join('instructors', 'instructors.id', '=', 'courses.instructor_id')
                     ->where('courses.is_active',1)
                     ->groupBy('courses.id')
+                    ->groupBy('instructors.first_name')
+                    ->groupBy('instructors.last_name')
                     ->limit(8)
                     ->where('courses.price', 0)
                     ->get();
@@ -59,6 +63,8 @@ class HomeController extends Controller
                     ->join('instructors', 'instructors.id', '=', 'courses.instructor_id')
                     ->where('courses.is_active',1)
                     ->groupBy('courses.id')
+                    ->groupBy('instructors.first_name')
+                    ->groupBy('instructors.last_name')
                     ->limit(8)
                     ->where('courses.strike_out_price', '<>' ,null)
                     ->get();
