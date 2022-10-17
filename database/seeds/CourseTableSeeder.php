@@ -61,7 +61,7 @@ class CourseTableSeeder extends Seeder
                                  );
 
                 foreach ($section_names as $s_key => $section_name) {
-                    $curriculum_sections['course_id'] = $course->id;
+                    $curriculum_sections['course_id'] = $course_id;
                     $curriculum_sections['title'] = $section_name;
                     $curriculum_sections['sort_order'] = $s_key;
                     $curriculum_sections['createdOn'] = date("Y-m-d H:i:s");   
