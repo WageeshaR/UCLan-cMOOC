@@ -238,7 +238,7 @@ class Course extends Model
         {
 			 $data['createdOn'] = date("Y-m-d H:i:s");	
 			 $data['updatedOn'] = date("Y-m-d H:i:s");	
-			 $id = \DB::table( $table)->insertGetId($data);
+			 $id = \DB::table( $table)->insertGetId($data, "section_id");
             
         } else {
             // Update here 
@@ -258,7 +258,7 @@ class Course extends Model
         {
 			 $data['createdOn'] = date("Y-m-d H:i:s");	
 			 $data['updatedOn'] = date("Y-m-d H:i:s");	
-			 $id = \DB::table( $table)->insertGetId($data);
+			 $id = \DB::table( $table)->insertGetId($data, "section_id");
             
         } else {
             // Update here 
