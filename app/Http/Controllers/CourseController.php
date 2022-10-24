@@ -41,6 +41,7 @@ class CourseController extends Controller
                     ->select('courses.*', 'instructors.first_name', 'instructors.last_name')
                     ->join('instructors', 'instructors.id', '=', 'courses.instructor_id')
                     ->join('course_taken', 'course_taken.course_id', '=', 'courses.id')
+                    ->groupBy('courses.id')
                     ->groupBy('instructors.first_name')
                     ->groupBy('instructors.last_name')
                     ->where('course_taken.user_id',$user_id)->get();
