@@ -103,7 +103,7 @@ class HomeController extends Controller
                     ->paginate($paginate_count);
 
         $archieves = DB::table('blogs')
-                ->select(DB::raw('YEAR(created_at) year, MONTH(created_at) month, MONTHNAME(created_at) month_name, COUNT(*) blog_count'))
+                ->select(DB::raw('extract(year from "created_at") as year, extract(month from "created_at") as month, COUNT(*) blog_count'))
                 ->groupBy('year')
                 ->groupBy('month')
                 ->orderBy('year', 'desc')
@@ -119,7 +119,7 @@ class HomeController extends Controller
         $blog =  Blog::where('blog_slug',$blog_slug)->first();
 
         $archieves = DB::table('blogs')
-                ->select(DB::raw('YEAR(created_at) year, MONTH(created_at) month, MONTHNAME(created_at) month_name, COUNT(*) blog_count'))
+                ->select(DB::raw('extract(year from "created_at") as year, extract(month from "created_at") as month, COUNT(*) blog_count'))
                 ->groupBy('year')
                 ->groupBy('month')
                 ->orderBy('year', 'desc')

@@ -63,7 +63,6 @@
                                 <img src="@if(Storage::exists($blog->blog_image)){{ Storage::url($blog->blog_image) }}@else{{ asset('backend/assets/images/blog_image.jpeg') }}@endif">
                             </div>
 
-                            <p>{!! mb_strimwidth($blog->description, 0, 230, ".....") !!}</p>
                             
                             <hr class="mb-5 mt-4">
                         </div>
@@ -95,7 +94,7 @@
                     <ul class="ul-no-padding">
                         @foreach ($archieves as $archieve)
                         <li class="my-2"> 
-                            {{ $archieve->month_name.' '.$archieve->year.' ('.$archieve->blog_count.')' }}
+                            {{ $archieve->month.' '.$archieve->year.' ('.$archieve->blog_count.')' }}
                         </li>
                         @endforeach
                     </ul>
