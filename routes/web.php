@@ -169,9 +169,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::group(['middleware' => 'subscribed'], function () {
         //Route for react js
-        Route::get('course-enroll/{course_slug}/{lecture_slug}', function () {
-            return view('site/course/course_enroll');
-        });
+        Route::get('course-enroll/{course_slug}/{lecture_slug}', 'CourseController@lectureDiscussion')->name('course.discussion');
         Route::get('course-learn/{course_slug}', 'CourseController@courseLearn')->name('course.learn');
     });
     

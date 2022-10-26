@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CourseTaken;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Course;
@@ -97,8 +98,8 @@ class CourseController extends Controller
         {
             $video = $this->model->getvideoinfoFirst($course->course_video); 
         }
-        
-        return view('site.course.view', compact('course', 'curriculum_sections', 'lectures_count', 'videos_count', 'video', 'course_breadcrumb', 'is_curriculum'));
+        $is_enrolled = CourseTaken::where('course_id', $course->id)->where('user_id', \Auth::user()->id)->exists();
+        return view('site.course.view', compact('course', 'curriculum_sections', 'lectures_count', 'videos_count', 'video', 'course_breadcrumb', 'is_curriculum', 'is_enrolled'));
     }
 
     public function courseLearn($course_slug = '', Request $request)
@@ -602,6 +603,15 @@ class CourseController extends Controller
     }
 
     /* Curriculum start */
+    public function lectureDiscussion($course_slug = '', $lecture_slug = '', Request $request)
+    {
+        $course = Course::where('course_slug', $course_slug)->first();
+        $discussion = DB::table('curriculum_lectures_quiz')
+                        ->select('*')
+                        ->where('lecture_quiz_id', SiteHelpers::encrypt_decrypt($lecture_slug, 'd'))->first();
+        return view('site.course.discussion', compact('course', 'discussion'));
+    }
+
     public function postSectionSave(Request $request)
     {   
         $data['course_id'] = $request->input('courseid');

@@ -68,7 +68,11 @@
                         </div>
                         <div class="col-xl-3 col-lg-3 col-md-6 float-md-right col-sm-6 float-sm-right col-6">
                             <div class="cv-category-detail cv-enroll float-lg-right float-md-right float-sm-right">
-                                <a href="{{ route('course.checkout', $course->course_slug) }}" class="btn btn-ulearn-cview mt-1">ENROLL COURSE</a>
+                                @if($is_enrolled)
+                                    <a href="{{ route('course.learn', $course->course_slug) }}" class="btn btn-ulearn-cview mt-1">GO TO COURSE</a>
+                                @else
+                                    <a href="{{ route('course.checkout', $course->course_slug) }}" class="btn btn-ulearn-cview mt-1">ENROLL COURSE</a>
+                                @endif
                             </div>
                         </div>
                     </div>
