@@ -93,17 +93,18 @@ class Course extends Model
     {
         $lectures = \DB::table('curriculum_sections')
               ->join('curriculum_lectures_quiz', 'curriculum_lectures_quiz.section_id', '=', 'curriculum_sections.section_id')
-              ->leftJoin('course_videos', 'course_videos.id', '=', 'curriculum_lectures_quiz.media')
-              ->leftJoin('course_files', 'course_files.id', '=', 'curriculum_lectures_quiz.media')
+//              ->leftJoin('course_videos', 'course_videos.id', '=', 'curriculum_lectures_quiz.media')
+//              ->leftJoin('course_files', 'course_files.id', '=', 'curriculum_lectures_quiz.media')
               ->select('curriculum_sections.section_id',
               	'curriculum_sections.title as s_title', 
                 'curriculum_lectures_quiz.lecture_quiz_id',
               	'curriculum_lectures_quiz.title as l_title',
               	'curriculum_sections.sort_order as s_sort_order', 
               	'curriculum_lectures_quiz.sort_order as l_sort_order',
-                'curriculum_lectures_quiz.media_type',
-                'course_videos.duration as v_duration',
-                'course_files.duration as f_duration')
+                'curriculum_lectures_quiz.media_type'
+//                'course_videos.duration as v_duration',
+//                'course_files.duration as f_duration'
+            )
               ->where('curriculum_sections.course_id', '=', $id)
               ->where("curriculum_lectures_quiz.publish",'=','1')
               ->orderBy('curriculum_sections.sort_order', 'asc')
