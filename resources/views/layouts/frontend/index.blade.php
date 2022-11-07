@@ -26,7 +26,7 @@
         <div class="row" style="flex-grow: 1;">
             <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2" id="logo">
                 <i class="fa fa-bars d-inline-block d-md-none mobile-nav"></i>
-                <a href="{{ route('home') }}" class="float-xl-right"><img src="{{ asset('frontend/img/logo.png') }}" width="100" height="23" /></a>
+                <a href="{{ route('home') }}" class="float-xl-right"><img src="{{ asset('frontend/img/logo.png') }}" width="70" height="25" /></a>
             </div>
             <div class="col-md-3 col-lg-6 col-xl-6 d-none d-md-block">
                 <div class="dropdown float-left" >
@@ -130,10 +130,10 @@
                 </ul>
             </div>
             <div class="col-lg-6 col-md-12 col-sm-12 text-center mt-4">
-                <img src="{{ asset('frontend/img/logo_footer.png') }}" class="img-fluid" width="210" height="48">
+                <img src="{{ asset('frontend/img/logo.png') }}" class="img-fluid" width="180" height="40">
                 <br>
-                <span id="c-copyright">
-                    Copyright © 2019, Ulearn. All rights reserved.
+                <span style="font-size: 12px" id="c-copyright">
+                    Copyright © 2022, IncluDE. All rights reserved.
                 </span>
             </div>
         </div>

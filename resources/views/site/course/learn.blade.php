@@ -77,7 +77,7 @@
                     
                     @if($is_curriculum)
                     <!-- curriculum block start -->
-                    <h4 class="mt-4">Curriculum</h4>
+                    <h4 class="mt-4">Topics you'll learn..</h4>
 
                     <div class="accordion mt-3" id="accordionExample">
                       

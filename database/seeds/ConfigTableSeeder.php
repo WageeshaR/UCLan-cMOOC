@@ -19,14 +19,14 @@ class ConfigTableSeeder extends Seeder
             'id'=>1,
             'code'=>'pageHome',
             'option_key'=>'banner_title',
-            'option_value'=>'Learn courses online'
+            'option_value'=>'IncluDE'
             ] );
                         
             Config::create( [
             'id'=>2,
             'code'=>'pageHome',
             'option_key'=>'banner_text',
-            'option_value'=>'Learn every topic. On time. Everytime.'
+            'option_value'=>'Inclusive Disaster Education'
             ] );
                         
             Config::create( [
@@ -96,150 +96,7 @@ class ConfigTableSeeder extends Seeder
                 </div>
             </div>
         </div>
-    </article><article class="about-features-block">
-    <div class="container">
-        <div class="row">
-            <div class="col-12 text-center seperator-head mt-3">
-                <h3>Why choose Ulearn</h3>
-                <p class="mt-3">Cum doctus civibus efficiantur in imperdiet deterruisset.</p>
-            </div>
-        </div>
-                        <div class="row mt-4 mb-5">
-                                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
-                <div class="feature-box mx-auto text-center">
-                    <main>
-                        <i class="fas fa-file-signature"></i>
-                        <div class="col-md-12">
-                            <h6 class="instructor-title">Hi-Tech Learning </h6>
-                            <p>Aenean massa. Sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. </p>
-                        </div>
-                    </main>
-                </div>
-            </div>
-                            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
-                <div class="feature-box mx-auto text-center">
-                    <main>
-                        <i class="fas fa-users-cog"></i>
-                        <div class="col-md-12">
-                            <h6 class="instructor-title">Course Discussion </h6>
-                            <p>Aenean massa. Sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. </p>
-                        </div>
-                    </main>
-                </div>
-            </div>
-                            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
-                <div class="feature-box mx-auto text-center">
-                    <main>
-                        <i class="fas fa-shield-alt"></i>
-                        <div class="col-md-12">
-                            <h6 class="instructor-title">Website Security </h6>
-                            <p>Aenean massa. Sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. </p>
-                        </div>
-                    </main>
-                </div>
-            </div>
-                            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
-                <div class="feature-box mx-auto text-center">
-                    <main>
-                        <i class="fas fa-chalkboard-teacher"></i>
-                        <div class="col-md-12">
-                            <h6 class="instructor-title">Qualified teachers </h6>
-                            <p>Aenean massa. Sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. </p>
-                        </div>
-                    </main>
-                </div>
-            </div>
-                            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
-                <div class="feature-box mx-auto text-center">
-                    <main>
-                        <i class="fas fa-building"></i>
-                        <div class="col-md-12">
-                            <h6 class="instructor-title">Equiped class rooms </h6>
-                            <p>Aenean massa. Sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. </p>
-                        </div>
-                    </main>
-                </div>
-            </div>
-                            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
-                <div class="feature-box mx-auto text-center">
-                    <main>
-                        <i class="fas fa-digital-tachograph"></i>
-                        <div class="col-md-12">
-                            <h6 class="instructor-title">Advanced teaching </h6>
-                            <p>Aenean massa. Sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. </p>
-                        </div>
-                    </main>
-                </div>
-            </div>
-                            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
-                <div class="feature-box mx-auto text-center">
-                    <main>
-                        <i class="fas fa-puzzle-piece"></i>
-                        <div class="col-md-12">
-                            <h6 class="instructor-title">Adavanced study plans </h6>
-                            <p>Aenean massa. Sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. </p>
-                        </div>
-                    </main>
-                </div>
-            </div>
-                            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
-                <div class="feature-box mx-auto text-center">
-                    <main>
-                        <i class="fas fa-bullseye"></i>
-                        <div class="col-md-12">
-                            <h6 class="instructor-title">Focus on target </h6>
-                            <p>Aenean massa. Sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. </p>
-                        </div>
-                    </main>
-                </div>
-            </div>
-                            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
-                <div class="feature-box mx-auto text-center">
-                    <main>
-                        <i class="fas fa-thumbs-up"></i>
-                        <div class="col-md-12">
-                            <h6 class="instructor-title">Focus on success </h6>
-                            <p>Aenean massa. Sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. </p>
-                        </div>
-                    </main>
-                </div>
-            </div>
-                            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
-                <div class="feature-box mx-auto text-center">
-                    <main>
-                        <i class="fas fa-tablet-alt"></i>
-                        <div class="col-md-12">
-                            <h6 class="instructor-title">Responsive Design </h6>
-                            <p>Aenean massa. Sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. </p>
-                        </div>
-                    </main>
-                </div>
-            </div>
-                            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
-                <div class="feature-box mx-auto text-center">
-                    <main>
-                        <i class="fas fa-credit-card"></i>
-                        <div class="col-md-12">
-                            <h6 class="instructor-title">Payment Gateways </h6>
-                            <p>Aenean massa. Sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. </p>
-                        </div>
-                    </main>
-                </div>
-            </div>
-                            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
-                <div class="feature-box mx-auto text-center">
-                    <main>
-                        <i class="fas fa-search-plus"></i>
-                        <div class="col-md-12">
-                            <h6 class="instructor-title">SEO Friendly </h6>
-                            <p>Aenean massa. Sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. </p>
-                        </div>
-                    </main>
-                </div>
-            </div>
-                        </div>
-    </div>
-</article>'
+    </article>'
             ] );
 
                         

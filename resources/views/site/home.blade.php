@@ -4,7 +4,7 @@
     <div class="container-fluid p-0 home-content">
         <!-- banner start -->
         <div class="homepage-slide-blue">
-            <h1>{{ Sitehelpers::get_option('pageHome', 'banner_title') }}</h1>
+            <h1 style="font-size: 62px">{{ Sitehelpers::get_option('pageHome', 'banner_title') }}</h1>
             <span class="title-sub-header">{{ Sitehelpers::get_option('pageHome', 'banner_text') }}</span>
             <form method="GET" action="{{ route('course.list') }}">
             <div class="searchbox-contrainer col-md-6 mx-auto">
@@ -114,7 +114,7 @@
                         <div class="instructor-box mx-auto text-center">
                         <a href="{{ route('instructor.view', $instructor->instructor_slug) }}">
                             <main>
-                                <img src="@if(Storage::exists($instructor->instructor_image)){{ Storage::url($instructor->instructor_image) }}@else{{ asset('backend/assets/images/course_detail_thumb.jpg') }}@endif">
+                                <img src="@if(Storage::exists($instructor->instructor_image)){{ Storage::url($instructor->instructor_image) }}@else{{ asset('backend/assets/images/sample_instructor.jpg') }}@endif">
                                 <div class="col-md-12">
                                     <h6 class="instructor-title">{{ $instructor->first_name.' '.$instructor->last_name }}</h6>
                                 </div>

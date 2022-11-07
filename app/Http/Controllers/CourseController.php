@@ -9,6 +9,7 @@ use App\Models\Course;
 use App\Models\Category;
 use App\Models\CourseRating;
 use App\Models\InstructionLevel;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use DB;
 use Illuminate\Support\Facades\Input;
@@ -94,11 +95,15 @@ class CourseController extends Controller
         $videos_count = $curriculum['videos_count'];
         $is_curriculum = $curriculum['is_curriculum'];
         $video = null;
+        $is_enrolled = null;
         if($course->course_video)
         {
             $video = $this->model->getvideoinfoFirst($course->course_video); 
         }
-        $is_enrolled = CourseTaken::where('course_id', $course->id)->where('user_id', \Auth::user()->id)->exists();
+        if (Auth::user())
+        {
+            $is_enrolled = CourseTaken::where('course_id', $course->id)->where('user_id', \Auth::user()->id)->exists() ? "1" : "0";
+        }
         return view('site.course.view', compact('course', 'curriculum_sections', 'lectures_count', 'videos_count', 'video', 'course_breadcrumb', 'is_curriculum', 'is_enrolled'));
     }
 

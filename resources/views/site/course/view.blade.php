@@ -68,10 +68,12 @@
                         </div>
                         <div class="col-xl-3 col-lg-3 col-md-6 float-md-right col-sm-6 float-sm-right col-6">
                             <div class="cv-category-detail cv-enroll float-lg-right float-md-right float-sm-right">
-                                @if($is_enrolled)
+                                @if($is_enrolled == "1")
                                     <a href="{{ route('course.learn', $course->course_slug) }}" class="btn btn-ulearn-cview mt-1">GO TO COURSE</a>
-                                @else
+                                @elseif($is_enrolled == "0")
                                     <a href="{{ route('course.checkout', $course->course_slug) }}" class="btn btn-ulearn-cview mt-1">ENROLL COURSE</a>
+                                @else
+                                    <a href="{{ route('login') }}" class="btn btn-ulearn-cview mt-1">ENROLL COURSE</a>
                                 @endif
                             </div>
                         </div>
@@ -86,7 +88,7 @@
                         {!! $course->overview !!}
                     @endif
                     
-                    @if($is_curriculum)
+                    @if($is_curriculum and $is_enrolled != null)
                     <!-- curriculum block start -->
                     <h4 class="mt-4">Curriculum</h4>
 

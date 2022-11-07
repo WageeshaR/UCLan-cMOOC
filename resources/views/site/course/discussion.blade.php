@@ -27,13 +27,30 @@
 
         <!-- feed ui start -->
         <div class="feed-root-container">
-            <div class="testing-ui-left">Left Side Menu</div>
+            <div class="feed-menu-left">
+                <div class="left-menu-item" id="profile">
+                    <i style="font-size: 32px; color: rgb(40,50,140)" class="material-icons">person</i>
+                    <span style="font-size: 20px; color: rgb(40,50,140); margin-left: 20px">Profile</span>
+                </div>
+                <div class="left-menu-item" id="resources">
+                    <i style="font-size: 32px; color: rgb(40,50,140)" class="material-icons">folder</i>
+                    <span style="font-size: 20px; color: rgb(40,50,140); margin-left: 20px">Resources</span>
+                </div>
+                <div class="left-menu-item" id="account">
+                    <i style="font-size: 32px; color: rgb(40,50,140)" class="material-icons">account_balance</i>
+                    <span style="font-size: 20px; color: rgb(40,50,140); margin-left: 20px">Account</span>
+                </div>
+                <div class="left-menu-item" id="settings">
+                    <i style="font-size: 32px; color: rgb(40,50,140)" class="material-icons">settings</i>
+                    <span style="font-size: 20px; color: rgb(40,50,140); margin-left: 20px">Settings</span>
+                </div>
+                <div class="left-menu-item" id="settings">
+                    <i style="font-size: 32px; color: rgb(40,50,140)" class="material-icons">more</i>
+                    <span style="font-size: 20px; color: rgb(40,50,140); margin-left: 20px">More</span>
+                </div>
+            </div>
             <div class="feed-scrollable-root">
                 <div class="editor-frame">
-{{--                    <div class="editor-collapsed-container">--}}
-{{--                        <button class="editor-create-button">Create</button>--}}
-{{--                        <span class="grayed-out-text">new post/poll/question</span>--}}
-{{--                    </div>--}}
                     <div class="editor-expanded-container">
                         <div class="editor-body">
                             <span style="font-weight: bold; font-size: 16px; color: rgb(216,216,216)">Share your ideas..</span>
@@ -60,10 +77,10 @@
                         </div>
                     </div>
                     <div class="post-footer">
-                        <span class="material-icons grayed-out-text">thumb_up</span>
-                        <span class="material-icons grayed-out-text">comment</span>
-                        <span class="material-icons grayed-out-text">share</span>
-                        <span class="material-icons grayed-out-text">send</span>
+                        <span title="make trending" class="material-icons colored-icon">trending_up</span>
+                        <span onclick="openPopUp()" id="discussion" title="discussion" class="material-icons grayed-out-icon">comment</span>
+                        <span title="share" class="material-icons grayed-out-icon">share</span>
+                        <span title="send to a chat" class="material-icons grayed-out-icon">send</span>
                     </div>
                 </div>
                 <div class="published-post-frame">
@@ -84,7 +101,7 @@
                                 Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
                                 when an unknown printer took a galley of type and scrambled it to make a type specimen book.
                                 It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
-                                It was popularised in the 1960s with the release of Letraset sheets cont...
+                                It was popularised...
                             </p>
                         </div>
                     </div>
@@ -103,14 +120,14 @@
                         </div>
                     </div>
                     <div class="post-footer">
-                        <span class="material-icons grayed-out-text">thumb_up</span>
-                        <span class="material-icons grayed-out-text">comment</span>
-                        <span class="material-icons grayed-out-text">share</span>
-                        <span class="material-icons grayed-out-text">send</span>
+                        <span title="make trending" class="material-icons grayed-out-icon">trending_up</span>
+                        <span onclick="openPopUp()" id="discussion" title="discussion" class="material-icons grayed-out-icon">comment</span>
+                        <span title="share" class="material-icons grayed-out-icon">share</span>
+                        <span title="send to a chat" class="material-icons grayed-out-icon">send</span>
                     </div>
                 </div>
             </div>
-            <div class="testing-ui-right">
+            <div class="feed-menu-right">
                 <span>More on <b>{{ $course->course_title }}</b></span>
                 <div>
                     <div id="social-container">
@@ -149,6 +166,80 @@
                     </div>
                 </div>
             </div>
+            <!--Feed UI end-->
+
+            <!--Sample demo popup start-->
+            <div id="discussion-popup" class="discussion-popup-frame">
+                <div style="margin-top: 0px">
+                    <button onclick="closePopUp()" class="popup-close-button">close</button>
+                </div>
+                <div class="discussion-popup-message-box" style="margin-top: 10px">
+                    <span>Sarah Flynn:</span>
+                    <span style="font-weight: normal">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</span>
+                    <br>
+                    <span style="font-weight: normal; color: lightgrey; cursor: pointer; margin-left: 5px">reply</span>
+                </div>
+                <div class="discussion-popup-reply-box">
+                    <span>Sarah Flynn:</span>
+                    <span style="font-weight: normal">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</span>
+                </div>
+                <div class="discussion-popup-reply-box">
+                    <span>Sarah Flynn:</span>
+                    <span style="font-weight: normal">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</span>
+                </div>
+                <div class="discussion-popup-reply-box">
+                    <span>Sarah Flynn:</span>
+                    <span style="font-weight: normal">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</span>
+                </div>
+                <div class="discussion-popup-message-box">Sarah Flynn:
+                    <br>
+                    <span style="font-weight: normal; color: lightgrey; cursor: pointer; margin-left: 5px">reply</span>
+                </div>
+                <div class="discussion-popup-message-box">Sarah Flynn:
+                    <br>
+                    <span style="font-weight: normal; color: lightgrey; cursor: pointer; margin-left: 5px">reply</span>
+                </div>
+                <div class="discussion-popup-reply-box">Sarah Flynn:</div>
+                <div class="discussion-popup-message-box">Sarah Flynn:
+                    <br>
+                    <span style="font-weight: normal; color: lightgrey; cursor: pointer; margin-left: 5px">reply</span>
+                </div>
+                <div class="discussion-popup-reply-box">Sarah Flynn:</div>
+                <div class="discussion-popup-reply-box">Sarah Flynn:</div>
+                <div class="discussion-popup-reply-box">Sarah Flynn:</div>
+                <div class="discussion-popup-reply-box">Sarah Flynn:</div>
+                <div class="discussion-popup-reply-box">Sarah Flynn:</div>
+                <div class="discussion-popup-reply-box">Sarah Flynn:</div>
+                <div class="discussion-popup-message-box">Sarah Flynn:
+                    <br>
+                    <span style="font-weight: normal; color: lightgrey; cursor: pointer; margin-left: 5px">reply</span>
+                </div>
+                <div class="discussion-popup-reply-box">Sarah Flynn:</div>
+                <div class="discussion-popup-reply-box">Sarah Flynn:</div>
+                <div class="discussion-popup-message-box">Sarah Flynn:
+                    <br>
+                    <span style="font-weight: normal; color: lightgrey; cursor: pointer; margin-left: 5px">reply</span>
+                </div>
+                <div class="discussion-popup-message-box">Sarah Flynn:
+                    <br>
+                    <span style="font-weight: normal; color: lightgrey; cursor: pointer; margin-left: 5px">reply</span>
+                </div>
+                <div class="discussion-popup-message-box">Sarah Flynn:
+                    <br>
+                    <span style="font-weight: normal; color: lightgrey; cursor: pointer; margin-left: 5px">reply</span>
+                </div>
+            </div>
+            <!--Sample demo popup end-->
         </div>
     </div>
+@endsection
+@section("javascript")
+    <script>
+        function openPopUp() {
+            document.getElementById("discussion-popup").style.display = 'block';
+        }
+        function closePopUp() {
+            document.getElementById("discussion-popup").style.display = 'none';
+        }
+    </script>
 @endsection
