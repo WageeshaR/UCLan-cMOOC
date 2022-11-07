@@ -33,7 +33,7 @@ class ConfigTableSeeder extends Seeder
             'id'=>3,
             'code'=>'pageHome',
             'option_key'=>'instructor_text',
-            'option_value'=>'We have more than 3,250 skilled & professional Instructors'
+            'option_value'=>'Join our open, large pool of Instructors'
             ] );
                         
             Config::create( [

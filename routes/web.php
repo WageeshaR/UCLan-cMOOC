@@ -135,7 +135,7 @@ Route::group(['middleware' => 'auth'], function () {
     //Functions accessed by only admin users
     Route::group(['middleware' => 'role:admin'], function () {
         Route::get('admin/dashboard', 'Admin\DashboardController')->name('admin.dashboard');
-        
+        Route::get('admin/institution', 'Admin\InstitutionController@index')->name('admin.institution');
         Route::get('admin/users', 'Admin\UserController@index')->name('admin.users');
         Route::get('admin/user-form', 'Admin\UserController@getForm')->name('admin.getForm');
         Route::get('admin/user-form/{user_id}', 'Admin\UserController@getForm');

@@ -10,15 +10,13 @@
             <div class="searchbox-contrainer col-md-6 mx-auto">
                 <input name="keyword" type="text" class="searchbox d-none d-sm-inline-block" placeholder="Search for courses by course titles"><input name="keyword" type="text" class="searchbox d-inline-block d-sm-none" placeholder="Search for courses"><button type="submit" class="searchbox-submit"><i class="fa fa-search"></i></button>
             </div>
+            <span class="title-sub-desc">A joint initiative by the University of A, the University of B, the University of C and the University of D</span>
             </form>
         </div>
         <!-- banner end -->
 
         <?php 
-            $tabs = array('latestTab' => 'Latest Courses',
-                          'freeTab' => 'Free Courses',
-                          'discountTab' => 'Discount Courses',
-                        );
+            $tabs = array('latestTab' => 'Latest Courses');
         ?>
         <nav class="clearfix secondary-nav seperator-head">
             <ul class="secondary-nav-ul list mx-auto nav">

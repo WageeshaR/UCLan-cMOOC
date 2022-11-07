@@ -144,7 +144,7 @@
                                         @if($is_completed)
                                         RESTART
                                         @else
-                                        JOIN DISCUSSION
+                                        EXPLORE
                                         @endif
                                         </a>
                                     </article>
@@ -185,7 +185,6 @@
                         <li><i class="far fa-clock"></i>Duration: {{ $course->duration ? $course->duration : '-' }}</li>
                         <li><i class="fas fa-bullhorn"></i>Lectures: {{ $lectures_count }}</li>
                         <li><i class="far fa-play-circle"></i>Videos: {{ $videos_count }}</li>
-                        <li><i class="far fa-address-card"></i>Certificate of Completion</li>
                         <li><i class="fas fa-file-download"></i>Downloadable Resources</li>
                     </ul>
                 </section>

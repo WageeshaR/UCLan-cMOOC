@@ -50,6 +50,8 @@ class DashboardController extends Controller
                         ->leftJoin('instructors', 'instructors.id', '=', 'courses.instructor_id')
                         ->groupBy('instructors.first_name')
                         ->groupBy('instructors.last_name')
+                        ->groupBy('courses.id')
+                        ->groupBy('categories.name')
                         ->paginate(5);
         $metrics = Instructor::admin_metrics();
         return view('admin.dashboard.index', compact('courses', 'metrics'));

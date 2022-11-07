@@ -80,7 +80,7 @@
                         <span title="make trending" class="material-icons colored-icon">trending_up</span>
                         <span onclick="openPopUp()" id="discussion" title="discussion" class="material-icons grayed-out-icon">comment</span>
                         <span title="share" class="material-icons grayed-out-icon">share</span>
-                        <span title="send to a chat" class="material-icons grayed-out-icon">send</span>
+                        <span onclick="openChat()" title="send to a chat" class="material-icons grayed-out-icon">send</span>
                     </div>
                 </div>
                 <div class="published-post-frame">
@@ -123,7 +123,7 @@
                         <span title="make trending" class="material-icons grayed-out-icon">trending_up</span>
                         <span onclick="openPopUp()" id="discussion" title="discussion" class="material-icons grayed-out-icon">comment</span>
                         <span title="share" class="material-icons grayed-out-icon">share</span>
-                        <span title="send to a chat" class="material-icons grayed-out-icon">send</span>
+                        <span onclick="openChat()" title="send to a chat" class="material-icons grayed-out-icon">send</span>
                     </div>
                 </div>
             </div>
@@ -230,6 +230,18 @@
                 </div>
             </div>
             <!--Sample demo popup end-->
+
+            <!--Sample chat popup start-->
+            <div id="chat-frame" class="chat-frame">
+                <div class="chat-name-bar">
+                    <span class="material-icons grayed-out-icon">person</span>
+                    <span style="font-weight: bold; margin-left: 5px; color: black; font-size: 12px; margin-top: 2px">Angela Yu</span>
+                    <span onclick="closeChat()" style="margin-left: 130px" class="material-icons grayed-out-icon" >close</span>
+                </div>
+                <div class="chat-search-bar">search for a name</div>
+                <div class="chat-type-bar"><i>type your message</i>...</div>
+            </div>
+            <!--Sample chat popup end-->
         </div>
     </div>
 @endsection
@@ -240,6 +252,12 @@
         }
         function closePopUp() {
             document.getElementById("discussion-popup").style.display = 'none';
+        }
+        function openChat() {
+            document.getElementById("chat-frame").style.display = 'block';
+        }
+        function closeChat() {
+            document.getElementById("chat-frame").style.display = 'none';
         }
     </script>
 @endsection

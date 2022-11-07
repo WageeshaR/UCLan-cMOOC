@@ -90,7 +90,7 @@
                     
                     @if($is_curriculum and $is_enrolled != null)
                     <!-- curriculum block start -->
-                    <h4 class="mt-4">Curriculum</h4>
+                    <h4 class="mt-4">Agenda</h4>
 
                     <div class="accordion mt-3" id="accordionExample">
                       
@@ -220,7 +220,6 @@
                         <li><i class="far fa-clock"></i>Duration: {{ $course->duration ? $course->duration : '-' }}</li>
                         <li><i class="fas fa-bullhorn"></i>Lectures: {{ $lectures_count }}</li>
                         <li><i class="far fa-play-circle"></i>Videos: {{ $videos_count }}</li>
-                        <li><i class="far fa-address-card"></i>Certificate of Completion</li>
                         <li><i class="fas fa-file-download"></i>Downloadable Resources</li>
                     </ul>
                 </section>

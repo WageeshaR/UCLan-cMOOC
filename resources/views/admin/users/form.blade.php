@@ -6,7 +6,7 @@
     <li class="breadcrumb-item"><a href="{{ route('admin.users') }}">Users Management</a></li>
     <li class="breadcrumb-item active">Add</li>
   </ol>
-  <h1 class="page-title">Add User</h1>
+  <h1 class="page-title">Add/Edit User</h1>
 </div>
 
 <div class="page-content">
@@ -84,6 +84,45 @@
         @if ($errors->has('password'))
             <label class="error" for="password">{{ $errors->first('password') }}</label>
         @endif
+      </div>
+
+      <hr>
+      <div class="form-group col-md-12">
+          <label class="form-control-label">Add/Remove User Permissions</label>
+          <div style="display: flex; flex-direction: column">
+              <div class="checkbox-custom checkbox-default">
+                  <input type="checkbox" id="inputBasicActive" name="is_active" value="1" @if($user->is_active) checked @endif />
+                  <label for="inputBasicActive">Publish blogs</label>
+              </div>
+              <div class="checkbox-custom checkbox-default">
+                  <input type="checkbox" id="inputBasicInactive" name="is_active" value="0" @if(!$user->is_active) checked @endif/>
+                  <label for="inputBasicInactive">Create posts</label>
+              </div>
+              <div class="checkbox-custom checkbox-default">
+                  <input type="checkbox" id="inputBasicActive" name="is_active" value="1" @if($user->is_active) checked @endif />
+                  <label for="inputBasicActive">Edit posts</label>
+              </div>
+              <div class="checkbox-custom checkbox-default">
+                  <input type="checkbox" id="inputBasicInactive" name="is_active" value="0" @if(!$user->is_active) checked @endif/>
+                  <label for="inputBasicInactive">Remove posts</label>
+              </div>
+              <div class="checkbox-custom checkbox-default">
+                  <input type="checkbox" id="inputBasicActive" name="is_active" value="1" @if($user->is_active) checked @endif />
+                  <label for="inputBasicActive">Permission 5</label>
+              </div>
+              <div class="checkbox-custom checkbox-default">
+                  <input type="checkbox" id="inputBasicInactive" name="is_active" value="0" @if(!$user->is_active) checked @endif/>
+                  <label for="inputBasicInactive">Permission 6</label>
+              </div>
+              <div class="checkbox-custom checkbox-default">
+                  <input type="checkbox" id="inputBasicActive" name="is_active" value="1" @if($user->is_active) checked @endif />
+                  <label for="inputBasicActive">Permission 7</label>
+              </div>
+              <div class="checkbox-custom checkbox-default">
+                  <input type="checkbox" id="inputBasicInactive" name="is_active" value="0" @if(!$user->is_active) checked @endif/>
+                  <label for="inputBasicInactive">Permission 8</label>
+              </div>
+          </div>
       </div>
       </div>
       <hr>
