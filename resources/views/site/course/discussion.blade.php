@@ -28,26 +28,30 @@
         <!-- feed ui start -->
         <div class="feed-root-container">
             <div class="feed-menu-left">
-                <div class="left-menu-item" id="profile">
+                <a class="left-menu-item" id="home" href="{{ url('course-enroll/'.$course->course_slug.'/'.SiteHelpers::encrypt_decrypt($discussion->lecture_quiz_id)) }}">
+                    <i style="font-size: 32px; color: rgb(40,50,140)" class="material-icons">home</i>
+                    <span style="font-size: 20px; color: rgb(40,50,140); margin-left: 20px">Feed</span>
+                </a>
+                <a class="left-menu-item" id="profile">
                     <i style="font-size: 32px; color: rgb(40,50,140)" class="material-icons">person</i>
                     <span style="font-size: 20px; color: rgb(40,50,140); margin-left: 20px">Profile</span>
-                </div>
-                <div class="left-menu-item" id="resources">
+                </a>
+                <a class="left-menu-item" id="resources" href="{{ url('course-enroll/'.$course->course_slug.'/'.SiteHelpers::encrypt_decrypt($discussion->lecture_quiz_id).'/resources') }}">
                     <i style="font-size: 32px; color: rgb(40,50,140)" class="material-icons">folder</i>
                     <span style="font-size: 20px; color: rgb(40,50,140); margin-left: 20px">Resources</span>
-                </div>
-                <div class="left-menu-item" id="account">
+                </a>
+                <a class="left-menu-item" id="account">
                     <i style="font-size: 32px; color: rgb(40,50,140)" class="material-icons">account_balance</i>
                     <span style="font-size: 20px; color: rgb(40,50,140); margin-left: 20px">Account</span>
-                </div>
-                <div class="left-menu-item" id="settings">
+                </a>
+                <a class="left-menu-item" id="settings">
                     <i style="font-size: 32px; color: rgb(40,50,140)" class="material-icons">settings</i>
                     <span style="font-size: 20px; color: rgb(40,50,140); margin-left: 20px">Settings</span>
-                </div>
-                <div class="left-menu-item" id="settings">
+                </a>
+                <a class="left-menu-item" id="settings">
                     <i style="font-size: 32px; color: rgb(40,50,140)" class="material-icons">more</i>
                     <span style="font-size: 20px; color: rgb(40,50,140); margin-left: 20px">More</span>
-                </div>
+                </a>
             </div>
             <div class="feed-scrollable-root">
                 <div class="editor-frame">
@@ -65,7 +69,7 @@
                 </div>
                 <div class="published-post-frame">
                     <div class="post-header">
-                        Wageesha Shilpage
+                        John Doe
                         <span style="font-weight: normal; font-size: 12px; color: rgb(216,216,216); margin-left: 5px">31 Oct &bull; Phuket, Thailand</span>
                     </div>
                     <div class="post-body">
@@ -85,7 +89,7 @@
                 </div>
                 <div class="published-post-frame">
                     <div class="post-header tweet-share">
-                        Wageesha Shilpage <span style="font-weight: normal">shared a </span> tweet
+                        John Doe <span style="font-weight: normal">shared a </span> tweet
                         <span style="font-weight: normal; font-size: 12px; color: rgb(216,216,216); margin-left: 5px">31 Oct &bull; Bolton, UK</span>
                     </div>
                     <div class="tweet-share-body">
@@ -108,7 +112,7 @@
                 </div>
                 <div class="published-post-frame">
                     <div class="post-header">
-                        Wageesha Shilpage
+                        John Doe
                         <span style="font-weight: normal; font-size: 12px; color: rgb(216,216,216); margin-left: 5px">31 Oct &bull; Manchester, UK</span>
                     </div>
                     <div class="post-body">

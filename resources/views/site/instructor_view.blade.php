@@ -28,7 +28,7 @@
                 <div class="col-xl-3 col-lg-4 col-md-5 d-none d-md-block">
                     <div class="instructor-profile-box mx-auto">
                         <main>
-                            <img src="@if(Storage::exists($instructor->instructor_image)){{ Storage::url($instructor->instructor_image) }}@else{{ asset('backend/assets/images/sample_instructor.jpg') }}@endif">
+                            <img src="@if(Storage::exists($instructor->instructor_image)){{ Storage::url($instructor->instructor_image) }}@else{{ asset('backend/assets/images/cristina_avatar.png') }}@endif">
                             <div class="col-12">
                                 <ul class="list-unstyled social-icons">
                                     <li>

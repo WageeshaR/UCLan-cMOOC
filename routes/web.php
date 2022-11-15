@@ -74,6 +74,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('course-enroll-api/{course_slug}/{lecture_slug}/{is_sidebar}', 'CourseController@courseEnrollAPI');
         Route::get('readPDF/{file_id}', 'CourseController@readPDF');
 
+        // Course Feed
+        Route::get('course-enroll/{course_slug}/{lecture_slug}/resources', 'CourseController@getLectureResources')->name('course.getLectureResources');
+
     });
 
     //Functions accessed by both student and instructor

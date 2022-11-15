@@ -1158,4 +1158,13 @@ if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {               $ffmpeg_path = b
         echo $vidoes->video_title;exit();
     }
     /* Curriculum end */
+
+    /* Course Feed */
+    public function getLectureResources($course_slug = '', $lecture_slug = '', Request $request) {
+        $course = Course::where('course_slug', $course_slug)->first();
+        $discussion = DB::table('curriculum_lectures_quiz')
+            ->select('*')
+            ->where('lecture_quiz_id', SiteHelpers::encrypt_decrypt($lecture_slug, 'd'))->first();
+        return view('site.course.feed.resources', compact('course', 'discussion'));
+    }
 }

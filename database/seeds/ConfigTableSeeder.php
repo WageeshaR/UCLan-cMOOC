@@ -19,7 +19,7 @@ class ConfigTableSeeder extends Seeder
             'id'=>1,
             'code'=>'pageHome',
             'option_key'=>'banner_title',
-            'option_value'=>'IncluDE'
+            'option_value'=>'INCLUDE'
             ] );
                         
             Config::create( [
