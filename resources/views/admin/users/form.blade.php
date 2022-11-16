@@ -66,8 +66,8 @@
                 <label for="inputCheckboxStudent">Student</label>
               </div>
               <div class="checkbox-custom checkbox-default checkbox-inline">
-                <input type="checkbox" id="inputCheckboxInstructor" name="roles[]" value="instructor" @if($user->id &&  $user->hasRole('instructor')) checked @endif>
-                <label for="inputCheckboxInstructor">Instructor</label>
+                <input type="checkbox" id="inputCheckboxInstructor" name="roles[]" value="instructor" @if($user->id &&  $user->hasRole('facilitator')) checked @endif>
+                <label for="inputCheckboxInstructor">Facilitator</label>
               </div>
               <div id="role-div-error">
               @if ($errors->has('roles'))
@@ -86,44 +86,6 @@
         @endif
       </div>
 
-      <hr>
-      <div class="form-group col-md-12">
-          <label class="form-control-label">Add/Remove User Permissions</label>
-          <div style="display: flex; flex-direction: column">
-              <div class="checkbox-custom checkbox-default">
-                  <input type="checkbox" id="inputBasicActive" name="is_active" value="1" @if($user->is_active) checked @endif />
-                  <label for="inputBasicActive">Publish blogs</label>
-              </div>
-              <div class="checkbox-custom checkbox-default">
-                  <input type="checkbox" id="inputBasicInactive" name="is_active" value="0" @if(!$user->is_active) checked @endif/>
-                  <label for="inputBasicInactive">Create posts</label>
-              </div>
-              <div class="checkbox-custom checkbox-default">
-                  <input type="checkbox" id="inputBasicActive" name="is_active" value="1" @if($user->is_active) checked @endif />
-                  <label for="inputBasicActive">Edit posts</label>
-              </div>
-              <div class="checkbox-custom checkbox-default">
-                  <input type="checkbox" id="inputBasicInactive" name="is_active" value="0" @if(!$user->is_active) checked @endif/>
-                  <label for="inputBasicInactive">Remove posts</label>
-              </div>
-              <div class="checkbox-custom checkbox-default">
-                  <input type="checkbox" id="inputBasicActive" name="is_active" value="1" @if($user->is_active) checked @endif />
-                  <label for="inputBasicActive">Permission 5</label>
-              </div>
-              <div class="checkbox-custom checkbox-default">
-                  <input type="checkbox" id="inputBasicInactive" name="is_active" value="0" @if(!$user->is_active) checked @endif/>
-                  <label for="inputBasicInactive">Permission 6</label>
-              </div>
-              <div class="checkbox-custom checkbox-default">
-                  <input type="checkbox" id="inputBasicActive" name="is_active" value="1" @if($user->is_active) checked @endif />
-                  <label for="inputBasicActive">Permission 7</label>
-              </div>
-              <div class="checkbox-custom checkbox-default">
-                  <input type="checkbox" id="inputBasicInactive" name="is_active" value="0" @if(!$user->is_active) checked @endif/>
-                  <label for="inputBasicInactive">Permission 8</label>
-              </div>
-          </div>
-      </div>
       </div>
       <hr>
       <div class="form-group row">

@@ -27,7 +27,7 @@
             <div class="counter counter-md counter-inverse text-left">
               <div class="counter-number-group">
                 <span class="counter-number">{{ $metrics['instructors'] }}</span>
-                <span class="counter-number-related text-capitalize">instructors</span>
+                <span class="counter-number-related text-capitalize">facilitators</span>
               </div>
               <div class="counter-label text-capitalize">in total</div>
             </div>
@@ -65,7 +65,7 @@
                     <th>Title</th>
                     <th>Slug</th>
                     <th>Category</th>
-                    <th>Instructor</th>
+                    <th>Facilitator</th>
                     <th>Price</th>
                     <th>Status</th>
                     </tr>

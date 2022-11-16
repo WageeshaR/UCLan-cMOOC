@@ -13,10 +13,7 @@
             </nav>
 
             <div class="row">
-                <div class="col-xl-6 col-lg-6 col-md-6 vertical-align d-none d-lg-block">
-                    <img class="img-fluid" src="{{ asset('frontend/img/fimg.png') }}" width="500px" height="500px">
-                </div>
-                <div class="col-xl-6 offset-xl-0 col-lg-6 offset-lg-0 col-md-8 offset-md-2">
+                <div class="col-lg-12" style="margin-left: 27.5%;">
                     <div class="rightRegisterForm">
                     <form id="loginForm" class="form-horizontal" method="POST" action="{{ route('login') }}">
                         {{ csrf_field() }}
@@ -60,10 +57,10 @@
                             <div class="form-group">
                                 <a href="{{ url('login/facebook') }}" class="btn btn-lg btn-block social-btn facebook-btn">
                                     <div class="row">
-                                        <div class="col-3">
+                                        <div class="col-4">
                                             <i class="fab fa-facebook-f float-right"></i>
                                         </div>
-                                        <div class="col-9">
+                                        <div class="col-8">
                                             <span>
                                             Login with Facebook
                                             </span>
@@ -73,14 +70,14 @@
                             </div>
 
                             <div class="form-group">
-                                <a href="{{ url('login/google') }}" class="btn btn-lg btn-block social-btn google-btn">
+                                <a href="{{ url('login/google') }}" class="btn btn-lg btn-block social-btn twitter-btn">
                                     <div class="row">
-                                        <div class="col-3">
-                                            <i class="fab fa-google-plus-g float-right"></i>
+                                        <div class="col-4">
+                                            <i class="fab fa-twitter float-right"></i>
                                         </div>
-                                        <div class="col-9">
+                                        <div class="col-8">
                                             <span>
-                                            Login with Google plus
+                                            Login with Twitter
                                             </span>
                                         </div>
                                     </div>

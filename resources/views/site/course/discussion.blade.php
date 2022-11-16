@@ -70,7 +70,7 @@
                 <div class="published-post-frame">
                     <div class="post-header">
                         John Doe
-                        <span style="font-weight: normal; font-size: 12px; color: rgb(216,216,216); margin-left: 5px">31 Oct &bull; Phuket, Thailand</span>
+                        <span style="font-weight: normal; font-size: 12px; color: rgb(200,200,200); margin-left: 5px">@Sample University Name &bull; 31 Oct &bull; Phuket, Thailand</span>
                     </div>
                     <div class="post-body">
                         <img src="{{asset('frontend/img/Sample image.jpg')}}" width="100%">
@@ -89,8 +89,8 @@
                 </div>
                 <div class="published-post-frame">
                     <div class="post-header tweet-share">
-                        John Doe <span style="font-weight: normal">shared a </span> tweet
-                        <span style="font-weight: normal; font-size: 12px; color: rgb(216,216,216); margin-left: 5px">31 Oct &bull; Bolton, UK</span>
+                        Lillian Hart <span style="font-weight: normal">shared a </span> tweet
+                        <span style="font-weight: normal; font-size: 12px; color: rgb(200,200,200); margin-left: 5px">@Sample Company Name &bull; 31 Oct &bull; London, UK</span>
                     </div>
                     <div class="tweet-share-body">
                         <a id="tweet-thumbnail" href="https://www.twitter.com">
@@ -98,7 +98,7 @@
                         </a>
                         <div id="tweet-text">
                             <a style="display: block" href="https://www.twitter.com">
-                                <span style="font-weight: bold; font-size: 16px">Sarah Flynn wrote:</span>
+                                <span style="font-weight: bold; font-size: 16px">Amy Scott wrote:</span>
                             </a>
                             <p>
                                 Lorem Ipsum is simply dummy text of the printing and typesetting industry.
@@ -113,7 +113,7 @@
                 <div class="published-post-frame">
                     <div class="post-header">
                         John Doe
-                        <span style="font-weight: normal; font-size: 12px; color: rgb(216,216,216); margin-left: 5px">31 Oct &bull; Manchester, UK</span>
+                        <span style="font-weight: normal; font-size: 12px; color: rgb(200,200,200); margin-left: 5px">@Sample University Name &bull; 31 Oct &bull; Manchester, UK</span>
                     </div>
                     <div class="post-body">
                         <iframe width="100%" height="450" src="https://www.youtube.com/embed/oj5tbAFDQYA"></iframe>

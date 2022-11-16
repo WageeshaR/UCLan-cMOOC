@@ -9,16 +9,22 @@
                 <span class="site-menu-title">Dashboard</span>
             </a>
         </li>
-        <li class="site-menu-item" {{ request()->is('admin/institution') ? 'active' : '' }}">
-            <a href="{{ route('admin.institution') }}">
+        <li class="site-menu-item" {{ request()->is('admin/institutions') ? 'active' : '' }}">
+            <a href="{{ route('admin.institutions') }}">
                 <i class="site-menu-icon wb-table" aria-hidden="true"></i>
                 <span class="site-menu-title">Institution Management</span>
             </a>
         </li>
         <li class="site-menu-item {{ request()->is('admin/user*') ? 'active' : '' }}">
             <a href="{{ route('admin.users') }}">
-                <i class="site-menu-icon wb-user" aria-hidden="true"></i>
+                <i class="site-menu-icon wb-users" aria-hidden="true"></i>
                 <span class="site-menu-title">Users Management</span>
+            </a>
+        </li>
+        <li class="site-menu-item {{ request()->is('admin/roles') ? 'active' : '' }}">
+            <a href="{{ route('admin.roles') }}">
+                <i class="site-menu-icon wb-user-circle" aria-hidden="true"></i>
+                <span class="site-menu-title">User Roles</span>
             </a>
         </li>
         <li class="site-menu-item {{ request()->is('admin/categor*') ? 'active' : '' }}">

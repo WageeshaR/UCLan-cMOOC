@@ -47,7 +47,7 @@
 
             <div class="col-sm-5 col-md-3 col-lg-2 col-xl-2 d-none d-sm-block">
                 @if(Auth::check() && !Auth::user()->hasRole('instructor') && !Auth::user()->hasRole('admin'))
-                <span class="become-instructor" href="{{ route('login') }}" data-toggle="modal" data-target="#myModal">Become Instructor</span>
+                <span class="become-instructor" href="{{ route('login') }}" data-toggle="modal" data-target="#myModal">Become A Facilitator</span>
                 @endif
             </div>
 
@@ -105,7 +105,7 @@
                     <li class="mb-1"><b>Quick Links</b></li>
                     <li><a href="{{ route('home') }}">Home Page</a></li>
                     <li><a href="{{ route('course.list') }}">Courses List</a></li>
-                    <li><a href="{{ route('instructor.list') }}">Instructors List</a></li>
+                    <li><a href="{{ route('instructor.list') }}">Facilitators List</a></li>
                     <li><a href="{{ route('blogs') }}">Blogs List</a></li>
                 </ul>
             </div>

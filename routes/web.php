@@ -138,12 +138,19 @@ Route::group(['middleware' => 'auth'], function () {
     //Functions accessed by only admin users
     Route::group(['middleware' => 'role:admin'], function () {
         Route::get('admin/dashboard', 'Admin\DashboardController')->name('admin.dashboard');
-        Route::get('admin/institution', 'Admin\InstitutionController@index')->name('admin.institution');
+        Route::get('admin/institutions', 'Admin\InstitutionController@index')->name('admin.institutions');
         Route::get('admin/users', 'Admin\UserController@index')->name('admin.users');
-        Route::get('admin/user-form', 'Admin\UserController@getForm')->name('admin.getForm');
+        Route::get('admin/roles', 'Admin\RolesController@index')->name('admin.roles');
+        Route::get('admin/institution-form', 'Admin\InstitutionController@getForm')->name('admin.getInstitutionForm');
+        Route::get('admin/institution-form/{institution_id}', 'Admin\InstitutionController@getForm');
+        Route::post('admin/save-institution', 'Admin\InstitutionController@saveInstitution')->name('admin.saveInstitution');
+        Route::get('admin/user-form', 'Admin\UserController@getForm')->name('admin.getUserForm');
         Route::get('admin/user-form/{user_id}', 'Admin\UserController@getForm');
         Route::post('admin/save-user', 'Admin\UserController@saveUser')->name('admin.saveUser');
         Route::get('admin/users/getData', 'Admin\UserController@getData')->name('admin.users.getData');
+        Route::get('admin/role-form', 'Admin\RolesController@getForm')->name('admin.getRoleForm');
+        Route::get('admin/role-form/{role_id}', 'Admin\RolesController@getForm');
+        Route::post('admin/save-role', 'Admin\RolesController@saveRole')->name('admin.saveRole');
 
         Route::get('admin/categories', 'Admin\CategoryController@index')->name('admin.categories');
         Route::get('admin/category-form', 'Admin\CategoryController@getForm')->name('admin.categoryForm');

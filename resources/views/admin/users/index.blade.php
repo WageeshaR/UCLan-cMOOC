@@ -13,7 +13,7 @@
 <div class="panel">
         <div class="panel-heading">
             <div class="panel-title">
-              <a href="{{ route('admin.getForm') }}" class="btn btn-success btn-sm"><i class="icon wb-plus" aria-hidden="true"></i> Add User</a>
+              <a href="{{ route('admin.getUserForm') }}" class="btn btn-success btn-sm"><i class="icon wb-plus" aria-hidden="true"></i> Add User</a>
             </div>
           
           <div class="panel-actions">
@@ -53,7 +53,7 @@
                   @foreach($user->roles as $role)
                     @if($role->name == 'student')
                         <span class="badge badge-primary">{{ ucfirst($role->name) }}</span>
-                    @elseif($role->name == 'instructor')
+                    @elseif($role->name == 'facilitator')
                         <span class="badge badge-warning">{{ ucfirst($role->name) }}</span>
                     @endif
                     @if(!$loop->last)
