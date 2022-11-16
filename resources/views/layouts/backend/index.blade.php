@@ -9,7 +9,7 @@
   <meta name="author" content="">
   <meta name="_token" content="{!! csrf_token() !!}"/>
 
-  <title>IncluDE</title>
+  <title>INCLUDE</title>
 
   <link rel="apple-touch-icon" href="{{ asset('backend/assets/images/apple-touch-icon.png') }}">
   <link rel="shortcut icon" href="{{ asset('backend/assets/images/favicon.ico ') }}">
@@ -117,7 +117,7 @@
 
     @if(Auth::user()->hasRole('admin'))
         @include('layouts/backend/admin_sidebar')
-    @elseif(Auth::user()->hasRole('instructor'))
+    @elseif(Auth::user()->hasRole('facilitator'))
         @include('layouts/backend/instructor_sidebar')
     @endif
   </div>
