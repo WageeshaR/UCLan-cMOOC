@@ -80,7 +80,7 @@
                     </div>
 
                     <div class="course-image mt-2">
-                        <img src="@if(Storage::exists($course->course_image)){{ Storage::url($course->course_image) }}@else{{ asset('backend/assets/images/course_detail.jpg') }}@endif">
+                        <img src="@if(Storage::exists($course->course_image)){{ asset('backend/assets/images/'.$course->course_image) }}@else{{ asset('backend/assets/images/course1_detail.jpg') }}@endif">
                     </div>
 
                     @if($course->overview)
@@ -239,7 +239,7 @@
 						    <source src="{{ Storage::url($file_name) }}" type="video/mp4">
 						    Your browser doesn't support HTML5 video tag.
 						</video>
-                        <img src="@if(Storage::exists($file_image_name)){{ Storage::url($file_image_name) }}@else{{ asset('backend/assets/images/course_detail.jpg') }}@endif" alt="image description">
+                        <img src="@if(Storage::exists($file_image_name)){{ Storage::url($file_image_name) }}@else{{ asset('backend/assets/images/course1_detail.jpg') }}@endif" alt="image description">
                     </div>
                 </section>
                 @endif

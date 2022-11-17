@@ -141,10 +141,10 @@
                         </div>
                         <div>
                             <span>popular within this course</span><br>
-                            <a href="www.twitter.com">#hashtag_1</a>
-                            <a href="www.twitter.com">#hashtag_2</a>
-                            <a href="www.twitter.com">#hashtag_3</a><br>
-                            <div style="margin-top: 10px">Follow the <a style="font-weight: bold" href="www.twitter.com">course profile</a></div>
+                            <a href="https://twitter.com/hashtag/disastermanagement?src=hashtag_click">#disastermanagement</a>
+                            <a href="https://twitter.com/hashtag/disasterpreparedness?src=hashtag_click">#disasterpreparedness</a>
+                            <a href="https://twitter.com/hashtag/EmergencyMedicine?src=hashtag_click">#EmergencyMedicine</a><br>
+                            <div style="margin-top: 10px">Follow the <a style="font-weight: bold" href="https://www.twitter.com">course profile</a></div>
                         </div>
                     </div>
                     <div id="social-container">
@@ -155,10 +155,10 @@
                         <div>
                             <div>
                                 <span>Join active discussions on below communities</span><br>
-                                <a style="font-weight: bold" href="www.facebook.com">Group 1</a><br>
-                                <a style="font-weight: bold" href="www.facebook.com">Group 2</a><br>
-                                <a style="font-weight: bold" href="www.facebook.com">Group 3</a><br>
-                                <div style="margin-top: 10px">Follow the official <a style="font-weight: bold" href="www.facebook.com">course page</a></div>
+                                <a style="font-weight: bold" href="https://www.facebook.com">Group 1</a><br>
+                                <a style="font-weight: bold" href="https://www.facebook.com">Group 2</a><br>
+                                <a style="font-weight: bold" href="https://www.facebook.com">Group 3</a><br>
+                                <div style="margin-top: 10px">Follow the official <a style="font-weight: bold" href="https://www.facebook.com">course page</a></div>
                             </div>
                         </div>
                     </div>
@@ -239,7 +239,7 @@
             <div id="chat-frame" class="chat-frame">
                 <div class="chat-name-bar">
                     <span class="material-icons grayed-out-icon">person</span>
-                    <span style="font-weight: bold; margin-left: 5px; color: black; font-size: 12px; margin-top: 2px">Angela Yu</span>
+                    <span style="font-weight: bold; margin-left: 5px; color: black; font-size: 12px; margin-top: 2px">John Doe</span>
                     <span onclick="closeChat()" style="margin-left: 130px" class="material-icons grayed-out-icon" >close</span>
                 </div>
                 <div class="chat-search-bar">search for a name</div>

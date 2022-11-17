@@ -103,9 +103,9 @@
                         </div>
                         <div>
                             <span>popular within this course</span><br>
-                            <a href="www.twitter.com">#hashtag_1</a>
-                            <a href="www.twitter.com">#hashtag_2</a>
-                            <a href="www.twitter.com">#hashtag_3</a><br>
+                            <a href="https://twitter.com/hashtag/disastermanagement?src=hashtag_click">#disastermanagement</a>
+                            <a href="https://twitter.com/hashtag/disasterpreparedness?src=hashtag_click">#disasterpreparedness</a>
+                            <a href="https://twitter.com/hashtag/EmergencyMedicine?src=hashtag_click">#EmergencyMedicine</a><br>
                             <div style="margin-top: 10px">Follow the <a style="font-weight: bold" href="www.twitter.com">course profile</a></div>
                         </div>
                     </div>

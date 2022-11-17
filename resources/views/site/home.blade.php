@@ -37,7 +37,7 @@
                         <div class="course-block mx-auto">
                             <a href="{{ route('course.view', $course->course_slug) }}">
                                 <main>
-                                    <img src="@if(Storage::exists($course->thumb_image)){{ Storage::url($course->thumb_image) }}@else{{ asset('backend/assets/images/course_detail_thumb.jpg') }}@endif">
+                                    <img src="@if(Storage::exists($course->thumb_image)){{ asset('backend/assets/images/'.$course->thumb_image) }}@else{{ asset('backend/assets/images/course1_thumb.jpg') }}@endif">
                                     <div class="col-md-12"><h6 class="course-title">{{ $course->course_title }}</h6></div>
                                     
                                     <div class="instructor-clist">

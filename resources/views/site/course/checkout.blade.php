@@ -33,7 +33,7 @@
                     
                     <div class="row mb-1">
                         <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-4">
-                            <img src="@if(Storage::exists($course->thumb_image)){{ Storage::url($course->thumb_image) }}@else{{ asset('backend/assets/images/course_detail_thumb.jpg') }}@endif" width="120" height="90">
+                            <img src="@if(Storage::exists($course->thumb_image)){{ Storage::url($course->thumb_image) }}@else{{ asset('backend/assets/images/course1_thumb.jpg') }}@endif" width="120" height="90">
                         </div>
                         <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-8">
                             <h6 class="mb-xl-0">{{ $course->course_title }}</h6>
