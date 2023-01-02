@@ -27,6 +27,7 @@
             <thead>
               <tr>
                 <th>Sl.no</th>
+                <th>Attached Lecture</th>
                 <th>Blog Title</th>
                 <th>Slug</th>
                 <th>Status</th>
@@ -37,6 +38,7 @@
               @foreach($blogs as $blog)
               <tr>
                 <td>{{ $blog->id }}</td>
+                <td>{{ $blog->lecture }}</td>
                 <td>{{ $blog->blog_title }}</td>
                 <td>{{ $blog->blog_slug }}</td>
                 <td>

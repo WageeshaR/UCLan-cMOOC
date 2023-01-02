@@ -119,14 +119,14 @@
 								}
                           	@endphp
                             <div class="row lecture-container">
-                                <div class="col-7 my-auto ml-4">
+                                <div class="col-6 my-auto ml-4">
                                     <i class="{{ $icon_class }} mr-2"></i>
                                     <span>{{ $curriculum_lecture->l_title }}</span>
                                 </div>
                                 @php
                                     $is_completed = SiteHelpers::getCoursecompletedStatus($curriculum_lecture->lecture_quiz_id);
                                 @endphp
-                                <div class="col-3 my-auto">
+                                <div class="col-4 my-auto">
                                     <article  class="preview-time">
                                         <span class="mr-3">
                                         	@if($curriculum_lecture->media_type == 2)
@@ -137,15 +137,18 @@
                                         		@else
                                         			{{ $curriculum_lecture->f_duration }}
                                         		@endif
-                                            
+
                                         	@endif
                                         </span>
                                         <a href="{{ url('course-enroll/'.$course->course_slug.'/'.SiteHelpers::encrypt_decrypt($curriculum_lecture->lecture_quiz_id)) }}" class="btn btn-ulearn-preview">
-                                        @if($is_completed)
-                                        RESTART
-                                        @else
-                                        EXPLORE
-                                        @endif
+                                            @if($is_completed)
+                                                RESTART
+                                            @else
+                                                EXPLORE
+                                            @endif
+                                        </a>
+                                        <a href="{{ url('read-blogs/'.$course->course_slug.'/'.SiteHelpers::encrypt_decrypt($curriculum_lecture->lecture_quiz_id)) }}" class="btn btn-ulearn-preview">
+                                            VIEW BLOGS
                                         </a>
                                     </article>
                                 </div>

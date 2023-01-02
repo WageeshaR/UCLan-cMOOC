@@ -112,6 +112,9 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::get('instructor-withdraw-requests', 'InstructorController@listWithdrawRequests')->name('instructor.list.withdraw');
 
+        // Blogs
+        Route::get('blog-read/{blog_id}', 'BlogController@blogRead')->name('blog.read');
+
         // Save Curriculum
         Route::post('courses/section/save', 'CourseController@postSectionSave');
         Route::post('courses/section/delete', 'CourseController@postSectionDelete');
@@ -183,6 +186,7 @@ Route::group(['middleware' => 'auth'], function () {
         //Route for react js
         Route::get('course-enroll/{course_slug}/{lecture_slug}', 'CourseController@lectureDiscussion')->name('course.discussion');
         Route::get('course-learn/{course_slug}', 'CourseController@courseLearn')->name('course.learn');
+        Route::get('read-blogs/{course_slug}/{lecture_slug}', 'BlogController@blogsList')->name('lecture.blogs.list');
     });
     
 });

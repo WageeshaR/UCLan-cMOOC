@@ -48,11 +48,17 @@ class BlogController extends Controller
         $paginate_count = 10;
         if($request->has('search')){
             $search = $request->input('search');
-            $blogs = Blog::where('blog_title', 'LIKE', '%' . $search . '%')
-                           ->paginate($paginate_count);
+            $blogs = DB::table('blogs')
+                    ->select('blogs.*', 'curriculum_lectures_quiz.title')
+                    ->join('curriculum_lectures_quiz', 'curriculum_lectures_quiz.lecture_quiz_id', '=', 'blogs.lecture_quiz_id')
+                    ->where('blog_title', 'LIKE', '%' . $search . '%')
+                    ->paginate($paginate_count);
         }
         else {
-            $blogs = Blog::paginate($paginate_count);
+            $blogs = DB::table('blogs')
+                    ->select('blogs.*', 'curriculum_lectures_quiz.title as lecture')
+                    ->join('curriculum_lectures_quiz', 'curriculum_lectures_quiz.lecture_quiz_id', '=', 'blogs.lecture_quiz_id')
+                    ->paginate($paginate_count);
         }
         
         return view('admin.blogs.index', compact('blogs'));

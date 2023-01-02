@@ -49,4 +49,22 @@ class BlogController extends Controller
         }
         return view('blogs.form', compact('blog'));
     }
+
+    public function blogsList($course_slug = '', $lecture_slug = '', Request $request)
+    {
+        $paginate_count = 10;
+        $blogs = DB::table('blogs')
+            ->select('blogs.*', 'curriculum_lectures_quiz.title as lecture', 'courses.course_slug as course_slug')
+            ->join('curriculum_lectures_quiz', 'curriculum_lectures_quiz.lecture_quiz_id', '=', 'blogs.lecture_quiz_id')
+            ->join('curriculum_sections', 'curriculum_sections.section_id', '=', 'curriculum_lectures_quiz.section_id')
+            ->join('courses', 'courses.id', '=', 'curriculum_sections.course_id')
+            ->where('blogs.lecture_quiz_id', SiteHelpers::encrypt_decrypt($lecture_slug, 'd'))->paginate($paginate_count);
+        return view('blogs.list', compact('blogs'));
+    }
+
+    public function blogRead($blog_id = '', Request $request)
+    {
+        $content = Blog::find($blog_id);
+        return view('blogs.read', compact('content'));
+    }
 }
