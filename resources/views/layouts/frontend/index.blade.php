@@ -46,7 +46,7 @@
             </div>
 
             <div class="col-sm-5 col-md-3 col-lg-2 col-xl-2 d-none d-sm-block">
-                @if(Auth::check() && !Auth::user()->hasRole('instructor') && !Auth::user()->hasRole('admin'))
+                @if(Auth::check() && !Auth::user()->hasRole('facilitator') && !Auth::user()->hasRole('admin'))
                 <span class="become-instructor" href="{{ route('login') }}" data-toggle="modal" data-target="#myModal">Become A Facilitator</span>
                 @endif
             </div>
@@ -60,7 +60,7 @@
                     
                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButtonRight">
                     
-                    @if(Auth::user()->hasRole('instructor'))
+                    @if(Auth::user()->hasRole('facilitator'))
                     <a class="dropdown-item" href="{{ route('instructor.dashboard') }}" >
                         <i class="fa fa-sign-out-alt"></i> Instructor
                     </a>
