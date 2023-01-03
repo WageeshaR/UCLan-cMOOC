@@ -67,7 +67,7 @@ figure figcaption {
 
 <div class="panel">
   <div class="panel-body">
-    <form method="POST" action="{{ route('admin.saveBlog') }}" id="blogForm" enctype="multipart/form-data">
+    <form method="POST" action="{{ route('common.saveBlog') }}" id="blogForm" enctype="multipart/form-data">
       {{ csrf_field() }}
       <input type="hidden" name="blog_id" value="{{ $blog->id }}">
       <input type="hidden" name="old_blog_image" value="{{ $blog->blog_image }}">
@@ -75,7 +75,7 @@ figure figcaption {
       
         <div class="form-group col-md-7">
           <label class="form-control-label">Blog Title <span class="required">*</span></label>
-          <input type="text" class="form-control" name="blog_title" 
+          <input type="text" class="form-control" name="blog_title"
             placeholder="Blog Title" value="{{ $blog->blog_title }}" />
             @if ($errors->has('blog_title'))
                 <label class="error" for="blog_title">{{ $errors->first('blog_title') }}</label>
@@ -97,6 +97,16 @@ figure figcaption {
         </div>
       </div>
 
+      </div>
+
+      <div class="row">
+          <div class="form-group col-md-7">
+              <label class="form-control-label">Attached Lecture <span class="required">*</span></label>
+              <input type="text" class="form-control" name="blog_title" placeholder="Blog Title" value="{{ $blog->lecture }}" />
+              @if ($errors->has('blog_title'))
+                  <label class="error" for="blog_title">{{ $errors->first('blog_title') }}</label>
+              @endif
+          </div>
       </div>
 
       <div class="row">

@@ -6,11 +6,11 @@
 <div class="panel">
         <div class="panel-heading">
             <div class="panel-title">
-              <a href="{{ route('instructor.blogForm') }}" class="btn btn-success btn-sm"><i class="icon wb-plus" aria-hidden="true"></i> Add Blog</a>
+              <a href="{{ route('common.blogForm') }}" class="btn btn-success btn-sm"><i class="icon wb-plus" aria-hidden="true"></i> Add Blog</a>
             </div>
           
           <div class="panel-actions">
-          <form method="GET" action="{{ route('instructor.blogs.index') }}">
+          <form method="GET" action="{{ route('common.blogs.index') }}">
               <div class="input-group">
                 <input type="text" class="form-control" name="search" placeholder="Search..." value="{{ Request::input('search') }}">
                 <span class="input-group-btn">

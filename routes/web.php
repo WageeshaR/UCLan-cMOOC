@@ -81,7 +81,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     //Functions accessed by both student and instructor
     // Route::group(['middleware' => 'role:student,instructor'], function () {
-    Route::group(['middleware' => 'role:facilitator'], function () {
+    Route::group(['middleware' => 'role:student,facilitator'], function () {
         Route::get('instructor-dashboard', 'InstructorController@dashboard')->name('instructor.dashboard');
 
         Route::get('instructor-profile', 'InstructorController@getProfile')->name('instructor.profile.get');
@@ -103,17 +103,19 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('instructor-course-curriculum/{course_id}', 'CourseController@instructorCourseCurriculum')->name('instructor.course.curriculum.edit');
         Route::post('instructor-course-curriculum-save', 'CourseController@instructorCourseCurriculumSave')->name('instructor.course.curriculum.save');
 
-        Route::get('instructor-blogs', 'BlogController@index')->name('instructor.blogs.index');
-        Route::get('instructor-blog-form', 'BlogController@getForm')->name('instructor.blogForm');
+        // Blogs common to both student and facilitator
+        Route::get('common-blogs', 'BlogController@index')->name('common.blogs.index');
+        Route::get('common-blog-form', 'BlogController@getForm')->name('common.blogForm');
+        Route::get('common-blog-form/{blog_id}', 'BlogController@getForm');
+        Route::post('common-save-blog', 'BlogController@saveBlog')->name('common.saveBlog');
+        Route::get('common-delete-blog/{blog_id}', 'BlogController@deleteBlog');
+        Route::get('blog-read/{blog_id}', 'BlogController@blogRead')->name('blog.read');
 
         Route::get('instructor-credits', 'InstructorController@credits')->name('instructor.credits');
 
         Route::post('instructor-withdraw-request', 'InstructorController@withdrawRequest')->name('instructor.withdraw.request');
 
         Route::get('instructor-withdraw-requests', 'InstructorController@listWithdrawRequests')->name('instructor.list.withdraw');
-
-        // Blogs
-        Route::get('blog-read/{blog_id}', 'BlogController@blogRead')->name('blog.read');
 
         // Save Curriculum
         Route::post('courses/section/save', 'CourseController@postSectionSave');

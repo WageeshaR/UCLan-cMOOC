@@ -43,7 +43,12 @@ class BlogController extends Controller
     public function getForm($blog_id='', Request $request)
     {
         if($blog_id) {
-            $blog = Blog::find($blog_id);
+            $blog = DB::table('blogs')
+                ->select('blogs.*', 'curriculum_lectures_quiz.title as lecture', 'courses.course_title as lecture')
+                ->join('curriculum_lectures_quiz', 'curriculum_lectures_quiz.lecture_quiz_id', '=', 'blogs.lecture_quiz_id')
+                ->join('curriculum_sections', 'curriculum_sections.section_id', '=', 'curriculum_lectures_quiz.section_id')
+                ->join('courses', 'courses.id', '=', 'curriculum_sections.course_id')
+                ->where('blogs.id', $blog_id)->first();
         }else{
             $blog = $this->getColumnTable('blogs');
         }
@@ -54,7 +59,7 @@ class BlogController extends Controller
     {
         $paginate_count = 10;
         $blogs = DB::table('blogs')
-            ->select('blogs.*', 'curriculum_lectures_quiz.title as lecture', 'courses.course_slug as course_slug')
+            ->select('blogs.*', 'curriculum_lectures_quiz.title as lecture', 'courses.course_title as lecture')
             ->join('curriculum_lectures_quiz', 'curriculum_lectures_quiz.lecture_quiz_id', '=', 'blogs.lecture_quiz_id')
             ->join('curriculum_sections', 'curriculum_sections.section_id', '=', 'curriculum_lectures_quiz.section_id')
             ->join('courses', 'courses.id', '=', 'curriculum_sections.course_id')
@@ -66,5 +71,82 @@ class BlogController extends Controller
     {
         $content = Blog::find($blog_id);
         return view('blogs.read', compact('content'));
+    }
+
+    public function saveBlog(Request $request)
+    {
+        // echo '<pre>';print_r($_POST);exit;
+        $blog_id = $request->input('blog_id');
+
+        $validation_rules = ['blog_title' => 'required|string'];
+
+        $validator = Validator::make($request->all(),$validation_rules);
+
+        // Stop if validation fails
+        if ($validator->fails()) {
+            return $this->return_output('error', 'error', $validator, 'back', '422');
+        }
+
+        if ($blog_id) {
+            $blog = Blog::find($blog_id);
+            $success_message = 'Blog updated successfully';
+        } else {
+            $blog = new Blog();
+            $success_message = 'Blog added successfully';
+
+            //create slug only while add
+            $slug = $request->input('blog_title');
+            $slug = str_slug($slug, '-');
+
+            $results = DB::select(DB::raw("SELECT count(*) as total from blogs where blog_slug REGEXP '^{$slug}(-[0-9]+)?$' "));
+
+            $finalSlug = ($results['0']->total > 0) ? "{$slug}-{$results['0']->total}" : $slug;
+            $blog->blog_slug = $finalSlug;
+        }
+
+        $blog->blog_title = $request->input('blog_title');
+        $blog->description = $request->input('description');
+        $blog->is_active = $request->input('is_active');
+
+        $blog_lecture = $request->input('lecture');
+        $blog_lecture_id = DB::table('courses')
+                        ->select('')
+                        ->where('blogs')
+
+        if (Input::hasFile('blog_image') && Input::has('blog_image_base64')) {
+            //delete old file
+            $old_image = $request->input('old_blog_image');
+            if (Storage::exists($old_image)) {
+                Storage::delete($old_image);
+            }
+
+            //get filename
+            $file_name   = $request->file('blog_image')->getClientOriginalName();
+
+            // returns Intervention\Image\Image
+            $image_make = Image::make($request->input('blog_image_base64'))->encode('jpg');
+
+            // create path
+            $path = "blogs";
+
+            //check if the file name is already exists
+            $new_file_name = SiteHelpers::checkFileName($path, $file_name);
+
+            //save the image using storage
+            Storage::put($path."/".$new_file_name, $image_make->__toString(), 'public');
+
+            $blog->blog_image = $path."/".$new_file_name;
+
+        }
+
+        $blog->save();
+
+        return $this->return_output('flash', 'success', $success_message, 'common-blogs', '200');
+    }
+
+    public function deleteBlog($blog_id)
+    {
+        Blog::destroy($blog_id);
+        return $this->return_output('flash', 'success', 'Blog deleted successfully', 'common-blogs', '200');
     }
 }

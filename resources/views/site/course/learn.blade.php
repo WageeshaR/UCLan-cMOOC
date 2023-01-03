@@ -141,14 +141,14 @@
                                         	@endif
                                         </span>
                                         <a href="{{ url('course-enroll/'.$course->course_slug.'/'.SiteHelpers::encrypt_decrypt($curriculum_lecture->lecture_quiz_id)) }}" class="btn btn-ulearn-preview">
-                                            @if($is_completed)
+                                            @if($is_completed)v
                                                 RESTART
                                             @else
                                                 EXPLORE
                                             @endif
                                         </a>
                                         <a href="{{ url('read-blogs/'.$course->course_slug.'/'.SiteHelpers::encrypt_decrypt($curriculum_lecture->lecture_quiz_id)) }}" class="btn btn-ulearn-preview">
-                                            VIEW BLOGS
+                                            READ BLOGS
                                         </a>
                                     </article>
                                 </div>
