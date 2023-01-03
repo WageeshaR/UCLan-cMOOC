@@ -148,6 +148,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('admin/dashboard', 'Admin\DashboardController')->name('admin.dashboard');
         Route::get('admin/institutions', 'Admin\InstitutionController@index')->name('admin.institutions');
         Route::get('admin/users', 'Admin\UserController@index')->name('admin.users');
+        Route::get('admin/userGroups', 'Admin\GroupsController@index')->name('admin.userGroups');
         Route::get('admin/roles', 'Admin\RolesController@index')->name('admin.roles');
         Route::get('admin/institution-form', 'Admin\InstitutionController@getForm')->name('admin.getInstitutionForm');
         Route::get('admin/institution-form/{institution_id}', 'Admin\InstitutionController@getForm');

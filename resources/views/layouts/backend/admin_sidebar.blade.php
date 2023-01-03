@@ -17,8 +17,14 @@
         </li>
         <li class="site-menu-item {{ request()->is('admin/user*') ? 'active' : '' }}">
             <a href="{{ route('admin.users') }}">
-                <i class="site-menu-icon wb-users" aria-hidden="true"></i>
+                <i class="site-menu-icon wb-user" aria-hidden="true"></i>
                 <span class="site-menu-title">Users Management</span>
+            </a>
+        </li>
+        <li class="site-menu-item {{ request()->is('admin/userGroup*') ? 'active' : '' }}">
+            <a href="{{ route('admin.userGroups') }}">
+                <i class="site-menu-icon wb-users" aria-hidden="true"></i>
+                <span class="site-menu-title">User Groups</span>
             </a>
         </li>
         <li class="site-menu-item {{ request()->is('admin/roles') ? 'active' : '' }}">
