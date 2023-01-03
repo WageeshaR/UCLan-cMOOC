@@ -30,11 +30,17 @@ class BlogController extends Controller
         $paginate_count = 10;
         if($request->has('search')){
             $search = $request->input('search');
-            $blogs = Blog::where('blog_title', 'LIKE', '%' . $search . '%')
+            $blogs = DB::table('blogs')
+                ->select('blogs.*', 'curriculum_lectures_quiz.title as lecture')
+                ->join('curriculum_lectures_quiz', 'curriculum_lectures_quiz.lecture_quiz_id', '=', 'blogs.lecture_quiz_id')
+                ->where('blog_title', 'LIKE', '%' . $search . '%')
                 ->paginate($paginate_count);
         }
         else {
-            $blogs = Blog::paginate($paginate_count);
+            $blogs = DB::table('blogs')
+                ->select('blogs.*', 'curriculum_lectures_quiz.title as lecture')
+                ->join('curriculum_lectures_quiz', 'curriculum_lectures_quiz.lecture_quiz_id', '=', 'blogs.lecture_quiz_id')
+                ->paginate($paginate_count);
         }
 
         return view('blogs.index', compact('blogs'));
@@ -44,10 +50,8 @@ class BlogController extends Controller
     {
         if($blog_id) {
             $blog = DB::table('blogs')
-                ->select('blogs.*', 'curriculum_lectures_quiz.title as lecture', 'courses.course_title as lecture')
+                ->select('blogs.*', 'curriculum_lectures_quiz.title as lecture')
                 ->join('curriculum_lectures_quiz', 'curriculum_lectures_quiz.lecture_quiz_id', '=', 'blogs.lecture_quiz_id')
-                ->join('curriculum_sections', 'curriculum_sections.section_id', '=', 'curriculum_lectures_quiz.section_id')
-                ->join('courses', 'courses.id', '=', 'curriculum_sections.course_id')
                 ->where('blogs.id', $blog_id)->first();
         }else{
             $blog = $this->getColumnTable('blogs');
@@ -55,16 +59,14 @@ class BlogController extends Controller
         return view('blogs.form', compact('blog'));
     }
 
-    public function blogsList($course_slug = '', $lecture_slug = '', Request $request)
+    public function blogsList($lecture_slug = '', Request $request)
     {
         $paginate_count = 10;
         $blogs = DB::table('blogs')
-            ->select('blogs.*', 'curriculum_lectures_quiz.title as lecture', 'courses.course_title as lecture')
+            ->select('blogs.*', 'curriculum_lectures_quiz.title as lecture')
             ->join('curriculum_lectures_quiz', 'curriculum_lectures_quiz.lecture_quiz_id', '=', 'blogs.lecture_quiz_id')
-            ->join('curriculum_sections', 'curriculum_sections.section_id', '=', 'curriculum_lectures_quiz.section_id')
-            ->join('courses', 'courses.id', '=', 'curriculum_sections.course_id')
-            ->where('blogs.lecture_quiz_id', SiteHelpers::encrypt_decrypt($lecture_slug, 'd'))->paginate($paginate_count);
-        return view('blogs.list', compact('blogs'));
+            ->where('curriculum_lectures_quiz.lecture_quiz_id', SiteHelpers::encrypt_decrypt($lecture_slug, 'd'))->paginate($paginate_count);
+        return view('blogs.index', compact('blogs'));
     }
 
     public function blogRead($blog_id = '', Request $request)
@@ -108,10 +110,11 @@ class BlogController extends Controller
         $blog->description = $request->input('description');
         $blog->is_active = $request->input('is_active');
 
-        $blog_lecture = $request->input('lecture');
-        $blog_lecture_id = DB::table('courses')
-                        ->select('')
-                        ->where('blogs')
+        $lecture_title = $request->input('lecture');
+        $lecture = DB::table('curriculum_lectures_quiz')
+                        ->select('lecture_quiz_id')
+                        ->where('curriculum_lectures_quiz.title', $lecture_title)->first();
+        $blog->lecture_quiz_id = $lecture->lecture_quiz_id;
 
         if (Input::hasFile('blog_image') && Input::has('blog_image_base64')) {
             //delete old file

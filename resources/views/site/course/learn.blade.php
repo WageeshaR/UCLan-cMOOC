@@ -147,7 +147,7 @@
                                                 EXPLORE
                                             @endif
                                         </a>
-                                        <a href="{{ url('read-blogs/'.$course->course_slug.'/'.SiteHelpers::encrypt_decrypt($curriculum_lecture->lecture_quiz_id)) }}" class="btn btn-ulearn-preview">
+                                        <a href="{{ url('common-lecture-blogs/'.SiteHelpers::encrypt_decrypt($curriculum_lecture->lecture_quiz_id)) }}" class="btn btn-ulearn-preview">
                                             READ BLOGS
                                         </a>
                                     </article>

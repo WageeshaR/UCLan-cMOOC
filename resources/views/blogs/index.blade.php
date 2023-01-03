@@ -49,13 +49,17 @@
                   @endif
                 </td>
                 <td>
-                  <a href="{{ url('admin/blog-form/'.$blog->id) }}" class="btn btn-xs btn-icon btn-inverse btn-round" data-toggle="tooltip" data-original-title="Edit" >
-                    <i class="icon wb-pencil" aria-hidden="true"></i>
-                  </a>
-
-                  <a href="{{ url('admin/delete-blog/'.$blog->id) }}" class="delete-record btn btn-xs btn-icon btn-inverse btn-round" data-toggle="tooltip" data-original-title="Delete" >
-                    <i class="icon wb-trash" aria-hidden="true"></i>
-                  </a>
+                    <a href="{{ url('blog-read/'.$blog->id) }}" class="btn btn-xs btn-icon btn-inverse btn-round" data-toggle="tooltip" data-original-title="View" >
+                        <i class="icon wb-eye" aria-hidden="true"></i>
+                    </a>
+                    @if(Auth::user()->id == $blog->author_id)
+                        <a href="{{ url('common-blog-form/'.$blog->id) }}" class="btn btn-xs btn-icon btn-inverse btn-round" data-toggle="tooltip" data-original-title="Edit" >
+                            <i class="icon wb-pencil" aria-hidden="true"></i>
+                        </a>
+                        <a href="{{ url('common-delete-blog/'.$blog->id) }}" class="delete-record btn btn-xs btn-icon btn-inverse btn-round" data-toggle="tooltip" data-original-title="Delete" >
+                            <i class="icon wb-trash" aria-hidden="true"></i>
+                        </a>
+                    @endif
                 </td>
               </tr>
               @endforeach

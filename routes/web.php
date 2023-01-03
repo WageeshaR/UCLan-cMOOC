@@ -105,6 +105,7 @@ Route::group(['middleware' => 'auth'], function () {
 
         // Blogs common to both student and facilitator
         Route::get('common-blogs', 'BlogController@index')->name('common.blogs.index');
+        Route::get('common-lecture-blogs/{lecture_slug}', 'BlogController@blogsList')->name('lecture.blogs.index');
         Route::get('common-blog-form', 'BlogController@getForm')->name('common.blogForm');
         Route::get('common-blog-form/{blog_id}', 'BlogController@getForm');
         Route::post('common-save-blog', 'BlogController@saveBlog')->name('common.saveBlog');
