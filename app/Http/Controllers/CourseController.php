@@ -9,6 +9,7 @@ use App\Models\Course;
 use App\Models\Category;
 use App\Models\CourseRating;
 use App\Models\InstructionLevel;
+use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use DB;
@@ -614,7 +615,8 @@ class CourseController extends Controller
         $discussion = DB::table('curriculum_lectures_quiz')
                         ->select('*')
                         ->where('lecture_quiz_id', SiteHelpers::encrypt_decrypt($lecture_slug, 'd'))->first();
-        return view('site.course.discussion', compact('course', 'discussion'));
+        $posts = Post::where('lecture_id', SiteHelpers::encrypt_decrypt($lecture_slug, 'd'))->orderBy('created_at', 'DESC')->get();
+        return view('site.course.discussion', compact('course', 'discussion', 'posts'));
     }
 
     public function postSectionSave(Request $request)
@@ -1166,5 +1168,29 @@ if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {               $ffmpeg_path = b
             ->select('*')
             ->where('lecture_quiz_id', SiteHelpers::encrypt_decrypt($lecture_slug, 'd'))->first();
         return view('site.course.feed.resources', compact('course', 'discussion'));
+    }
+
+    public function savePost(Request $request) {
+        $post = new Post();
+        $post->author_id = \Auth::user()->id;
+        $post->lecture_id = $request->lecture;
+        if (isset($request->contents)) {
+            $post->content = $request->contents;
+        }
+        if (isset($request->tweet_content)) {
+            $post->tweet_url = $request->tweet_content;
+        }
+        if (isset($request->yt_content)) {
+            $url = $request->yt_content;
+            if (strpos($url, "watch?v=") !== false) {
+                $url = str_replace("watch?v=", "embed/", $url);
+            }
+            $post->video_url = $url;
+        }
+        $post->content = $request->contents;
+        $post->location = $request->location;
+        $post->save();
+        $return_url = 'course-enroll/'.$request->course.'/'.SiteHelpers::encrypt_decrypt($request->lecture);
+        return redirect($return_url)->with('status', "Success");
     }
 }

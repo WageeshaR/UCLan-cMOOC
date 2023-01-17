@@ -3,6 +3,7 @@
     <!-- Material Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('frontend/vendor/rating/rateyo.css') }}">
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
     <!-- content start -->
     <div class="container-fluid p-0 home-content">
         <!-- banner start -->
@@ -54,82 +55,57 @@
                 </a>
             </div>
             <div class="feed-scrollable-root">
-                <div class="editor-frame">
-                    <div class="editor-expanded-container">
-                        <div class="editor-body">
-                            <span style="font-weight: bold; font-size: 16px; color: rgb(216,216,216)">Share your ideas..</span>
+                <form name="sample-form" id="sample-form" method="post" action="{{url('save-post')}}">
+                    @csrf
+                    <input type="hidden" id="course" name="course" class="form-control" required="" value="{{$course->course_slug}}">
+                    <input type="hidden" id="lecture" name="lecture" class="form-control" required="" value="{{$discussion->lecture_quiz_id}}">
+                    <div class="form-group">
+                        <textarea placeholder="share your ideas.." name="contents" id="contents" class="form-control"></textarea>
+                        <input placeholder="tweet url" type="hidden" id="tweet_content" name="tweet_content" class="form-control">
+                        <input placeholder="video url" type="hidden" id="yt_content" name="yt_content" class="form-control">
+                    </div>
+                    <div class="post-button-group">
+                        <button type="submit" class="btn btn-primary" style="height: 35px">Post</button>
+                        <img src="{{asset('frontend/icons/textbox.jpg')}}" height="40px" class="post-clickable-icon" onclick="openContents()">
+                        <img src="{{asset('frontend/icons/image.png')}}" height="40px" class="post-clickable-icon" onclick="openImage()">
+                        <img src="{{asset('frontend/icons/Twitter.png')}}" height="40px" class="post-clickable-icon" onclick="openTweet()">
+                        <img src="{{asset('frontend/icons/YT.png')}}" height="40px" class="post-clickable-icon" onclick="openYT()">
+                    </div>
+                </form>
+                @foreach($posts as $post)
+                    <div class="published-post-frame">
+                        <div class="post-header">
+                            {{$post->author_id}}
+                            <span style="font-weight: normal; font-size: 12px; color: rgb(200,200,200); margin-left: 5px">@Sample University Name &bull; 31 Oct &bull; {{$post->location}}</span>
                         </div>
-                        <div class="editor-footer">
-                            <button class="editor-create-button">Post</button>
-                            <i class="material-icons icon-hover" style="font-size: 28px; padding-left: 5px; color: rgb(216,216,216)">image</i>
-                            <i class="material-icons icon-hover" style="font-size: 28px; padding-left: 5px; color: rgb(216,216,216)">ondemand_video</i>
-                            <i class="material-icons icon-hover" style="font-size: 26px; color: rgb(216,216,216)">attach_file</i>
-                        </div>
-                    </div>
-                </div>
-                <div class="published-post-frame">
-                    <div class="post-header">
-                        John Doe
-                        <span style="font-weight: normal; font-size: 12px; color: rgb(200,200,200); margin-left: 5px">@Sample University Name &bull; 31 Oct &bull; Phuket, Thailand</span>
-                    </div>
-                    <div class="post-body">
-                        <img src="{{asset('frontend/img/Sample image.jpg')}}" width="100%">
-                        <div class="post-body-description">
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                            when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                        </div>
-                    </div>
-                    <div class="post-footer">
-                        <span title="make trending" class="material-icons colored-icon">trending_up</span>
-                        <span onclick="openPopUp()" id="discussion" title="discussion" class="material-icons grayed-out-icon">comment</span>
-                        <span title="share" class="material-icons grayed-out-icon">share</span>
-                        <span onclick="openChat()" title="send to a chat" class="material-icons grayed-out-icon">send</span>
-                    </div>
-                </div>
-                <div class="published-post-frame">
-                    <div class="post-header tweet-share">
-                        Lillian Hart <span style="font-weight: normal">shared a </span> tweet
-                        <span style="font-weight: normal; font-size: 12px; color: rgb(200,200,200); margin-left: 5px">@Sample Company Name &bull; 31 Oct &bull; London, UK</span>
-                    </div>
-                    <div class="tweet-share-body">
-                        <a id="tweet-thumbnail" href="https://www.twitter.com">
-                            <img src="{{asset('frontend/img/sample_disaster.jpg')}}" height="100%">
-                        </a>
-                        <div id="tweet-text">
-                            <a style="display: block" href="https://www.twitter.com">
-                                <span style="font-weight: bold; font-size: 16px">Amy Scott wrote:</span>
-                            </a>
-                            <p>
-                                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                                when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                                It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
-                                It was popularised...
-                            </p>
+                        @if(is_null($post->tweet_url))
+                            <div class="post-body">
+                            @if($post->image_src)
+                                <img src="{{asset($post->image_src)}}" width="100%">
+                            @elseif($post->video_url)
+                                <iframe width="100%" height="450" src="{{$post->video_url}}"></iframe>
+                            @endif
+                            @if(!is_null($post->content))
+                                <div class="post-body-description">
+                                    {!! $post->content !!}
+                                </div>
+                            @endif
+                            </div>
+                        @else
+                            <div class="tweet-share-body">
+                                <blockquote class="twitter-tweet">
+                                    <a href="{{$post->tweet_url}}"></a>
+                                </blockquote>
+                            </div>
+                        @endif
+                        <div class="post-footer">
+                            <span title="make trending" class="material-icons colored-icon">trending_up</span>
+                            <span onclick="openPopUp()" id="discussion" title="discussion" class="material-icons grayed-out-icon">comment</span>
+                            <span title="share" class="material-icons grayed-out-icon">share</span>
+                            <span onclick="openChat()" title="send to a chat" class="material-icons grayed-out-icon">send</span>
                         </div>
                     </div>
-                </div>
-                <div class="published-post-frame">
-                    <div class="post-header">
-                        John Doe
-                        <span style="font-weight: normal; font-size: 12px; color: rgb(200,200,200); margin-left: 5px">@Sample University Name &bull; 31 Oct &bull; Manchester, UK</span>
-                    </div>
-                    <div class="post-body">
-                        <iframe width="100%" height="450" src="https://www.youtube.com/embed/oj5tbAFDQYA"></iframe>
-                        <div class="post-body-description">
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                            when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                        </div>
-                    </div>
-                    <div class="post-footer">
-                        <span title="make trending" class="material-icons grayed-out-icon">trending_up</span>
-                        <span onclick="openPopUp()" id="discussion" title="discussion" class="material-icons grayed-out-icon">comment</span>
-                        <span title="share" class="material-icons grayed-out-icon">share</span>
-                        <span onclick="openChat()" title="send to a chat" class="material-icons grayed-out-icon">send</span>
-                    </div>
-                </div>
+                @endforeach
             </div>
             <div class="feed-menu-right">
                 <span>More on <b>{{ $course->course_title }}</b></span>
@@ -262,6 +238,21 @@
         }
         function closeChat() {
             document.getElementById("chat-frame").style.display = 'none';
+        }
+        function openContents() {
+            document.getElementById("contents").style.display = 'block';
+            document.getElementById("tweet_content").type = 'hidden';
+            document.getElementById("yt_content").type = 'hidden';
+        }
+        function openTweet() {
+            document.getElementById("contents").style.display = 'none';
+            document.getElementById("tweet_content").type = 'text';
+            document.getElementById("yt_content").type = 'hidden';
+        }
+        function openYT() {
+            document.getElementById("contents").style.display = 'none';
+            document.getElementById("tweet_content").type = 'hidden';
+            document.getElementById("yt_content").type = 'text';
         }
     </script>
 @endsection
