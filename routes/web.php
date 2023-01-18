@@ -77,6 +77,7 @@ Route::group(['middleware' => 'auth'], function () {
         // Course Feed
         Route::get('course-enroll/{course_slug}/{lecture_slug}/resources', 'CourseController@getLectureResources')->name('course.getLectureResources');
         Route::post('save-post', 'CourseController@savePost')->name('course.savePost');
+        Route::post('delete-post', 'CourseController@deletePost')->name('course.deletePost');
 
     });
 

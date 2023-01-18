@@ -86,9 +86,13 @@
                                 {{$post->author_id}}
                                 <span style="font-weight: normal; font-size: 12px; color: rgb(200,200,200); margin-left: 5px">@Sample University Name &bull; 31 Oct &bull; {{$post->location}}</span>
                             </div>
-                            <span title="edit post" class="material-icons grayed-out-icon" onclick="editPost({{$post->id}})">
-                                edit
-                            </span>
+                            <div class="dropdown">
+                                <span title="edit post" class="material-icons grayed-out-icon" onclick="showEditOptions({{$post->id}})">more_vert</span>
+                                <div class="dropdown-content" id="edit-dropdown-{{$post->id}}">
+                                    <a href="#" onclick="editPost({{$post->id}})">Edit</a>
+                                    <a href="#" onclick="deletePost({{$post->id}})">Delete</a>
+                                </div>
+                            </div>
                         </div>
                         <div class="post-body" id="post-body" name="post-body">
                         @if($post->image_src)
@@ -296,6 +300,25 @@
             var id_input = document.getElementById("post_id");
             id_input.value = postId;
             window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+        function deletePost(postId) {
+            fetch("/delete-post", {
+                method: "POST",
+                headers: {'Content-Type': 'application/json', "X-CSRF-Token": '{{csrf_token()}}'},
+                body: JSON.stringify({
+                    post_id: postId
+                })
+            }).then(res => {
+                location.reload();
+            });
+        }
+        function showEditOptions(postId) {
+            var elem = document.getElementById("edit-dropdown-"+postId);
+            if (elem.style.display == 'block') {
+                elem.style.display = 'none';
+            } else {
+                elem.style.display = 'block';
+            }
         }
     </script>
 @endsection

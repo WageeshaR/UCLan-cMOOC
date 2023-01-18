@@ -1197,4 +1197,10 @@ if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {               $ffmpeg_path = b
         $return_url = 'course-enroll/'.$request->course.'/'.SiteHelpers::encrypt_decrypt($request->lecture);
         return redirect($return_url)->with('status', "Success");
     }
+
+    public function deletePost(Request $request) {
+        $post = Post::find($request->post_id);
+        $post->delete();
+        return response("Success", 200);
+    }
 }
