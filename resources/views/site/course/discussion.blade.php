@@ -3,7 +3,13 @@
     <!-- Material Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('frontend/vendor/rating/rateyo.css') }}">
+    <!-- Quill Editor -->
+    <link href="https://cdn.quilljs.com/1.0.0/quill.snow.css" rel="stylesheet">
+    <script src="https://cdn.quilljs.com/1.0.0/quill.js"></script>
+    <script src="https://unpkg.com/quill-image-compress@1.2.11/dist/quill.imageCompressor.min.js"></script>
+    <!-- Twitter Widgets -->
     <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
     <!-- content start -->
     <div class="container-fluid p-0 home-content">
         <!-- banner start -->
@@ -55,19 +61,19 @@
                 </a>
             </div>
             <div class="feed-scrollable-root">
-                <form name="sample-form" id="sample-form" method="post" action="{{url('save-post')}}">
+                <form name="post-form" id="post-form" method="post" action="{{url('save-post')}}">
                     @csrf
                     <input type="hidden" id="course" name="course" class="form-control" required="" value="{{$course->course_slug}}">
                     <input type="hidden" id="lecture" name="lecture" class="form-control" required="" value="{{$discussion->lecture_quiz_id}}">
+                    <input type="hidden" id="quill_content" name="quill_content">
                     <div class="form-group">
-                        <textarea placeholder="share your ideas.." name="contents" id="contents" class="form-control"></textarea>
+                        <div id="contents"></div>
                         <input placeholder="tweet url" type="hidden" id="tweet_content" name="tweet_content" class="form-control">
                         <input placeholder="video url" type="hidden" id="yt_content" name="yt_content" class="form-control">
                     </div>
                     <div class="post-button-group">
                         <button type="submit" class="btn btn-primary" style="height: 35px">Post</button>
                         <img src="{{asset('frontend/icons/textbox.jpg')}}" height="40px" class="post-clickable-icon" onclick="openContents()">
-                        <img src="{{asset('frontend/icons/image.png')}}" height="40px" class="post-clickable-icon" onclick="openImage()">
                         <img src="{{asset('frontend/icons/Twitter.png')}}" height="40px" class="post-clickable-icon" onclick="openTweet()">
                         <img src="{{asset('frontend/icons/YT.png')}}" height="40px" class="post-clickable-icon" onclick="openYT()">
                     </div>
@@ -254,5 +260,29 @@
             document.getElementById("tweet_content").type = 'hidden';
             document.getElementById("yt_content").type = 'text';
         }
+
+        /* Quill editor JS */
+        Quill.register("modules/imageCompressor", imageCompressor);
+        var quill = new Quill('#contents', {
+            modules: {
+                toolbar: [
+                    [{ header: [1, 2, false] }],
+                    ['bold', 'italic', 'underline', 'link'],
+                    ['image', 'code-block']
+                ],
+                imageCompressor: {
+                    quality: 0.9,
+                    maxWidth: 500, // default
+                    maxHeight: 500, // default
+                }
+            },
+            placeholder: 'Share your ideas...',
+            theme: 'snow'  // or 'bubble'
+        });
+        $("#post-form").on("submit",function(){
+            var $input = $(this).find("input[name=quill_content]");
+            var $qc = quill.root.innerHTML;
+            $input.attr('value', $qc);
+        })
     </script>
 @endsection

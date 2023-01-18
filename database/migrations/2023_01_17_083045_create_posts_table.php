@@ -18,7 +18,7 @@ class CreatePostsTable extends Migration {
             $table->integer('author_id');
             $table->integer('lecture_id');
             $table->string('location')->nullable();
-            $table->string('content')->nullable();
+            $table->string('content', 1000)->nullable();
             $table->string('image_src')->nullable();
             $table->string('tweet_url')->nullable();
             $table->string('video_url')->nullable();

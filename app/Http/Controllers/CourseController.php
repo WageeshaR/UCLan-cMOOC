@@ -1174,8 +1174,9 @@ if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {               $ffmpeg_path = b
         $post = new Post();
         $post->author_id = \Auth::user()->id;
         $post->lecture_id = $request->lecture;
-        if (isset($request->contents)) {
-            $post->content = $request->contents;
+        if (isset($request->quill_content)) {
+            $content = $request->quill_content;
+            $post->content = $content;
         }
         if (isset($request->tweet_content)) {
             $post->tweet_url = $request->tweet_content;
@@ -1187,7 +1188,6 @@ if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {               $ffmpeg_path = b
             }
             $post->video_url = $url;
         }
-        $post->content = $request->contents;
         $post->location = $request->location;
         $post->save();
         $return_url = 'course-enroll/'.$request->course.'/'.SiteHelpers::encrypt_decrypt($request->lecture);
