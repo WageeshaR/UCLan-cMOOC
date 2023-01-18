@@ -66,6 +66,7 @@
                     <input type="hidden" id="course" name="course" class="form-control" required="" value="{{$course->course_slug}}">
                     <input type="hidden" id="lecture" name="lecture" class="form-control" required="" value="{{$discussion->lecture_quiz_id}}">
                     <input type="hidden" id="quill_content" name="quill_content">
+                    <input type="hidden" id="post_id" name="post_id">
                     <div class="form-group">
                         <div id="contents"></div>
                         <input placeholder="tweet url" type="hidden" id="tweet_content" name="tweet_content" class="form-control">
@@ -79,31 +80,34 @@
                     </div>
                 </form>
                 @foreach($posts as $post)
-                    <div class="published-post-frame">
+                    <div class="published-post-frame" id="{{$post->id}}">
                         <div class="post-header">
-                            {{$post->author_id}}
-                            <span style="font-weight: normal; font-size: 12px; color: rgb(200,200,200); margin-left: 5px">@Sample University Name &bull; 31 Oct &bull; {{$post->location}}</span>
-                        </div>
-                        @if(is_null($post->tweet_url))
-                            <div class="post-body">
-                            @if($post->image_src)
-                                <img src="{{asset($post->image_src)}}" width="100%">
-                            @elseif($post->video_url)
-                                <iframe width="100%" height="450" src="{{$post->video_url}}"></iframe>
-                            @endif
-                            @if(!is_null($post->content))
-                                <div class="post-body-description">
-                                    {!! $post->content !!}
-                                </div>
-                            @endif
+                            <div>
+                                {{$post->author_id}}
+                                <span style="font-weight: normal; font-size: 12px; color: rgb(200,200,200); margin-left: 5px">@Sample University Name &bull; 31 Oct &bull; {{$post->location}}</span>
                             </div>
-                        @else
-                            <div class="tweet-share-body">
+                            <span title="edit post" class="material-icons grayed-out-icon" onclick="editPost({{$post->id}})">
+                                edit
+                            </span>
+                        </div>
+                        <div class="post-body" id="post-body" name="post-body">
+                        @if($post->image_src)
+                            <img src="{{asset($post->image_src)}}" width="100%">
+                        @elseif($post->video_url)
+                            <iframe width="100%" height="450" src="{{$post->video_url}}"></iframe>
+                        @elseif($post->tweet_url)
+                            <div class="tweet-body">
                                 <blockquote class="twitter-tweet">
                                     <a href="{{$post->tweet_url}}"></a>
                                 </blockquote>
                             </div>
                         @endif
+                        @if(!is_null($post->content))
+                            <div class="post-body-description">
+                                {!! $post->content !!}
+                            </div>
+                        @endif
+                        </div>
                         <div class="post-footer">
                             <span title="make trending" class="material-icons colored-icon">trending_up</span>
                             <span onclick="openPopUp()" id="discussion" title="discussion" class="material-icons grayed-out-icon">comment</span>
@@ -251,12 +255,10 @@
             document.getElementById("yt_content").type = 'hidden';
         }
         function openTweet() {
-            document.getElementById("contents").style.display = 'none';
             document.getElementById("tweet_content").type = 'text';
             document.getElementById("yt_content").type = 'hidden';
         }
         function openYT() {
-            document.getElementById("contents").style.display = 'none';
             document.getElementById("tweet_content").type = 'hidden';
             document.getElementById("yt_content").type = 'text';
         }
@@ -283,6 +285,17 @@
             var $input = $(this).find("input[name=quill_content]");
             var $qc = quill.root.innerHTML;
             $input.attr('value', $qc);
-        })
+        });
+        function editPost(postId) {
+            var post = document.getElementById(postId);
+            var content = post.childNodes.item(3).innerHTML;
+            post.style.display = 'none';
+            const delta = quill.clipboard.convert(content);
+            quill.root.dataset.placeholder = '';
+            quill.setContents(delta, 'silent');
+            var id_input = document.getElementById("post_id");
+            id_input.value = postId;
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
     </script>
 @endsection

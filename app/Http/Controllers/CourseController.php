@@ -1171,7 +1171,11 @@ if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {               $ffmpeg_path = b
     }
 
     public function savePost(Request $request) {
-        $post = new Post();
+        if (isset($request->post_id)) {
+            $post = Post::find($request->post_id);
+        } else {
+            $post = new Post();
+        }
         $post->author_id = \Auth::user()->id;
         $post->lecture_id = $request->lecture;
         if (isset($request->quill_content)) {
