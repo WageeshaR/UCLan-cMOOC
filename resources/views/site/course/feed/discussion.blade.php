@@ -113,18 +113,18 @@
                         @endif
                         </div>
                         <div class="post-footer">
-                            <span title="make trending" class="material-icons colored-icon">trending_up</span>
+                            <span title="make trending" class="material-icons grayed-out-icon">trending_up</span>
                             <span onclick="loadReloadPopUp({{$post->id}})" id="discussion" title="discussion" class="material-icons grayed-out-icon">comment</span>
                             <span title="share" class="material-icons grayed-out-icon">share</span>
                             <span onclick="openChat()" title="send to a chat" class="material-icons grayed-out-icon">send</span>
                         </div>
-                        <div class="popup-backdrop" id="popup-backdrop-{{$post->id}}" onclick="closePopUp({{$post->id}})">
+                        <div class="popup-backdrop" id="popup-backdrop-{{$post->id}}">
                             <div id="discussion-popup-{{$post->id}}" class="discussion-popup-frame">
                                 <div style="margin-top: 0px">
                                     <button onclick="closePopUp({{$post->id}})" class="popup-close-button">close</button>
                                 </div>
                                 <div id="comment-container" class="comment-container">
-                                    <input type="text" placeholder="what are your thoughts.." id="comment_box_{{$post->id}}" name="comment_box_{{$post->id}}" class="comment-box">
+                                    <textarea type="text" placeholder="what are your thoughts.." id="comment_box_{{$post->id}}" name="comment_box_{{$post->id}}" class="comment-box"></textarea>
                                     <button onclick="submitComment({{$post->id}})" class="comment-button">comment</button>
                                 </div>
                                 <div id="discussion-body-{{$post->id}}"></div>
@@ -200,11 +200,44 @@
             let bodyHTML = "";
             comments.forEach(loopBody)
             function loopBody(item, index) {
+                const t = item.created_at.split(/[- :]/);
+                const created_at = new Date(Date.UTC(t[0], t[1]-1, t[2], t[3], t[4], t[5]));
+                const today = new Date();
+                const diffMs = (today - created_at);
+                let diff = 0;
+                const diffInDays = Math.floor(diffMs / 86400000);
+                if (diffInDays == 0) {
+                    var diffInHrs = Math.floor((diffMs % 86400000) / 3600000);
+                    if (diffInHrs == 0) {
+                        var diffInMins = Math.round(((diffMs % 86400000) % 3600000) / 60000);
+                        diff = diffInMins + "m ago";
+                    } else {
+                        diff = diffInHrs + "h ago";
+                    }
+                } else {
+                    diff = diffInDays + "d ago";
+                }
                 bodyHTML += "<div class='discussion-popup-message-box' style='margin-top: 10px'>" +
-                    "<span>Sarah Flynn: </span>" +
+                    "<span>" + item.fn + " " + item.ln + " </span>" +
+                    "<span style='font-weight: lighter; color: lightgrey'>" + diff + " </span>" +
                     "<span style='font-weight: normal'>" + item.text + "</span>" +
-                    "<br><span style='font-weight: normal; color: lightgrey; cursor: pointer; margin-left: 5px'>reply</span>" +
+                    "<br>" +
+                    "<span onclick='reply("+ item.id +")' style='font-weight: normal; color: lightgrey; cursor: pointer; margin-left: 5px'>reply</span>" +
+                    "<br>" +
+                    "<div id='reply-container-" + item.id +"' class='reply-container'>" +
+                        "<textarea type='text' placeholder='your reply..' id='reply_box_" + item.id + "' name='reply_box_" + item.id + "' class='reply-box'></textarea>" +
+                        "<button onclick='submitComment(" + post_id + ","+ item.id +")' class='reply-button'>reply</button>" +
+                    "</div>" +
                     "</div>";
+                if (item.replies && item.replies.length > 0) {
+                    item.replies.forEach(replyLoopBody)
+                }
+            }
+            function replyLoopBody(item, index) {
+                bodyHTML += "<div id='popup-reply-box-"+ item.id +"' class='discussion-popup-reply-box'>" +
+                    "<span>" + item.fn + " " + item.ln + " </span>" +
+                    "<span style='font-weight: normal'>"+ item.text +"</span>" +
+                    "</div>"
             }
             document.getElementById("discussion-body-"+post_id).innerHTML = bodyHTML;
             if (!reload) {
@@ -297,19 +330,35 @@
                 elem.style.display = 'block';
             }
         }
-        function submitComment(postId) {
-            let comment = document.getElementById("comment_box_"+postId).value;
-            document.getElementById("comment_box_"+postId).value = null;
+        function submitComment(postId, parentId) {
+            let comment = "";
+            if (!parentId) {
+                comment = document.getElementById("comment_box_"+postId).value;
+                document.getElementById("comment_box_"+postId).value = null;
+            }
+            else {
+                comment = document.getElementById("reply_box_"+parentId).value;
+                document.getElementById("reply_box_"+parentId).value = null;
+            }
             fetch("/save-comment", {
                 method: "POST",
                 headers: {'Content-Type': 'application/json', "X-CSRF-Token": '{{csrf_token()}}'},
                 body: JSON.stringify({
                     post_id: postId,
+                    parent_id: parentId,
                     comment: comment
                 })
             }).then(res => {
                 loadReloadPopUp(postId, true);
             });
+        }
+        function reply(commentId) {
+            let reply_container = document.getElementById("reply-container-"+commentId);
+            if (reply_container.style.display == 'flex') {
+                reply_container.style.display = 'none'
+            } else {
+                reply_container.style.display = 'flex';
+            }
         }
     </script>
 @endsection

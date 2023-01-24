@@ -1280,17 +1280,17 @@ a:link, a:hover, a:visited, a:active {text-decoration: none}
 }
 .discussion-popup-reply-box {
     color: black;
-    font-size: 10px;
+    font-size: 12px;
     font-weight: bold;
     width: 95%;
     margin-left: 5%;
-    height: auto;
-    background-color: rgb(225,225,225);
+    height: 30px;
+    background-color: white;
     box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.25);
     border-radius: 2.5px;
-    margin-top: 3.5px;
-    padding: 4px;
-    line-height: 12px;
+    margin-top: 5px;
+    padding: 5px;
+    line-height: 14px;
 }
 .popup-close-button {
     background-color: transparent; font-size: 12px;
@@ -1304,16 +1304,48 @@ a:link, a:hover, a:visited, a:active {text-decoration: none}
 .popup-close-button:focus {
     outline: none;
 }
-.comment-box {
-    min-height: 30px;
+.comment-container, .reply-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.reply-container {
+    display: none;
+    justify-content: space-around;
+}
+.comment-box, .reply-box {
+    height: 30px;
     margin-top: 5px;
     border-style: none;
     border-radius: 3px;
     width: 90%;
     padding-left: 5px;
+    resize: none;
+    overflow: hidden;
 }
-.comment-box:focus {
+.reply-box {
+    height: 25px;
+    background-color: rgb(240,240,240);
+}
+.comment-box:focus, .reply-box:hover {
     outline: none;
+}
+.comment-button, .reply-button {
+    margin-top: 5px;
+    height: 25px;
+    border-radius: 5px;
+    color: white;
+    background-color: gold;
+}
+.reply-button {
+    background-color: rgb(240,240,240);
+    color: rgb(200,200,200);
+    height: 20px;
+}
+.comment-button:hover {
+    background-color: orange;
 }
 .comment-button:focus {
     outline: none;

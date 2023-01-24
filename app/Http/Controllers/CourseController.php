@@ -1206,8 +1206,29 @@ if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {               $ffmpeg_path = b
     }
 
     public function loadComments($post_id = '', Request $request) {
-        $comments = Comment::where('post_id', $post_id)->get();
-        return response()->json($comments);
+        $comments = DB::table('comments')
+            ->select('comments.*', 'users.first_name as fn', 'users.last_name as ln')
+            ->join('users', 'users.id', '=', 'comments.author_id')
+            ->where('comments.post_id', '=', $post_id)
+            ->whereNull('comments.parent_id')
+            ->orderBy('comments.id', 'ASC')
+            ->get();
+        $replies = DB::table('comments')
+            ->select('comments.*', 'users.first_name as fn', 'users.last_name as ln')
+            ->join('users', 'users.id', '=', 'comments.author_id')
+            ->where('comments.post_id', '=', $post_id)
+            ->whereNotNull('comments.parent_id')
+            ->orderBy('comments.parent_id', 'ASC')
+            ->get();
+        $comments = $comments->toArray();
+        $replies = $replies->toArray();
+        foreach ($comments as $c) {
+            $id = $c->id;
+            $c->replies = array_values(array_filter($replies, function ($elem) use($id) {
+                return $elem->parent_id == $id;
+            }));
+        }
+        return response(json_encode($comments));
     }
 
     public function saveComment(Request $request) {
@@ -1215,6 +1236,7 @@ if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {               $ffmpeg_path = b
         $cmnt->author_id = \Auth::user()->id;
         $cmnt->post_id = $request->post_id;
         $cmnt->text = $request->comment;
+        $cmnt->parent_id = $request->parent_id;
         $cmnt->save();
         return response("Success", 200);
     }
