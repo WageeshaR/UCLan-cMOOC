@@ -78,6 +78,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('course-enroll/{course_slug}/{lecture_slug}/resources', 'CourseController@getLectureResources')->name('course.getLectureResources');
         Route::post('save-post', 'CourseController@savePost')->name('course.savePost');
         Route::post('delete-post', 'CourseController@deletePost')->name('course.deletePost');
+        Route::get('load-comments/{post_id}', 'CourseController@loadComments')->name('course.post.comments');
+        Route::post('save-comment', 'CourseController@saveComment')->name('course.saveComment');
 
     });
 

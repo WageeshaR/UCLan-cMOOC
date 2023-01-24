@@ -114,9 +114,19 @@
                         </div>
                         <div class="post-footer">
                             <span title="make trending" class="material-icons colored-icon">trending_up</span>
-                            <span onclick="openPopUp()" id="discussion" title="discussion" class="material-icons grayed-out-icon">comment</span>
+                            <span onclick="loadReloadPopUp({{$post->id}})" id="discussion" title="discussion" class="material-icons grayed-out-icon">comment</span>
                             <span title="share" class="material-icons grayed-out-icon">share</span>
                             <span onclick="openChat()" title="send to a chat" class="material-icons grayed-out-icon">send</span>
+                        </div>
+                        <div id="discussion-popup-{{$post->id}}" class="discussion-popup-frame">
+                            <div style="margin-top: 0px">
+                                <button onclick="closePopUp({{$post->id}})" class="popup-close-button">close</button>
+                            </div>
+                            <div id="comment-container" class="comment-container">
+                                <input type="text" placeholder="what are your thoughts.." id="comment_box_{{$post->id}}" name="comment_box_{{$post->id}}" class="comment-box">
+                                <button onclick="submitComment({{$post->id}})" class="comment-button">comment</button>
+                            </div>
+                            <div id="discussion-body-{{$post->id}}"></div>
                         </div>
                     </div>
                 @endforeach
@@ -162,69 +172,6 @@
             </div>
             <!--Feed UI end-->
 
-            <!--Sample demo popup start-->
-            <div id="discussion-popup" class="discussion-popup-frame">
-                <div style="margin-top: 0px">
-                    <button onclick="closePopUp()" class="popup-close-button">close</button>
-                </div>
-                <div class="discussion-popup-message-box" style="margin-top: 10px">
-                    <span>Sarah Flynn:</span>
-                    <span style="font-weight: normal">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</span>
-                    <br>
-                    <span style="font-weight: normal; color: lightgrey; cursor: pointer; margin-left: 5px">reply</span>
-                </div>
-                <div class="discussion-popup-reply-box">
-                    <span>Sarah Flynn:</span>
-                    <span style="font-weight: normal">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</span>
-                </div>
-                <div class="discussion-popup-reply-box">
-                    <span>Sarah Flynn:</span>
-                    <span style="font-weight: normal">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</span>
-                </div>
-                <div class="discussion-popup-reply-box">
-                    <span>Sarah Flynn:</span>
-                    <span style="font-weight: normal">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</span>
-                </div>
-                <div class="discussion-popup-message-box">Sarah Flynn:
-                    <br>
-                    <span style="font-weight: normal; color: lightgrey; cursor: pointer; margin-left: 5px">reply</span>
-                </div>
-                <div class="discussion-popup-message-box">Sarah Flynn:
-                    <br>
-                    <span style="font-weight: normal; color: lightgrey; cursor: pointer; margin-left: 5px">reply</span>
-                </div>
-                <div class="discussion-popup-reply-box">Sarah Flynn:</div>
-                <div class="discussion-popup-message-box">Sarah Flynn:
-                    <br>
-                    <span style="font-weight: normal; color: lightgrey; cursor: pointer; margin-left: 5px">reply</span>
-                </div>
-                <div class="discussion-popup-reply-box">Sarah Flynn:</div>
-                <div class="discussion-popup-reply-box">Sarah Flynn:</div>
-                <div class="discussion-popup-reply-box">Sarah Flynn:</div>
-                <div class="discussion-popup-reply-box">Sarah Flynn:</div>
-                <div class="discussion-popup-reply-box">Sarah Flynn:</div>
-                <div class="discussion-popup-reply-box">Sarah Flynn:</div>
-                <div class="discussion-popup-message-box">Sarah Flynn:
-                    <br>
-                    <span style="font-weight: normal; color: lightgrey; cursor: pointer; margin-left: 5px">reply</span>
-                </div>
-                <div class="discussion-popup-reply-box">Sarah Flynn:</div>
-                <div class="discussion-popup-reply-box">Sarah Flynn:</div>
-                <div class="discussion-popup-message-box">Sarah Flynn:
-                    <br>
-                    <span style="font-weight: normal; color: lightgrey; cursor: pointer; margin-left: 5px">reply</span>
-                </div>
-                <div class="discussion-popup-message-box">Sarah Flynn:
-                    <br>
-                    <span style="font-weight: normal; color: lightgrey; cursor: pointer; margin-left: 5px">reply</span>
-                </div>
-                <div class="discussion-popup-message-box">Sarah Flynn:
-                    <br>
-                    <span style="font-weight: normal; color: lightgrey; cursor: pointer; margin-left: 5px">reply</span>
-                </div>
-            </div>
-            <!--Sample demo popup end-->
-
             <!--Sample chat popup start-->
             <div id="chat-frame" class="chat-frame">
                 <div class="chat-name-bar">
@@ -241,11 +188,28 @@
 @endsection
 @section("javascript")
     <script>
-        function openPopUp() {
-            document.getElementById("discussion-popup").style.display = 'block';
+        function loadReloadPopUp(post_id, reload=false) {
+            const xmlHttp = new XMLHttpRequest();
+            xmlHttp.open( "GET", '/load-comments/'+post_id, false ); // false for synchronous request
+            xmlHttp.send( null );
+            const comments = JSON.parse(xmlHttp.response);
+            let bodyHTML = "";
+            comments.forEach(loopBody)
+            function loopBody(item, index) {
+                bodyHTML += "<div class='discussion-popup-message-box' style='margin-top: 10px'>" +
+                    "<span>Sarah Flynn: </span>" +
+                    "<span style='font-weight: normal'>" + item.text + "</span>" +
+                    "<br><span style='font-weight: normal; color: lightgrey; cursor: pointer; margin-left: 5px'>reply</span>" +
+                    "</div>";
+            }
+            document.getElementById("discussion-body-"+post_id).innerHTML = bodyHTML;
+            if (!reload) {
+                document.getElementById("discussion-popup-"+post_id).style.display = 'block';
+            }
         }
-        function closePopUp() {
-            document.getElementById("discussion-popup").style.display = 'none';
+        function closePopUp(post_id) {
+            document.getElementById("discussion-body-"+post_id).innerHTML = null;
+            document.getElementById("discussion-popup-"+post_id).style.display = 'none';
         }
         function openChat() {
             document.getElementById("chat-frame").style.display = 'block';
@@ -319,6 +283,20 @@
             } else {
                 elem.style.display = 'block';
             }
+        }
+        function submitComment(postId) {
+            let comment = document.getElementById("comment_box_"+postId).value;
+            document.getElementById("comment_box_"+postId).value = null;
+            fetch("/save-comment", {
+                method: "POST",
+                headers: {'Content-Type': 'application/json', "X-CSRF-Token": '{{csrf_token()}}'},
+                body: JSON.stringify({
+                    post_id: postId,
+                    comment: comment
+                })
+            }).then(res => {
+                loadReloadPopUp(postId, true);
+            });
         }
     </script>
 @endsection

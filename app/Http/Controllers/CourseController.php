@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use App\Models\CourseTaken;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -616,7 +617,7 @@ class CourseController extends Controller
                         ->select('*')
                         ->where('lecture_quiz_id', SiteHelpers::encrypt_decrypt($lecture_slug, 'd'))->first();
         $posts = Post::where('lecture_id', SiteHelpers::encrypt_decrypt($lecture_slug, 'd'))->orderBy('created_at', 'DESC')->get();
-        return view('site.course.discussion', compact('course', 'discussion', 'posts'));
+        return view('site.course.feed.discussion', compact('course', 'discussion', 'posts'));
     }
 
     public function postSectionSave(Request $request)
@@ -1201,6 +1202,20 @@ if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {               $ffmpeg_path = b
     public function deletePost(Request $request) {
         $post = Post::find($request->post_id);
         $post->delete();
+        return response("Success", 200);
+    }
+
+    public function loadComments($post_id = '', Request $request) {
+        $comments = Comment::where('post_id', $post_id)->get();
+        return response()->json($comments);
+    }
+
+    public function saveComment(Request $request) {
+        $cmnt = new Comment();
+        $cmnt->author_id = \Auth::user()->id;
+        $cmnt->post_id = $request->post_id;
+        $cmnt->text = $request->comment;
+        $cmnt->save();
         return response("Success", 200);
     }
 }
