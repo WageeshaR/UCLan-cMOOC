@@ -1238,6 +1238,16 @@ a:link, a:hover, a:visited, a:active {text-decoration: none}
 .post-footer {
     margin-left: 5px;
 }
+.popup-backdrop {
+    position: fixed;
+    background: rgba(0,0,0,0.25);
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: none;
+    z-index: 999;
+}
 .discussion-popup-frame {
     display: none;
     position: fixed;

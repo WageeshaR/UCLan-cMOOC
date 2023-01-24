@@ -118,16 +118,19 @@
                             <span title="share" class="material-icons grayed-out-icon">share</span>
                             <span onclick="openChat()" title="send to a chat" class="material-icons grayed-out-icon">send</span>
                         </div>
-                        <div id="discussion-popup-{{$post->id}}" class="discussion-popup-frame">
-                            <div style="margin-top: 0px">
-                                <button onclick="closePopUp({{$post->id}})" class="popup-close-button">close</button>
+                        <div class="popup-backdrop" id="popup-backdrop-{{$post->id}}" onclick="closePopUp({{$post->id}})">
+                            <div id="discussion-popup-{{$post->id}}" class="discussion-popup-frame">
+                                <div style="margin-top: 0px">
+                                    <button onclick="closePopUp({{$post->id}})" class="popup-close-button">close</button>
+                                </div>
+                                <div id="comment-container" class="comment-container">
+                                    <input type="text" placeholder="what are your thoughts.." id="comment_box_{{$post->id}}" name="comment_box_{{$post->id}}" class="comment-box">
+                                    <button onclick="submitComment({{$post->id}})" class="comment-button">comment</button>
+                                </div>
+                                <div id="discussion-body-{{$post->id}}"></div>
                             </div>
-                            <div id="comment-container" class="comment-container">
-                                <input type="text" placeholder="what are your thoughts.." id="comment_box_{{$post->id}}" name="comment_box_{{$post->id}}" class="comment-box">
-                                <button onclick="submitComment({{$post->id}})" class="comment-button">comment</button>
-                            </div>
-                            <div id="discussion-body-{{$post->id}}"></div>
                         </div>
+
                     </div>
                 @endforeach
             </div>
@@ -189,6 +192,7 @@
 @section("javascript")
     <script>
         function loadReloadPopUp(post_id, reload=false) {
+            document.getElementById("popup-backdrop-"+post_id).style.display = 'block';
             const xmlHttp = new XMLHttpRequest();
             xmlHttp.open( "GET", '/load-comments/'+post_id, false ); // false for synchronous request
             xmlHttp.send( null );
@@ -207,9 +211,18 @@
                 document.getElementById("discussion-popup-"+post_id).style.display = 'block';
             }
         }
-        function closePopUp(post_id) {
+        async function closePopUp(post_id) {
             document.getElementById("discussion-body-"+post_id).innerHTML = null;
             document.getElementById("discussion-popup-"+post_id).style.display = 'none';
+            let backdrop = document.getElementById("popup-backdrop-"+post_id);
+            let alpha = 0.25;
+            for (let i=0; i<10; i++) {
+                alpha -= 0.05*i;
+                backdrop.style.backgroundColor = 'rgba('+0+','+0+','+0+','+alpha+')';
+                await new Promise(r => setTimeout(r, 25));
+            }
+            backdrop.style.display = 'none';
+            backdrop.style.backgroundColor = 'rgba('+0+','+0+','+0+','+0.25+')';
         }
         function openChat() {
             document.getElementById("chat-frame").style.display = 'block';
