@@ -16,13 +16,14 @@ class CreateCourseResourcesTable extends Migration {
         {
             $table->increments('id');
             $table->integer('course_id');
-            $table->integer('lecture_id');
+            $table->integer('lecture_id')->nullable();
             $table->string('resource_type');
             $table->string('title');
-            $table->string('sub_title');
-            $table->string('summary');
-            $table->string('url');
-            $table->integer('file_id');
+            $table->string('sub_title')->nullable();
+            $table->string('summary')->nullable();
+            $table->string('url')->nullable();
+            $table->integer('file_id')->nullable();
+            $table->integer('created_by');
             $table->timestamps();
         });
     }

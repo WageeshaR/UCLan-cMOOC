@@ -1,21 +1,109 @@
 @extends('layouts.backend.index')
 @section('content')
+    <link href="{{ asset('backend/css/resources.css') }}" rel="stylesheet">
     @include('instructor.course.header')
     <div class="page-content">
         <div class="panel">
             <div class="panel-body">
                 @include('instructor.course.tabs')
-                <h4>Publications</h4>
+                <h4 id="pubs-header" class="resource-header" onclick="expandCollapseSection('pubs')">Publications</h4>
                 <hr>
-                <h4>Research data</h4>
+                <div id="pubs-container" style="display: none">
+                    @include('instructor.course.resources-table', ['res' => $publications])
+                    <div class="resource-button" id="new-resource-button" name="new-resource-button" onclick="expandCollapseForm('pubs')">Add new</div>
+                    <div id="pubs-form-body" style="display: none">
+                        <form method="POST" action="{{ route('instructor.course.resources.save') }}" id="pubs_form">
+                            {{ csrf_field() }}
+                            <input type="hidden" name="course_id" value="{{ $course->id }}">
+                            <input type="hidden" name="res_type" value="pubs">
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    <label class="form-control-label">Publication Title<span class="required">*</span></label>
+                                    <input type="text" class="form-control" name="title"
+                                           placeholder="Title" value="" />
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label class="form-control-label">Publication Sub Title</label>
+                                    <input type="text" class="form-control" name="sub_title"
+                                           placeholder="Sub title" value="" />
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label class="form-control-label">Upload Document</label>
+                                    <div class="input-group input-group-file" data-plugin="inputGroupFile">
+                                        <input type="text" class="form-control" readonly="" placeholder="Select from your device">
+                                        <span class="input-group-btn">
+                                            <span class="btn btn-success btn-file">
+                                                <i class="icon wb-upload" aria-hidden="true"></i>
+                                                <input type="file" class="item-img file center-block" name="file" id="file" />
+                                            </span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="form-control-label" style=""></label>
+                                    <div style="font-size: 10px; margin-top: 20px">
+                                        Supported File Formats: pdf,doc,docx
+                                        <br> Max File Size: 2MB
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    <label class="form-control-label">Short Description</label>
+                                    <textarea class="form-control description-box" name="description" placeholder="Description" value=""></textarea>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label class="form-control-label">Publication URL</label>
+                                    <input type="text" class="form-control" name="url"
+                                           placeholder="URL" value="" />
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label class="form-control-label">Attach a Lecture</label>
+                                    <input type="text" class="form-control" name="lecture"
+                                           placeholder="Lecture" value="" />
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="form-group row">
+                                <div class="col-md-4">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                    <button type="reset" class="btn btn-default btn-outline">Reset</button>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+                <h4 id="data-header" class="resource-header">Research data</h4>
                 <hr>
-                <h4>Quizzes</h4>
+                <h4 id="quiz-header" class="resource-header">Quizzes</h4>
                 <hr>
-                <h4>Video footage</h4>
+                <h4 id="vids-header" class="resource-header">Video footage</h4>
                 <hr>
-                <h4>Other resources</h4>
+                <h4 id="othr-header" class="resource-header">Other resources</h4>
                 <hr>
             </div>
         </div>
     </div>
+@endsection
+
+@section('javascript')
+    <script>
+        function expandCollapseSection(res) {
+            let container = document.getElementById(res+"-container");
+            if (container.style.display == 'block') {
+                container.style.display = 'none';
+            } else {
+                container.style.display = 'block';
+            }
+        }
+        function expandCollapseForm(res) {
+            let container = document.getElementById(res+"-form-body");
+            if (container.style.display == 'block') {
+                container.style.display = 'none';
+            } else {
+                container.style.display = 'block';
+            }
+        }
+    </script>
 @endsection

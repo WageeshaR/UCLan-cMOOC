@@ -1,0 +1,28 @@
+.resource-button {
+    width: 100px;
+    border-radius: 3px;
+    border-style: none;
+    color: white;
+    background-color: rgb(62,142,247);
+    height: 30px;
+    cursor: pointer;
+    text-align: center;
+    padding-top: 3px;
+    user-select: none;
+}
+.resource-button:hover {
+    outline: none;
+    background-color: rgb(0, 107, 173);
+}
+.description-box {
+    resize: none;
+    overflow: hidden;
+}
+.resource-header:hover {
+    cursor: pointer;
+    color: rgb(126, 185, 229);
+    user-select: none;
+}
+.pubs-container {
+    display: none;
+}

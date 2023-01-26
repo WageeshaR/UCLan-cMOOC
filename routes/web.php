@@ -150,6 +150,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['middleware' => 'role:facilitator'], function () {
         // Course resources related routes
         Route::get('instructor-course-resources/{course_id}', 'CourseResourcesController@getCourseResources')->name('instructor.course.resources');
+        Route::post('instructor-course-resources-save', 'CourseResourcesController@saveResource')->name('instructor.course.resources.save');
     });
 
     
