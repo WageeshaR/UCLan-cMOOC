@@ -146,6 +146,12 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('courses/curriculum/sort', 'CourseController@postCurriculumSort');
     });
 
+    // Functions access by only facilitators
+    Route::group(['middleware' => 'role:facilitator'], function () {
+        // Course resources related routes
+        Route::get('instructor-course-resources/{course_id}', 'CourseResourcesController@getCourseResources')->name('instructor.course.resources');
+    });
+
     
     //Functions accessed by only admin users
     Route::group(['middleware' => 'role:admin'], function () {

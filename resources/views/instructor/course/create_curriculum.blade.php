@@ -7,14 +7,7 @@ $course_id = $course->id;
 @endphp
 <link href="{{ asset('backend/curriculum/css/createcourse/style.css') }}" rel="stylesheet">
 
-<div class="page-header">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="{{ route('instructor.dashboard') }}">Dashboard</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('instructor.course.list') }}">Courses</a></li>
-    <li class="breadcrumb-item active">Add</li>
-  </ol>
-  <h1 class="page-title">Add Course</h1>
-</div>
+@include('instructor.course.header')
 
 <div class="page-content">
 

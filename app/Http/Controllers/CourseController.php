@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use App\Models\CourseCollaborators;
 use App\Models\CourseTaken;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -348,23 +349,26 @@ class CourseController extends Controller
 
         
         $instructor_id = \Auth::user()->instructor->id;
+        $collab_courses = CourseCollaborators::where('collaborator_id', '=', $instructor_id)->pluck('course_id')->toArray();
         if($request->has('search')){
             $search = $request->input('search');
 
             $courses = DB::table('courses')
-                        ->select('courses.*', 'categories.name as category_name')
+                        ->select('courses.*', 'categories.name as category_name', DB::raw('(CASE WHEN courses.instructor_id = ' . $instructor_id . ' THEN 1 ELSE 0 END) AS ownership'))
                         ->leftJoin('categories', 'categories.id', '=', 'courses.category_id')
                         ->where('courses.instructor_id', $instructor_id)
                         ->where('courses.course_title', 'LIKE', '%' . $search . '%')
                         ->orWhere('courses.course_slug', 'LIKE', '%' . $search . '%')
                         ->orWhere('categories.name', 'LIKE', '%' . $search . '%')
+                        ->orWhereIn('course.id', $collab_courses)
                         ->paginate($paginate_count);
         }
         else {
             $courses = DB::table('courses')
-                        ->select('courses.*', 'categories.name as category_name')
+                        ->select('courses.*', 'categories.name as category_name', DB::raw('(CASE WHEN courses.instructor_id = ' . $instructor_id . ' THEN 1 ELSE 0 END) AS ownership'))
                         ->leftJoin('categories', 'categories.id', '=', 'courses.category_id')
                         ->where('courses.instructor_id', $instructor_id)
+                        ->orWhereIn('courses.id', $collab_courses)
                         ->paginate($paginate_count);
         }
         // echo '<pre>';print_r($courses);exit;

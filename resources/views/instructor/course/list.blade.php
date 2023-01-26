@@ -33,10 +33,11 @@
           <table class="table table-hover table-striped w-full">
             <thead>
               <tr>
-                <th>Sl.no</th>
+                <th>Course Id</th>
                 <th>Title</th>
                 <th>Slug</th>
                 <th>Category</th>
+                <th>Ownership</th>
                 <th>Price</th>
                 <th>Status</th>
                 <th>Actions</th>
@@ -49,6 +50,7 @@
                 <td>{{ $course->course_title }}</td>
                 <td>{{ $course->course_slug }}</td>
                 <td>{{ $course->category_name }}</td>
+                <td>{{ $course->ownership == 1 ? 'Owner' : 'Collaborator' }}</td>
                 <td>{{ $course->price ? $course->price : 'Free' }}</td>
                 <td>
                   @if($course->is_active)
