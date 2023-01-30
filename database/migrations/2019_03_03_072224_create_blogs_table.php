@@ -22,7 +22,7 @@ class CreateBlogsTable extends Migration
             $table->text('description')->nullable();
             $table->boolean('is_active');
             $table->timestamps();
-            $table->integer('lecture_quiz_id');
+            $table->integer('lecture_quiz_id')->nullable();
             $table->integer('author_id');
         });
     }

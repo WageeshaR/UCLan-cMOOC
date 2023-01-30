@@ -14,7 +14,7 @@ class CreateCurriculumSectionsTable extends Migration {
 	{
 		Schema::create('curriculum_sections', function(Blueprint $table)
 		{
-			$table->integer('section_id', true);
+			$table->integer('id', true);
 			$table->integer('course_id')->nullable();
 			$table->string('title', 100)->nullable();
 			$table->integer('sort_order')->nullable();

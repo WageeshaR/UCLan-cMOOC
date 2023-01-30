@@ -40,6 +40,7 @@ class BlogTableSeeder extends Seeder
 
         if (!$is_exist->count()) {
             $blog = new Blog();
+            $blog->author_id = 3;
             $blog->blog_title = 'Perspiciatis unde omnis iste natus error voluptatem';
             $blog->blog_slug = 'perspiciatis-unde-omnis-iste-natus-error-voluptatem';
             $blog->description = $blog_description;
