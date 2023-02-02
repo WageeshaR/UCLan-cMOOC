@@ -34,7 +34,7 @@ class CourseResourcesController extends Controller
         $video_footage = CourseResource::where('resource_type', 'vids')->where('course_id', '=', $course_id)->get();
         $other = CourseResource::where('resource_type', 'othr')->where('course_id', '=', $course_id)->get();
 
-        return view('instructor.course.resources', compact('course','publications', 'data', 'quizzes', 'video_footage', 'other'));
+        return view('instructor.course.resources.resources', compact('course','publications', 'data', 'quizzes', 'video_footage', 'other'));
     }
 
     public function saveResource(Request $request) {
