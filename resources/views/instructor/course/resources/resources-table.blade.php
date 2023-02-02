@@ -4,26 +4,22 @@
         <th>Id</th>
         <th>Attached Lecture</th>
         <th>Title</th>
-        <th>Sub Title</th>
-        <th>Description</th>
-        <th>Resource URL</th>
+        @if($type == "pubs")<th>Sub Title</th>@endif
+        @if($type == "pubs" or $type == "data" or $type == "vids")<th>Description</th>@endif
+        @if($type == "pubs" or $type == "data")<th>Resource URL</th>@endif
         <th>File</th>
         <th>Actions</th>
     </tr>
     </thead>
     <tbody>
-    @foreach($res as $item)
+    @foreach($data as $item)
         <tr>
             <td>{{ $item->id }}</td>
             <td>{{ $item->lecture_id }}</td>
             <td>{{ $item->title }}</td>
-            <td>{{ $item->sub_title }}</td>
-            <td>{{ $item->summary }}</td>
-            <td>
-                <a href="{{$item->url}}">
-                    {{ $item->url }}
-                </a>
-            </td>
+            @if($type == "pubs")<td>{{ $item->sub_title }}</td>@endif
+            @if($type == "pubs" or $type == "data" or $type == "vids")<td>{{ $item->summary }}</td>@endif
+            @if($type == "pubs" or $type == "data")<td><a href="{{$item->url}}">{{ $item->url }}</a></td>@endif
             <td>{{ $item->file_name }}</td>
             <td>
                 <button onclick="editResource({{$item}})" href="" class="btn btn-xs btn-icon btn-inverse btn-round" data-toggle="tooltip" data-original-title="Edit" >

@@ -11,37 +11,34 @@
                         @switch($res)
                             @case("pubs")
                             Publications
+                            </h4>
+                            <hr>
+                            @include('instructor.course.resources.form',['type' => $res, 'data' => $publications, 'name' => 'Publication'])
                             @break
                             @case("data")
                             Research Data
+                            </h4>
+                            <hr>
+                            @include('instructor.course.resources.form',['type' => $res, 'data' => $data, 'name' => 'Data'])
                             @break
                             @case("quiz")
                             Quizzes
+                            </h4>
+                            <hr>
+                            @include('instructor.course.resources.form',['type' => $res, 'data' => $quizzes, 'name' => 'Quiz'])
                             @break
                             @case("vids")
                             Video Footage
+                            </h4>
+                            <hr>
+                            @include('instructor.course.resources.form',['type' => $res, 'data' => $video_footage, 'name' => 'Video'])
                             @break
                             @case("othr")
                             Other Resources
+                            </h4>
+                            <hr>
+{{--                            @include('instructor.course.resources.form',['type' => $res, 'data' => $other, 'name' => 'Other'])--}}
                         @endswitch
-                    </h4>
-                    <hr>
-                    @switch($res)
-                        @case("pubs")
-                        @include('instructor.course.resources.form',['type' => $res, 'data' => $publications])
-                        @break
-                        @case("data")
-                        @include('instructor.course.resources.form',['type' => $res, 'data' => $data])
-                        @break
-                        @case("quiz")
-                        @include('instructor.course.resources.form',['type' => $res, 'data' => $quizzes])
-                        @break
-                        @case("vids")
-                        @include('instructor.course.resources.form',['type' => $res, 'data' => $video_footage])
-                        @break
-                        @case("othr")
-                        @include('instructor.course.resources.form',['type' => $res, 'data' => $other])
-                    @endswitch
                 @endforeach
             </div>
         </div>

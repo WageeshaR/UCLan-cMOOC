@@ -1,5 +1,5 @@
 <div id="{{$type}}-container" style="display: none">
-    @include('instructor.course.resources.resources-table', ['res' => $data])
+    @include('instructor.course.resources.resources-table', ['type' => $type, 'data' => $data, 'name' => $name])
     <div class="resource-button" id="new-resource-button" name="new-resource-button" onclick="expandCollapseForm('{{$type}}')">Add new</div>
     <div id="{{$type}}-form-body" style="display: none">
         <form method="POST" action="{{ route('instructor.course.resources.save') }}" id="{{$type}}_form" enctype="multipart/form-data">
@@ -9,17 +9,19 @@
             <input type="hidden" name="{{$type}}_resource_id">
             <div class="row">
                 <div class="form-group col-md-4">
-                    <label class="form-control-label">Publication Title<span class="required">*</span></label>
+                    <label class="form-control-label">{{$name}} Title<span class="required">*</span></label>
                     <input type="text" class="form-control" name="{{$type}}_title"
                            placeholder="Title" value="" />
                 </div>
-                <div class="form-group col-md-4">
-                    <label class="form-control-label">Publication Sub Title</label>
-                    <input type="text" class="form-control" name="{{$type}}_sub_title"
-                           placeholder="Sub title" value="" />
-                </div>
+                @if($type == "pubs")
+                    <div class="form-group col-md-4">
+                        <label class="form-control-label">{{$name}} Sub Title</label>
+                        <input type="text" class="form-control" name="{{$type}}_sub_title"
+                               placeholder="Sub title" value="" />
+                    </div>
+                @endif
                 <div class="form-group col-md-2">
-                    <label class="form-control-label">Upload Document</label>
+                    <label class="form-control-label">Upload {{$name}}</label>
                     <div class="input-group input-group-file" data-plugin="inputGroupFile">
                         <input id="{{$type}}_file_upload_ph" name="{{$type}}_file_upload_ph" type="text" class="form-control" readonly="" placeholder="Select from your device">
                         <span class="input-group-btn">
@@ -39,15 +41,19 @@
                 </div>
             </div>
             <div class="row">
-                <div class="form-group col-md-4">
-                    <label class="form-control-label">Short Description</label>
-                    <textarea class="form-control description-box" name="{{$type}}_summary" placeholder="Description" value=""></textarea>
-                </div>
-                <div class="form-group col-md-4">
-                    <label class="form-control-label">Publication URL</label>
-                    <input type="text" class="form-control" name="{{$type}}_url"
-                           placeholder="URL" value="" />
-                </div>
+                @if($type == "pubs" or $type == "data" or $type == "vids")
+                    <div class="form-group col-md-4">
+                        <label class="form-control-label">Short Description</label>
+                        <textarea class="form-control description-box" name="{{$type}}_summary" placeholder="Description" value=""></textarea>
+                    </div>
+                    @if($type != "vids")
+                        <div class="form-group col-md-4">
+                            <label class="form-control-label">{{$name}} URL</label>
+                            <input type="text" class="form-control" name="{{$type}}_url"
+                                   placeholder="URL" value="" />
+                        </div>
+                    @endif
+                @endif
                 <div class="form-group col-md-4">
                     <label class="form-control-label">Attach a Lecture</label>
                     <input type="text" class="form-control" name="{{$type}}_lecture"
