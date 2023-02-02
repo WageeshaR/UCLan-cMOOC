@@ -11,6 +11,7 @@ use App\Models\Course;
 use App\Models\CourseResource;
 use Illuminate\Http\Request;
 use DB;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Auth;
 use Image;
 use Crypt;
@@ -24,7 +25,7 @@ class CourseResourcesController extends Controller
         $this->model = new CourseResource();
     }
 
-    public function getCourseResources($course_id = '', Request $request) {
+    public function getResources($course_id = '', Request $request) {
 
         $course = Course::find($course_id);
         $publications = CourseResource::where('resource_type', '=', 'pubs')->where('course_id', '=', $course_id)->get();
@@ -37,19 +38,34 @@ class CourseResourcesController extends Controller
     }
 
     public function saveResource(Request $request) {
-        $resource = new CourseResource();
+        $res = $request->res_type;
+        if ($request->{$res.'_resource_id'}) {
+            $resource = CourseResource::find($request->{$res.'_resource_id'});
+        }
+        else {
+            $resource = new CourseResource();
+        }
         $resource->course_id = $request->course_id;
-        $resource->resource_type = $request->res_type;
+        $resource->resource_type = $res;
         $resource->created_by = \Auth::user()->id;
-        $resource->title = $request->title;
-        $resource->sub_title = $request->sub_title;
-        $resource->summary = $request->description;
-        $resource->url = $request->url;
-        if ($request->file) {
-            // TODO: implement file upload
+        $resource->title = $request->{$res.'_title'};
+        $resource->sub_title = $request->{$res.'_sub_title'};
+        $resource->summary = $request->{$res.'_summary'};
+        $resource->url = $request->{$res.'_url'};
+        $resource->lecture_id = $request->{$res.'_lecture'};
+        if ($request->file($res.'_file')) {
+            $name = $request->file($res.'_file')->getClientOriginalName();
+            $request->file($res.'_file')->storeAs('course_resources/'.$request->course_id, $name);
+            $resource->file_name = $name;
         }
         $resource->save();
         $return_url = 'instructor-course-resources/'.$request->course_id;
+        return redirect($return_url)->with('status', "Success");
+    }
+
+    public function deleteResource($course_id = '', $resource_id = '', Request $request) {
+        CourseResource::destroy($resource_id);
+        $return_url = 'instructor-course-resources/'.$course_id;
         return redirect($return_url)->with('status', "Success");
     }
 }

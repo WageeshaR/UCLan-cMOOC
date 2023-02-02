@@ -149,8 +149,9 @@ Route::group(['middleware' => 'auth'], function () {
     // Functions access by only facilitators
     Route::group(['middleware' => 'role:facilitator'], function () {
         // Course resources related routes
-        Route::get('instructor-course-resources/{course_id}', 'CourseResourcesController@getCourseResources')->name('instructor.course.resources');
+        Route::get('instructor-course-resources/{course_id}', 'CourseResourcesController@getResources')->name('instructor.course.resources');
         Route::post('instructor-course-resources-save', 'CourseResourcesController@saveResource')->name('instructor.course.resources.save');
+        Route::get('instructor-course-resources-delete/{course_id}/{resource_id}', 'CourseResourcesController@deleteResource')->name('instructor.course.resources.delete');
     });
 
     

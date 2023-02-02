@@ -22,7 +22,7 @@ class CreateCourseResourcesTable extends Migration {
             $table->string('sub_title')->nullable();
             $table->string('summary')->nullable();
             $table->string('url')->nullable();
-            $table->integer('file_id')->nullable();
+            $table->string('file_name')->nullable();
             $table->integer('created_by');
             $table->timestamps();
         });

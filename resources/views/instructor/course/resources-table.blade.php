@@ -19,14 +19,18 @@
             <td>{{ $item->title }}</td>
             <td>{{ $item->sub_title }}</td>
             <td>{{ $item->summary }}</td>
-            <td>{{ $item->url }}</td>
-            <td>{{ $item->file }}</td>
             <td>
-                <a href="{{ route('instructor.course.info.edit', $course->id) }}" class="btn btn-xs btn-icon btn-inverse btn-round" data-toggle="tooltip" data-original-title="Edit" >
-                    <i class="icon wb-pencil" aria-hidden="true"></i>
+                <a href="{{$item->url}}">
+                    {{ $item->url }}
                 </a>
+            </td>
+            <td>{{ $item->file_name }}</td>
+            <td>
+                <button onclick="editResource({{$item}})" href="" class="btn btn-xs btn-icon btn-inverse btn-round" data-toggle="tooltip" data-original-title="Edit" >
+                    <i class="icon wb-pencil" aria-hidden="true"></i>
+                </button>
 
-                <a href="{{ url('instructor-course-delete/'.$course->id) }}" class="delete-record btn btn-xs btn-icon btn-inverse btn-round" data-toggle="tooltip" data-original-title="Delete" >
+                <a href="{{ url('instructor-course-resources-delete/'.$item->course_id.'/'.$item->id) }}" class="delete-record btn btn-xs btn-icon btn-inverse btn-round" data-toggle="tooltip" data-original-title="Delete" >
                     <i class="icon wb-trash" aria-hidden="true"></i>
                 </a>
             </td>
