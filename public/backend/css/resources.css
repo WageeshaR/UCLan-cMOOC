@@ -26,3 +26,17 @@
 .pubs-container {
     display: none;
 }
+.res-tab-data {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 1px;
+    cursor: pointer;
+}
+.res-tab-data-clicked {
+    white-space: normal;
+    text-overflow: inherit;
+    max-width: none;
+    overflow: auto;
+    cursor: pointer;
+}

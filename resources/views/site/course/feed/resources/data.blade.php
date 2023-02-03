@@ -1,10 +1,25 @@
-<?php for ($x = 0; $x <= rand(5,10); $x++) {
-    $rand_chars = array("A","B","C","D","E","F","G","H","I","J","K","L","M","N","O");
-?>
-    <div class="resource_tab_item_horizontal">
-        <a style="display: flex; flex-direction: row; align-items: center" href="https://www.sample.com" >
-            <i style="font-size: 32px; color: lightgrey; margin-right: 5px" class="material-icons">folder</i>
-            <span>Data of research <?php echo $rand_chars[array_rand($rand_chars)] ?></span>
-        </a>
+@foreach($data as $item)
+    <div class="resource_tab_item_vertical">
+        <div class="row">
+            <div class="col-sm-10">
+                @if($item->url)
+                    <a style="display: flex; flex-direction: row; align-items: center" href="{{$item->url}}">
+                        <i style="font-size: 32px; color: lightgrey; margin-right: 5px" class="material-icons">folder</i>
+                        <span>Data title: {{$item->title}}</span>
+                    </a>
+                @else
+                    <a style="display: flex; flex-direction: row; align-items: center">
+                        <i style="font-size: 32px; color: lightgrey; margin-right: 5px" class="material-icons">folder</i>
+                        <span>Data title: {{$item->title}}</span>
+                    </a>
+                @endif
+            </div>
+            <a href="" class="col-sm-2 res-download">Download</a>
+        </div>
+        <div class="row">
+            <div class="col-sm-10">
+                <p class="res-summary">{{$item->summary}}</p>
+            </div>
+        </div>
     </div>
-<?php } ?>
+@endforeach

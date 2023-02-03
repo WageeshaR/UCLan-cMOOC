@@ -15,9 +15,14 @@
                 </div>
                 @if($type == "pubs")
                     <div class="form-group col-md-4">
-                        <label class="form-control-label">{{$name}} Sub Title</label>
+                        <label class="form-control-label">Authors</label>
                         <input type="text" class="form-control" name="{{$type}}_sub_title"
-                               placeholder="Sub title" value="" />
+                               placeholder="Author names (comma separated)" value="" />
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="form-control-label">Published On</label>
+                        <input type="text" class="form-control" name="{{$type}}_sub_title"
+                               placeholder="Conference, Journal etc." value="" />
                     </div>
                 @endif
                 <div class="form-group col-md-2">

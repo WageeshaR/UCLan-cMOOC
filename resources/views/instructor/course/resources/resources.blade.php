@@ -99,5 +99,15 @@
                 fillResourceForm(item, res);
             }
         }
+        function expandCollapseTableRow(item_id, type) {
+            const elem = $("#"+item_id+"-"+type+"-cell");
+            if (elem.attr('id'))
+            if (elem.attr('class') == 'res-tab-data') {
+                elem.attr('class', 'res-tab-data-clicked');
+            }
+            else {
+                elem.attr('class', 'res-tab-data');
+            }
+        }
     </script>
 @endsection

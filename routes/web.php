@@ -75,7 +75,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('readPDF/{file_id}', 'CourseController@readPDF');
 
         // Course Feed
-        Route::get('course-enroll/{course_slug}/{lecture_slug}/resources', 'CourseController@getLectureResources')->name('course.getLectureResources');
+        Route::get('course-enroll/{course_slug}/{lecture_slug}/resources', 'CourseResourcesController@getResourcesFrontend')->name('course.getResourcesFrontend');
+        Route::get('course-enroll/{course_slug}/{lecture_slug}/resources/{type}', 'CourseResourcesController@getResourcesFEByType')->name('course.getResourcesFrontendType');
         Route::post('save-post', 'CourseController@savePost')->name('course.savePost');
         Route::post('delete-post', 'CourseController@deletePost')->name('course.deletePost');
         Route::get('load-comments/{post_id}', 'CourseController@loadComments')->name('course.post.comments');
@@ -149,7 +150,7 @@ Route::group(['middleware' => 'auth'], function () {
     // Functions access by only facilitators
     Route::group(['middleware' => 'role:facilitator'], function () {
         // Course resources related routes
-        Route::get('instructor-course-resources/{course_id}', 'CourseResourcesController@getResources')->name('instructor.course.resources');
+        Route::get('instructor-course-resources/{course_id}', 'CourseResourcesController@getResourcesBackend')->name('instructor.course.resources');
         Route::post('instructor-course-resources-save', 'CourseResourcesController@saveResource')->name('instructor.course.resources.save');
         Route::get('instructor-course-resources-delete/{course_id}/{resource_id}', 'CourseResourcesController@deleteResource')->name('instructor.course.resources.delete');
     });

@@ -19,8 +19,9 @@ class CreateCourseResourcesTable extends Migration {
             $table->integer('lecture_id')->nullable();
             $table->string('resource_type');
             $table->string('title');
-            $table->string('sub_title')->nullable();
-            $table->string('summary')->nullable();
+            $table->string('authors')->nullable();
+            $table->string('publisher')->nullable();
+            $table->string('summary', 5000)->nullable();
             $table->string('url')->nullable();
             $table->string('file_name')->nullable();
             $table->integer('created_by');

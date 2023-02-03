@@ -84,7 +84,7 @@
                         <div class="post-header">
                             <div>
                                 {{$post->author_id}}
-                                <span style="font-weight: normal; font-size: 12px; color: rgb(200,200,200); margin-left: 5px">@Sample University Name &bull; 31 Oct &bull; {{$post->location}}</span>
+                                <span style="font-weight: normal; font-size: 12px; color: rgb(200,200,200); margin-left: 5px">@Sample Institution Name &bull; 31 Oct &bull; {{$post->location}}</span>
                             </div>
                             <div class="dropdown">
                                 <span title="edit post" class="material-icons grayed-out-icon" onclick="showEditOptions({{$post->id}})">more_vert</span>

@@ -55,11 +55,11 @@
             </div>
             <div class="feed-scrollable-root">
                 <?php
-                    $tabs = array('papers' => 'Publications',
+                    $tabs = array('pubs' => 'Publications',
                                   'data' => 'Research Data',
-                                  'footages' => 'Visual Footages',
-                                  'quizzes' => 'Quizzes',
-                                  'other' => 'Other');
+                                  'vids' => 'Video Footages',
+                                  'quiz' => 'Quizzes',
+                                  'othr' => 'Other');
                 ?>
                 <nav class="clearfix secondary-nav seperator-head">
                     <ul class="secondary-nav-ul list mx-auto nav">
@@ -78,16 +78,16 @@
                             <span style="font-weight: bold; color: lightgrey; font-size: 14px">search</span>
                             <i style="font-size: 26px; color: lightgrey" class="material-icons">search</i>
                         </div>
-                        <?php if ($tab_key == 'papers') { ?>
-                            @include('site.course.feed.resources.papers')
+                        <?php if ($tab_key == 'pubs') { ?>
+                            @include('site.course.feed.resources.pubs', ['data' => $publications])
                         <?php } elseif ($tab_key == 'data') { ?>
-                            @include('site.course.feed.resources.data')
-                        <?php } elseif ($tab_key == 'data') { ?>
-                            @include('site.course.feed.resources.data')
-                        <?php } elseif ($tab_key == 'quizzes') { ?>
-                            @include('site.course.feed.resources.quizzes')
+                            @include('site.course.feed.resources.data', ['data' => $data])
+                        <?php } elseif ($tab_key == 'quiz') { ?>
+                            @include('site.course.feed.resources.quiz', ['data' => $quizzes])
+                        <?php } elseif ($tab_key == 'vids') { ?>
+                            @include('site.course.feed.resources.vids', ['data' => $video_footage])
                         <?php } else { ?>
-                            @include('site.course.feed.resources.other')
+                            @include('site.course.feed.resources.other', ['data' => $other])
                         <?php } ?>
                     </div>
                     <?php }?>
@@ -149,6 +149,13 @@
         }
         function closeChat() {
             document.getElementById("chat-frame").style.display = 'none';
+        }
+        function loadData(res, course_slug, lecture_slug) {
+            const xmlHttp = new XMLHttpRequest();
+            const url = 'course-enroll/'+ course_slug + '/' + lecture_slug + '/resources/' + res;
+            xmlHttp.open( "GET",url , false ); // false for synchronous request
+            xmlHttp.send( null );
+            const resource = JSON.parse(xmlHttp.response);
         }
     </script>
 @endsection
