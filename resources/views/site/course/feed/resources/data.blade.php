@@ -14,7 +14,9 @@
                     </a>
                 @endif
             </div>
-            <a href="" class="col-sm-2 res-download">Download</a>
+            <div class="col-sm-2 res-download">
+                <a href="{{route('course.resource.download', ['course_id' => $course_id, 'file_name' => $item->file_name])}}">Download</a>
+            </div>
         </div>
         <div class="row">
             <div class="col-sm-10">

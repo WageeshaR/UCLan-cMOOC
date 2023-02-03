@@ -79,15 +79,15 @@
                             <i style="font-size: 26px; color: lightgrey" class="material-icons">search</i>
                         </div>
                         <?php if ($tab_key == 'pubs') { ?>
-                            @include('site.course.feed.resources.pubs', ['data' => $publications])
+                            @include('site.course.feed.resources.pubs', ['data' => $publications, 'course_id' => $course->id])
                         <?php } elseif ($tab_key == 'data') { ?>
-                            @include('site.course.feed.resources.data', ['data' => $data])
+                            @include('site.course.feed.resources.data', ['data' => $data, 'course_id' => $course->id])
                         <?php } elseif ($tab_key == 'quiz') { ?>
-                            @include('site.course.feed.resources.quiz', ['data' => $quizzes])
+                            @include('site.course.feed.resources.quiz', ['data' => $quizzes, 'course_id' => $course->id])
                         <?php } elseif ($tab_key == 'vids') { ?>
-                            @include('site.course.feed.resources.vids', ['data' => $video_footage])
+                            @include('site.course.feed.resources.vids', ['data' => $video_footage, 'course_id' => $course->id])
                         <?php } else { ?>
-                            @include('site.course.feed.resources.other', ['data' => $other])
+                            @include('site.course.feed.resources.other', ['data' => $other, 'course_id' => $course->id])
                         <?php } ?>
                     </div>
                     <?php }?>

@@ -19,7 +19,8 @@
         "intervention/image": "2.4.2",
         "ignited/laravel-omnipay": "3.0.2",
         "omnipay/paypal": "3.0.2",
-        "chumper/zipper": "1.0.x"
+        "chumper/zipper": "1.0.x",
+        "ext-fileinfo": "*"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",

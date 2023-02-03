@@ -10,7 +10,7 @@
             </div>
             <div class="col-sm-2 res-download">
                 @if($item->file_name)
-                    <a href="">Download</a>
+                    <a href="{{route('course.resource.download', ['course_id' => $course_id, 'file_name' => $item->file_name])}}">Download</a>
                 @endif
             </div>
         </div>

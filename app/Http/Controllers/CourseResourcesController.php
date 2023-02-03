@@ -11,6 +11,7 @@ use App\Models\Course;
 use App\Models\CourseResource;
 use Illuminate\Http\Request;
 use DB;
+use Illuminate\Support\Facades\Storage;
 use SiteHelpers;
 use Illuminate\Support\Facades\Auth;
 use Image;
@@ -104,6 +105,7 @@ class CourseResourcesController extends Controller
         $resource->lecture_id = $request->{$res.'_lecture'};
         if ($request->file($res.'_file')) {
             $name = $request->file($res.'_file')->getClientOriginalName();
+//            $name = preg_replace('/\s+/', '_', $name);
             $request->file($res.'_file')->storeAs('course_resources/'.$request->course_id, $name);
             $resource->file_name = $name;
         }
@@ -135,5 +137,17 @@ class CourseResourcesController extends Controller
         $video_footage = CourseResource::where('resource_type', 'vids')->where('course_id', $course_id)->get();
         $other = CourseResource::where('resource_type', 'othr')->where('course_id', $course_id)->get();
         return array("pubs" => $publications, "data" => $data, "quiz" => $quizzes, "vids" => $video_footage, "othr" => $other);
+    }
+
+    /**
+     * Downloads a file from request
+     * @param string $course_id
+     * @param string $file_name
+     * @param Request $request
+     */
+    public function downloadFile($course_id = '', $file_name = '', Request $request) {
+        $file_path = 'course_resources/' . $course_id . '/' . $file_name;
+        $headers = array( 'Content-Type : ' . mime_content_type(Storage::disk('public')->path($file_path)));
+        return Storage::disk('public')->download($file_path, $file_name, $headers);
     }
 }

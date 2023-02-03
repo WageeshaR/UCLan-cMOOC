@@ -74,9 +74,12 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('course-enroll-api/{course_slug}/{lecture_slug}/{is_sidebar}', 'CourseController@courseEnrollAPI');
         Route::get('readPDF/{file_id}', 'CourseController@readPDF');
 
-        // Course Feed
+        // Course Resources
         Route::get('course-enroll/{course_slug}/{lecture_slug}/resources', 'CourseResourcesController@getResourcesFrontend')->name('course.getResourcesFrontend');
         Route::get('course-enroll/{course_slug}/{lecture_slug}/resources/{type}', 'CourseResourcesController@getResourcesFEByType')->name('course.getResourcesFrontendType');
+        Route::get('file-download/{course_id}/{file_name}', 'CourseResourcesController@downloadFile')->name('course.resource.download');
+
+        // Course Feed
         Route::post('save-post', 'CourseController@savePost')->name('course.savePost');
         Route::post('delete-post', 'CourseController@deletePost')->name('course.deletePost');
         Route::get('load-comments/{post_id}', 'CourseController@loadComments')->name('course.post.comments');
