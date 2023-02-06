@@ -156,6 +156,11 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('instructor-course-resources/{course_id}', 'CourseResourcesController@getResourcesBackend')->name('instructor.course.resources');
         Route::post('instructor-course-resources-save', 'CourseResourcesController@saveResource')->name('instructor.course.resources.save');
         Route::get('instructor-course-resources-delete/{course_id}/{resource_id}', 'CourseResourcesController@deleteResource')->name('instructor.course.resources.delete');
+
+        // Course social media content related routes
+        Route::get('instructor-course-sm-content/{course_id}', 'CourseResourcesController@getSMContentBackend')->name('instructor.course.smContent.backend');
+        Route::post('instructor-course-sm-content-save', 'CourseResourcesController@saveSMContent')->name('instructor.course.smContent.save');
+        Route::get('instructor-course-sm-content-delete/{course_id}/{resource_id}', 'CourseResourcesController@deleteSMContent')->name('instructor.course.smContent.delete');
     });
 
     

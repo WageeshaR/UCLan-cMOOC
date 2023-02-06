@@ -9,6 +9,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Course;
 use App\Models\CourseResource;
+use App\Models\SMContent;
 use Illuminate\Http\Request;
 use DB;
 use Illuminate\Support\Facades\Storage;
@@ -155,5 +156,46 @@ class CourseResourcesController extends Controller
         $file_path = 'course_resources/' . $course_id . '/' . $file_name;
         $headers = array( 'Content-Type : ' . mime_content_type(Storage::disk('public')->path($file_path)));
         return Storage::disk('public')->download($file_path, $file_name, $headers);
+    }
+
+    /**
+     * @param string $course_id
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function getSMContentBackend($course_id = '', Request $request) {
+        $course = Course::find($course_id);
+        $lecs = DB::table('curriculum_lectures_quiz as clq')
+            ->select('clq.*')
+            ->join('curriculum_sections as cs', 'cs.section_id', '=', 'clq.section_id')
+            ->where('cs.course_id', $course_id)->get();
+        $tw_content = SMContent::where('sm_type', 'tw')->where('course_id', $course_id)->get();
+        $fb_content = SMContent::where('sm_type', 'fb')->where('course_id', $course_id)->get();
+        return view('instructor.course.resources.smcontent', compact('course', 'tw_content', 'fb_content', 'lecs'));
+    }
+
+    public function saveSMContent(Request $request) {
+        $res = $request->sm_type;
+        if ($request->{$res.'_sm_id'}) {
+            $sm_content = SMContent::find($request->{$res.'_sm_id'});
+        }
+        else {
+            $sm_content = new SMContent();
+        }
+        $sm_content->course_id = $request->course_id;
+        $sm_content->sm_type = $res;
+        $sm_content->title = $request->{$res.'_title'};
+        $sm_content->url = $request->{$res.'_url'};
+        $sm_content->is_hashtag = $request->{$res.'_is_hashtag'} == 'on' ? 1 : 0;
+        $sm_content->lecture_id = $request->{$res.'_lecture'};
+        $sm_content->save();
+        $return_url = 'instructor-course-sm-content/'.$request->course_id;
+        return redirect($return_url)->with('status', "Success");
+    }
+
+    public function deleteSMContent($course_id, $resource_id, Request $request) {
+        SMContent::destroy($resource_id);
+        $return_url = 'instructor-course-sm-content/'.$course_id;
+        return redirect($return_url)->with('status', "Success");
     }
 }

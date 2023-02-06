@@ -7,7 +7,7 @@
             <div class="panel-body">
                 @include('instructor.course.tabs')
                 @foreach(["pubs", "data", "quiz", "vids", "othr"] as $res)
-                    <h4 id="pubs-header" class="resource-header" onclick="expandCollapseSection('{{$res}}')">
+                    <h4 id="{{$res}}-header" class="resource-header" onclick="expandCollapseSection('{{$res}}')">
                         @switch($res)
                             @case("pubs")
                             Publications

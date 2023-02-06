@@ -14,4 +14,7 @@
     <li class="nav-item">
         <a class="nav-link py-1 {{ request()->is('instructor-course-resources*') ? 'active' : '' }} @if(!$course->id) {{ 'course-id-empty' }} @endif" href="@if($course->id) {{ route('instructor.course.resources', $course->id) }} @else {{ 'javascript:void();' }} @endif">Course Resources</a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link py-1 {{ request()->is('instructor-course-sm-content*') ? 'active' : '' }} @if(!$course->id) {{ 'course-id-empty' }} @endif" href="@if($course->id) {{ route('instructor.course.smContent.backend', $course->id) }} @else {{ 'javascript:void();' }} @endif">Social Media Content</a>
+    </li>
 </ul>
