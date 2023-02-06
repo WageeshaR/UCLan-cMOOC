@@ -3,9 +3,9 @@
         <div class="row">
             <div class="col-sm-10">
                 @if($item->url)
-                    <a style="display: flex; flex-direction: row; align-items: center" href="{{$item->url}}">
+                    <a style="display: flex; flex-direction: row; align-items: center" href="//{{$item->url}}">
                         <i style="font-size: 32px; color: lightgrey; margin-right: 5px" class="material-icons">folder</i>
-                        <span>{{$item->title}}</span>
+                        {{$item->title}}
                     </a>
                 @else
                     <a style="display: flex; flex-direction: row; align-items: center">
@@ -15,7 +15,9 @@
                 @endif
             </div>
             <div class="col-sm-2 res-download">
-                <a href="{{route('course.resource.download', ['course_id' => $course_id, 'file_name' => $item->file_name])}}">Download</a>
+                @if($item->file_name)
+                    <a href="{{route('course.resource.download', ['course_id' => $course_id, 'file_name' => $item->file_name])}}">Download</a>
+                @endif
             </div>
         </div>
         <div class="row">
