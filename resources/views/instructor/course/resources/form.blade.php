@@ -16,12 +16,12 @@
                 @if($type == "pubs")
                     <div class="form-group col-md-4">
                         <label class="form-control-label">Authors</label>
-                        <input type="text" class="form-control" name="{{$type}}_sub_title"
+                        <input type="text" class="form-control" name="{{$type}}_authors"
                                placeholder="Author names (comma separated)" value="" />
                     </div>
                     <div class="form-group col-md-4">
                         <label class="form-control-label">Published On</label>
-                        <input type="text" class="form-control" name="{{$type}}_sub_title"
+                        <input type="text" class="form-control" name="{{$type}}_publisher"
                                placeholder="Conference, Journal etc." value="" />
                     </div>
                 @endif
@@ -30,17 +30,25 @@
                     <div class="input-group input-group-file" data-plugin="inputGroupFile">
                         <input id="{{$type}}_file_upload_ph" name="{{$type}}_file_upload_ph" type="text" class="form-control" readonly="" placeholder="Select from your device">
                         <span class="input-group-btn">
-                                            <span class="btn btn-success btn-file">
-                                                <i class="icon wb-upload" aria-hidden="true"></i>
-                                                <input type="file" class="item-img file center-block" name="{{$type}}_file" id="{{$type}}_file" />
-                                            </span>
-                                        </span>
+                            <span class="btn btn-success btn-file">
+                                <i class="icon wb-upload" aria-hidden="true"></i>
+                                <input type="file" class="item-img file center-block" name="{{$type}}_file" id="{{$type}}_file" />
+                            </span>
+                        </span>
                     </div>
                 </div>
                 <div class="col-md-2">
                     <label class="form-control-label" style=""></label>
                     <div style="font-size: 10px; margin-top: 20px">
-                        Supported File Formats: pdf,doc,docx
+                        Supported File Formats:
+                        @if($type != 'vids')
+                            pdf,doc,docx
+                            @if($type == 'data')
+                                ,csv,xlsx
+                            @endif
+                        @else
+                            mp4,webm
+                        @endif
                         <br> Max File Size: 10MB
                     </div>
                 </div>
@@ -60,9 +68,15 @@
                     @endif
                 @endif
                 <div class="form-group col-md-4">
-                    <label class="form-control-label">Attach a Lecture</label>
-                    <input type="text" class="form-control" name="{{$type}}_lecture"
-                           placeholder="Lecture" value="" />
+                    <label class="form-control-label">Attached Lecture</label>
+                    <div class="select-div">
+                        <select class="lec-select" name="{{$type}}_lecture" id="cars" placeholder="Select a lecture">
+                            <option class="lec-select-option" value="0">Select a lecture</option>
+                            @foreach($lecs as $lec)
+                                <option class="lec-select-option" value="{{$lec->lecture_quiz_id}}">{{$lec->title}}</option>
+                            @endforeach
+                        </select>
+                    </div>
                 </div>
             </div>
             <hr>

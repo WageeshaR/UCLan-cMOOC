@@ -5,7 +5,7 @@
                 @if($item->url)
                     <a style="display: flex; flex-direction: row; align-items: center" href="{{$item->url}}">
                         <i style="font-size: 32px; color: lightgrey; margin-right: 5px" class="material-icons">folder</i>
-                        <span>Data title: {{$item->title}}</span>
+                        <span>{{$item->title}}</span>
                     </a>
                 @else
                     <a style="display: flex; flex-direction: row; align-items: center">

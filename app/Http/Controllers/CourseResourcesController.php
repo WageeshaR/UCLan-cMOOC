@@ -77,7 +77,8 @@ class CourseResourcesController extends Controller
                 'data' => $res['data'],
                 'quizzes' => $res['quiz'],
                 'video_footage' => $res['vids'],
-                'other' => $res['othr']
+                'other' => $res['othr'],
+                'lecs' => $res['lecs']
             )
         );
     }
@@ -99,7 +100,8 @@ class CourseResourcesController extends Controller
         $resource->resource_type = $res;
         $resource->created_by = \Auth::user()->id;
         $resource->title = $request->{$res.'_title'};
-        $resource->sub_title = $request->{$res.'_sub_title'};
+        $resource->authors = $request->{$res.'_authors'};
+        $resource->publisher = $request->{$res.'_publisher'};
         $resource->summary = $request->{$res.'_summary'};
         $resource->url = $request->{$res.'_url'};
         $resource->lecture_id = $request->{$res.'_lecture'};
@@ -131,12 +133,16 @@ class CourseResourcesController extends Controller
      * Utility function to fetch all resource types from DB
      */
     public function fetchAllResources($course_id) {
+        $lectures = DB::table('curriculum_lectures_quiz as clq')
+                        ->select('clq.*')
+                        ->join('curriculum_sections as cs', 'cs.section_id', '=', 'clq.section_id')
+                        ->where('cs.course_id', $course_id)->get();
         $publications = CourseResource::where('resource_type', 'pubs')->where('course_id', $course_id)->get();
         $data = CourseResource::where('resource_type', 'data')->where('course_id', $course_id)->get();
         $quizzes = CourseResource::where('resource_type', 'quiz')->where('course_id', $course_id)->get();
         $video_footage = CourseResource::where('resource_type', 'vids')->where('course_id', $course_id)->get();
         $other = CourseResource::where('resource_type', 'othr')->where('course_id', $course_id)->get();
-        return array("pubs" => $publications, "data" => $data, "quiz" => $quizzes, "vids" => $video_footage, "othr" => $other);
+        return array("pubs" => $publications, "data" => $data, "quiz" => $quizzes, "vids" => $video_footage, "othr" => $other, 'lecs' => $lectures);
     }
 
     /**

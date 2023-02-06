@@ -57,7 +57,7 @@
                 <?php
                     $tabs = array('pubs' => 'Publications',
                                   'data' => 'Research Data',
-                                  'vids' => 'Video Footages',
+                                  'vids' => 'Video Footage',
                                   'quiz' => 'Quizzes',
                                   'othr' => 'Other');
                 ?>

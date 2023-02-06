@@ -13,25 +13,25 @@
                             Publications
                             </h4>
                             <hr>
-                            @include('instructor.course.resources.form',['type' => $res, 'data' => $publications, 'name' => 'Publication'])
+                            @include('instructor.course.resources.form',['type' => $res, 'data' => $publications, 'name' => 'Publication', 'lecs' => $lecs])
                             @break
                             @case("data")
                             Research Data
                             </h4>
                             <hr>
-                            @include('instructor.course.resources.form',['type' => $res, 'data' => $data, 'name' => 'Data'])
+                            @include('instructor.course.resources.form',['type' => $res, 'data' => $data, 'name' => 'Data', 'lecs' => $lecs])
                             @break
                             @case("quiz")
                             Quizzes
                             </h4>
                             <hr>
-                            @include('instructor.course.resources.form',['type' => $res, 'data' => $quizzes, 'name' => 'Quiz'])
+                            @include('instructor.course.resources.form',['type' => $res, 'data' => $quizzes, 'name' => 'Quiz', 'lecs' => $lecs])
                             @break
                             @case("vids")
                             Video Footage
                             </h4>
                             <hr>
-                            @include('instructor.course.resources.form',['type' => $res, 'data' => $video_footage, 'name' => 'Video'])
+                            @include('instructor.course.resources.form',['type' => $res, 'data' => $video_footage, 'name' => 'Video', 'lecs' => $lecs])
                             @break
                             @case("othr")
                             Other Resources
@@ -68,15 +68,38 @@
         $("input[type=file]").change(function() {
             const re = /(?:\.([^.]+))?$/;
             const id = $(this).attr('id');
+            const type = id.split('_')[0];
             const f_name = $(this).prop('files')[0].name;
             const ext = re.exec(f_name);
-            if (ext[0].toUpperCase() != '.PDF' && ext[0].toUpperCase() != '.DOC' && ext[0].toUpperCase() != '.DOCX') {
-                alertify.confirm('Only .pdf, .doc and .docx file types are allowed', function () {
-                    return false;
-                }, function () {
-                    return false;
-                });
-                $(this).val(null);
+            if (type == 'vids') {
+                if (ext[0].toUpperCase() != '.MP4' && ext[0].toUpperCase() != '.WEBM') {
+                    alertify.confirm('Only .mp4, and .webm file types are allowed', function () {
+                        return false;
+                    }, function () {
+                        return false;
+                    });
+                    $(this).val(null);
+                }
+            }
+            else if (type == 'data') {
+                if (ext[0].toUpperCase() != '.PDF' && ext[0].toUpperCase() != '.DOC' && ext[0].toUpperCase() != '.DOCX' && ext[0].toUpperCase() != '.CSV' && ext[0].toUpperCase() != '.XLSX') {
+                    alertify.confirm('Only .pdf, .doc, .docx, csv and .xlsx file types are allowed', function () {
+                        return false;
+                    }, function () {
+                        return false;
+                    });
+                    $(this).val(null);
+                }
+            }
+            else {
+                if (ext[0].toUpperCase() != '.PDF' && ext[0].toUpperCase() != '.DOC' && ext[0].toUpperCase() != '.DOCX') {
+                    alertify.confirm('Only .pdf, .doc and .docx file types are allowed', function () {
+                        return false;
+                    }, function () {
+                        return false;
+                    });
+                    $(this).val(null);
+                }
             }
             if ($(this).prop('files')[0]) {
               $('#'+id+'_upload_ph').val(f_name);
