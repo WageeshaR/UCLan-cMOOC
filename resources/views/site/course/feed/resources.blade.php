@@ -75,18 +75,25 @@
                     <?php foreach ($tabs as $tab_key => $tab_value) { ?>
                     <div class="<?php echo $tab_key == 'latestTab' ? 'tab-pane fade show active' : 'tab-pane fade';?>" id="<?php echo $tab_key;?>" role="tabpanel">
                         <div class="resource_search_bar">
-                            <span style="font-weight: bold; color: lightgrey; font-size: 14px">search</span>
-                            <i style="font-size: 26px; color: lightgrey" class="material-icons">search</i>
-                        </div>
                         <?php if ($tab_key == 'pubs') { ?>
+                                <input class="res-search-input" placeholder="search by title" id="pubs-res-search-input" oninput="filter('pubs')">
+                            </div>
                             @include('site.course.feed.resources.pubs', ['data' => $publications, 'course_id' => $course->id])
                         <?php } elseif ($tab_key == 'data') { ?>
+                                <input class="res-search-input" placeholder="search by title" id="data-res-search-input" oninput="filter('data')">
+                            </div>
                             @include('site.course.feed.resources.data', ['data' => $data, 'course_id' => $course->id])
                         <?php } elseif ($tab_key == 'quiz') { ?>
+                                <input class="res-search-input" placeholder="search by title" id="quiz-res-search-input" oninput="filter('quiz')">
+                            </div>
                             @include('site.course.feed.resources.quiz', ['data' => $quizzes, 'course_id' => $course->id])
                         <?php } elseif ($tab_key == 'vids') { ?>
+                                <input class="res-search-input" placeholder="search by title" id="vids-res-search-input" oninput="filter('vids')">
+                            </div>
                             @include('site.course.feed.resources.vids', ['data' => $video_footage, 'course_id' => $course->id])
                         <?php } else { ?>
+                                <input class="res-search-input" placeholder="search by title" id="othr-res-search-input" oninput="filter('othr')">
+                            </div>
                             @include('site.course.feed.resources.other', ['data' => $other, 'course_id' => $course->id])
                         <?php } ?>
                     </div>
@@ -157,5 +164,19 @@
             xmlHttp.send( null );
             const resource = JSON.parse(xmlHttp.response);
         }
+        function filter(res) {
+            const val = $("#"+res+"-res-search-input")[0].value;
+            let collection = document.getElementsByClassName("resource_tab_item_vertical");
+            for (element of collection) {
+                const e = element;
+                if (!e.querySelector("#title-tag").innerText.includes(val)) {
+                    e.style.display = 'none';
+                } else {
+                    if (e.style.display == 'none') {
+                        e.style.display = 'block';
+                    }
+                }
+            };
+        };
     </script>
 @endsection

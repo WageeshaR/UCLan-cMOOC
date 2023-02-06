@@ -1426,3 +1426,9 @@ a:link, a:hover, a:visited, a:active {text-decoration: none}
 .res-summary {
     font-size: small;
 }
+.res-search-input {
+    font-size: 11pt;
+    padding: 2px;
+    outline: none;
+    border: none;
+}
