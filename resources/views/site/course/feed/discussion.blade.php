@@ -34,32 +34,7 @@
 
         <!-- feed ui start -->
         <div class="feed-root-container">
-            <div class="feed-menu-left">
-                <a class="left-menu-item" id="home" href="{{ url('course-enroll/'.$course->course_slug.'/'.SiteHelpers::encrypt_decrypt($discussion->lecture_quiz_id)) }}">
-                    <i style="font-size: 32px; color: rgb(40,50,140)" class="material-icons">home</i>
-                    <span style="font-size: 20px; color: rgb(40,50,140); margin-left: 20px">Feed</span>
-                </a>
-                <a class="left-menu-item" id="profile">
-                    <i style="font-size: 32px; color: rgb(40,50,140)" class="material-icons">person</i>
-                    <span style="font-size: 20px; color: rgb(40,50,140); margin-left: 20px">Profile</span>
-                </a>
-                <a class="left-menu-item" id="resources" href="{{ url('course-enroll/'.$course->course_slug.'/'.SiteHelpers::encrypt_decrypt($discussion->lecture_quiz_id).'/resources') }}">
-                    <i style="font-size: 32px; color: rgb(40,50,140)" class="material-icons">folder</i>
-                    <span style="font-size: 20px; color: rgb(40,50,140); margin-left: 20px">Resources</span>
-                </a>
-                <a class="left-menu-item" id="account">
-                    <i style="font-size: 32px; color: rgb(40,50,140)" class="material-icons">account_balance</i>
-                    <span style="font-size: 20px; color: rgb(40,50,140); margin-left: 20px">Account</span>
-                </a>
-                <a class="left-menu-item" id="settings">
-                    <i style="font-size: 32px; color: rgb(40,50,140)" class="material-icons">settings</i>
-                    <span style="font-size: 20px; color: rgb(40,50,140); margin-left: 20px">Settings</span>
-                </a>
-                <a class="left-menu-item" id="settings">
-                    <i style="font-size: 32px; color: rgb(40,50,140)" class="material-icons">more</i>
-                    <span style="font-size: 20px; color: rgb(40,50,140); margin-left: 20px">More</span>
-                </a>
-            </div>
+            @include('site.course.feed.feed-column-left', ['course' => $course, 'discussion' => $discussion]);
             <div class="feed-scrollable-root">
                 <form name="post-form" id="post-form" method="post" action="{{url('save-post')}}">
                     @csrf
@@ -134,45 +109,7 @@
                     </div>
                 @endforeach
             </div>
-            <div class="feed-menu-right">
-                <span>More on <b>{{ $course->course_title }}</b></span>
-                <div>
-                    <div id="social-container">
-                        <div>
-                            <span id="twitter">Twitter</span>
-                            <img src="{{asset('frontend/icons/Twitter.png')}}" height="27.5px" style="padding-bottom: 10px">
-                        </div>
-                        <div>
-                            <span>popular within this course</span><br>
-                            <a href="https://twitter.com/hashtag/disastermanagement?src=hashtag_click">#disastermanagement</a>
-                            <a href="https://twitter.com/hashtag/disasterpreparedness?src=hashtag_click">#disasterpreparedness</a>
-                            <a href="https://twitter.com/hashtag/EmergencyMedicine?src=hashtag_click">#EmergencyMedicine</a><br>
-                            <div style="margin-top: 10px">Follow the <a style="font-weight: bold" href="https://www.twitter.com">course profile</a></div>
-                        </div>
-                    </div>
-                    <div id="social-container">
-                        <div>
-                            <span id="facebook">Facebook</span>
-                            <img src="{{asset('frontend/icons/Facebook.png')}}" height="27.5px" style="padding-bottom: 10px">
-                        </div>
-                        <div>
-                            <div>
-                                <span>Join active discussions on below communities</span><br>
-                                <a style="font-weight: bold" href="https://www.facebook.com">Group 1</a><br>
-                                <a style="font-weight: bold" href="https://www.facebook.com">Group 2</a><br>
-                                <a style="font-weight: bold" href="https://www.facebook.com">Group 3</a><br>
-                                <div style="margin-top: 10px">Follow the official <a style="font-weight: bold" href="https://www.facebook.com">course page</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="social-container">
-                        <div>
-                            <div style="margin-top: 10px">For weekly up-to date information</div>
-                            <button class="subscribe">Subscribe</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @include('site.course.feed.feed-column-right', ['course' => $course, 'tw_content' => $tw_content, 'fb_contant' => $fb_content]);
             <!--Feed UI end-->
 
             <!--Sample chat popup start-->

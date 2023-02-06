@@ -100,45 +100,7 @@
                     <?php }?>
                 </div>
             </div>
-            <div class="feed-menu-right">
-                <span>More on <b>{{ $course->course_title }}</b></span>
-                <div>
-                    <div id="social-container">
-                        <div>
-                            <span id="twitter">Twitter</span>
-                            <img src="{{asset('frontend/icons/Twitter.png')}}" height="27.5px" style="padding-bottom: 10px">
-                        </div>
-                        <div>
-                            <span>popular within this course</span><br>
-                            <a href="https://twitter.com/hashtag/disastermanagement?src=hashtag_click">#disastermanagement</a>
-                            <a href="https://twitter.com/hashtag/disasterpreparedness?src=hashtag_click">#disasterpreparedness</a>
-                            <a href="https://twitter.com/hashtag/EmergencyMedicine?src=hashtag_click">#EmergencyMedicine</a><br>
-                            <div style="margin-top: 10px">Follow the <a style="font-weight: bold" href="www.twitter.com">course profile</a></div>
-                        </div>
-                    </div>
-                    <div id="social-container">
-                        <div>
-                            <span id="facebook">Facebook</span>
-                            <img src="{{asset('frontend/icons/Facebook.png')}}" height="27.5px" style="padding-bottom: 10px">
-                        </div>
-                        <div>
-                            <div>
-                                <span>Join active discussions on below communities</span><br>
-                                <a style="font-weight: bold" href="www.facebook.com">Group 1</a><br>
-                                <a style="font-weight: bold" href="www.facebook.com">Group 2</a><br>
-                                <a style="font-weight: bold" href="www.facebook.com">Group 3</a><br>
-                                <div style="margin-top: 10px">Follow the official <a style="font-weight: bold" href="www.facebook.com">course page</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="social-container">
-                        <div>
-                            <div style="margin-top: 10px">For weekly up-to date information</div>
-                            <button class="subscribe">Subscribe</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @include('site.course.feed.feed-column-right', ['course' => $course, 'tw_content' => $tw_content, 'fb_contant' => $fb_content]);
             <!--Feed UI end-->
         </div>
     </div>

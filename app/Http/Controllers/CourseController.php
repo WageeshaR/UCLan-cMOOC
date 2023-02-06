@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Comment;
 use App\Models\CourseCollaborators;
 use App\Models\CourseTaken;
+use App\Models\SMContent;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Course;
@@ -621,7 +622,13 @@ class CourseController extends Controller
                         ->select('*')
                         ->where('lecture_quiz_id', SiteHelpers::encrypt_decrypt($lecture_slug, 'd'))->first();
         $posts = Post::where('lecture_id', SiteHelpers::encrypt_decrypt($lecture_slug, 'd'))->orderBy('created_at', 'DESC')->get();
-        return view('site.course.feed.discussion', compact('course', 'discussion', 'posts'));
+        $tw_content = SMContent::where('course_id', $course->id)
+                                ->where('lecture_id', SiteHelpers::encrypt_decrypt($lecture_slug, 'd'))
+                                ->where('sm_type', 'tw')->get();
+        $fb_content = SMContent::where('course_id', $course->id)
+                                ->where('lecture_id', SiteHelpers::encrypt_decrypt($lecture_slug, 'd'))
+                                ->where('sm_type', 'fb')->get();
+        return view('site.course.feed.discussion', compact('course', 'discussion', 'posts', 'tw_content', 'fb_content'));
     }
 
     public function postSectionSave(Request $request)

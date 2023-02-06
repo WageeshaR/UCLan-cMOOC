@@ -1432,3 +1432,6 @@ a:link, a:hover, a:visited, a:active {text-decoration: none}
     outline: none;
     border: none;
 }
+.sm-tags:hover {
+    text-decoration: underline;
+}
