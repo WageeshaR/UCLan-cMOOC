@@ -54,7 +54,7 @@ select {
     cursor: inherit;
     line-height: inherit;
 }
-select:invalid {
+select[data-chosen=""] {
     color: rgb(169,181,188);
 }
 select:focus {

@@ -70,8 +70,8 @@
                 <div class="form-group col-md-4">
                     <label class="form-control-label">Attached Lecture</label>
                     <div class="">
-                        <select name="{{$type}}_lecture" id="cars" placeholder="Select a lecture">
-                            <option class="lec-select-option" value="0">Select a lecture</option>
+                        <select data-chosen="" onchange="this.dataset.chosen = this.value;" name="{{$type}}_lecture" id="cars">
+                            <option class="lec-select-option" value="">Select a lecture</option>
                             @foreach($lecs as $lec)
                                 <option class="lec-select-option" value="{{$lec->lecture_quiz_id}}">{{$lec->title}}</option>
                             @endforeach

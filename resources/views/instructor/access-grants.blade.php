@@ -17,7 +17,7 @@
                 <div class="row">
                     <div class="form-group col-sm-4">
                         <label class="form-control-label">Student</label>
-                        <select name="student_id" required>
+                        <select data-chosen="" onchange="this.dataset.chosen = this.value;" name="student_id" required>
                             <option class="lec-select-option" value="">Select the student</option>
                             @foreach($students as $student)
                                 <option class="lec-select-option" value="{{$student->id}}">{{$student->name}}</option>
@@ -26,7 +26,7 @@
                     </div>
                     <div class="form-group col-sm-4">
                         <label class="form-control-label">Course</label>
-                        <select name="course_id" required>
+                        <select data-chosen="" onchange="this.dataset.chosen = this.value;" name="course_id" required>
                             <option class="lec-select-option" value="">Select the course applicable</option>
                             @foreach($courses as $course)
                                 <option class="lec-select-option" value="{{$course->id}}">{{$course->course_title}}</option>
@@ -36,7 +36,7 @@
                 </div>
                 <div class="row">
                     <div class="form-group col-sm-4">
-                        <label class="form-control-label">Approve grants </label>
+                        <label class="form-control-label">Toggle the slider on/off to approve/dismiss grants.</label><br>
                         <label class="switch">
                             <input name="grant_value" type="checkbox">
                             <span class="slider round"></span>
