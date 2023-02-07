@@ -12,6 +12,7 @@
 */
 Route::get('/', 'HomeController@index')->name('home');
 Auth::routes();
+Route::get('/register-form', 'Auth\RegisterController@getRegisterFormData')->name('register.getData');
 Route::get('logout', 'Auth\LoginController@logout')->name('logOut');
 
 Route::get('/login/{social}','Auth\LoginController@socialLogin')->where('social','twitter|facebook|linkedin|google|github|bitbucket');
@@ -78,6 +79,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('course-enroll/{course_slug}/{lecture_slug}/resources', 'CourseResourcesController@getResourcesFrontend')->name('course.getResourcesFrontend');
         Route::get('course-enroll/{course_slug}/{lecture_slug}/resources/{type}', 'CourseResourcesController@getResourcesFEByType')->name('course.getResourcesFrontendType');
         Route::get('file-download/{course_id}/{file_name}', 'CourseResourcesController@downloadFile')->name('course.resource.download');
+        Route::get('resource-access-request/{course_id}/{access_type}', 'CourseResourcesController@accessRequest')->name('course.resource.access.request');
 
         // Course Feed
         Route::post('save-post', 'CourseController@savePost')->name('course.savePost');
@@ -161,6 +163,10 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('instructor-course-sm-content/{course_id}', 'CourseResourcesController@getSMContentBackend')->name('instructor.course.smContent.backend');
         Route::post('instructor-course-sm-content-save', 'CourseResourcesController@saveSMContent')->name('instructor.course.smContent.save');
         Route::get('instructor-course-sm-content-delete/{course_id}/{resource_id}', 'CourseResourcesController@deleteSMContent')->name('instructor.course.smContent.delete');
+
+        // Access grants related routes
+        Route::get('instructor-access-grants', 'InstructorController@getAccessGrantsData')->name('instructor.access.grants');
+        Route::post('instructor-access-grants-save', 'InstructorController@saveAccessGrant')->name('instructor.access.grants.save');
     });
 
     

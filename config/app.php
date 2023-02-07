@@ -176,8 +176,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
-        Ignited\LaravelOmnipay\LaravelOmnipayServiceProvider::class,
-        Chumper\Zipper\ZipperServiceProvider::class
+        Ignited\LaravelOmnipay\LaravelOmnipayServiceProvider::class
 
     ],
 

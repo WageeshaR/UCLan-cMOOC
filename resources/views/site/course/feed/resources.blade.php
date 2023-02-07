@@ -140,5 +140,16 @@
                 }
             };
         };
+
+        function requestAccess(course_id,access_type) {
+            const xmlHttp = new XMLHttpRequest();
+            const url = '/resource-access-request/'+ course_id + '/' + access_type;
+            xmlHttp.open( "GET",url , false ); // false for synchronous request
+            xmlHttp.send( null );
+            const res = JSON.parse(xmlHttp.response);
+            let banner = $("#no-access-banner")[0];
+            banner.innerHTML = "<h1>ACCESS REQUESTED<br></h1><span>You will receive an email once it is granted.</span>"
+            return true;
+        }
     </script>
 @endsection

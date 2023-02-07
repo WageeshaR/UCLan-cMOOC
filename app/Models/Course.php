@@ -25,6 +25,12 @@ class Course extends Model
         return \DB::table('course_taken')->where('course_id', $course_id)->count();
     }
 
+    public function get_all_students($course_id)
+    {
+        $user_ids = \DB::table('course_taken')->where('course_id', $course_id)->pluck('course_taken.user_id')->toArray();
+        return \DB::table('users')->select(\DB::raw("users.id, CONCAT(users.first_name, ' ', users.last_name) AS name"))->whereIn('id', $user_ids)->get();
+    }
+
     public function instructor()
     {
         return $this->belongsTo('App\Models\Instructor', 'instructor_id', 'id');

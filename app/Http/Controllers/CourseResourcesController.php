@@ -40,6 +40,12 @@ class CourseResourcesController extends Controller
                     ->select('*')
                     ->where('lecture_quiz_id', SiteHelpers::encrypt_decrypt($lecture_slug, 'd'))->first();
         $res = $this->fetchAllResources($course->id);
+        $tw_content = SMContent::where('course_id', $course->id)
+            ->where('lecture_id', SiteHelpers::encrypt_decrypt($lecture_slug, 'd'))
+            ->where('sm_type', 'tw')->get();
+        $fb_content = SMContent::where('course_id', $course->id)
+            ->where('lecture_id', SiteHelpers::encrypt_decrypt($lecture_slug, 'd'))
+            ->where('sm_type', 'fb')->get();
         return view('site.course.feed.resources',
                 array(
                     'course' => $course,
@@ -48,7 +54,9 @@ class CourseResourcesController extends Controller
                     'data' => $res['data'],
                     'quizzes' => $res['quiz'],
                     'video_footage' => $res['vids'],
-                    'other' => $res['othr']
+                    'other' => $res['othr'],
+                    'tw_content' => $tw_content,
+                    'fb_content' => $fb_content
                 )
         );
     }
@@ -174,6 +182,10 @@ class CourseResourcesController extends Controller
         return view('instructor.course.resources.smcontent', compact('course', 'tw_content', 'fb_content', 'lecs'));
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function saveSMContent(Request $request) {
         $res = $request->sm_type;
         if ($request->{$res.'_sm_id'}) {
@@ -193,9 +205,20 @@ class CourseResourcesController extends Controller
         return redirect($return_url)->with('status', "Success");
     }
 
+    /**
+     * @param $course_id
+     * @param $resource_id
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function deleteSMContent($course_id, $resource_id, Request $request) {
         SMContent::destroy($resource_id);
         $return_url = 'instructor-course-sm-content/'.$course_id;
         return redirect($return_url)->with('status', "Success");
+    }
+
+    public function accessRequest($course_id = '', $access_type = '', Request $request) {
+        $course = Course::find($course_id);
+        return response()->json($course);
     }
 }

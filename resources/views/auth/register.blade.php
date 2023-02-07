@@ -8,7 +8,7 @@
             <nav class="navbar clearfix secondary-nav pt-0 pb-0 login-page-seperator">
                 <ul class="list mt-0">
                      <li><a href="{{ route('login') }}" >Login</a></li>
-                     <li><a href="{{ route('register') }}" class="active">Register</a></li>
+                     <li><a href="{{ route('register.getData') }}" class="active">Register</a></li>
                 </ul>
             </nav>
 
@@ -21,15 +21,15 @@
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-6">
-                                        <label>First name</label>
-                                        <input type="text" class="form-control form-control-sm" placeholder="First name" value="@if(!empty($name)){{ $name }}@else{{ old('first_name') }}@endif" name="first_name"   >
+                                        <label class="required">First name</label>
+                                        <input required type="text" class="form-control form-control-sm" placeholder="First name" value="@if(!empty($name)){{ $name }}@else{{ old('first_name') }}@endif" name="first_name"   >
                                         @if ($errors->has('first_name'))
                                         <label class="error" for="first_name">{{ $errors->first('first_name') }}</label>
                                         @endif
                                     </div>
                                     <div class="col-6">
-                                        <label>Last name</label>
-                                        <input type="text" class="form-control form-control-sm" placeholder="Last name" value="{{ old('last_name') }}" name="last_name">
+                                        <label class="required">Last name</label>
+                                        <input required type="text" class="form-control form-control-sm" placeholder="Last name" value="{{ old('last_name') }}" name="last_name">
                                         @if ($errors->has('last_name'))
                                         <label class="error" for="last_name">{{ $errors->first('last_name') }}</label>
                                         @endif
@@ -41,11 +41,12 @@
                                 <label>What type of user are you?</label>
                                 <select class="custom-select" name="role" id="role">
                                     <option value=""></option>
-                                    <option value="student">University Student</option>
-                                    <option value="researcher">Researcher</option>
-                                    <option value="business">Business Person</option>
-                                    <option value="ngo">Organizational Leader</option>
+                                    <option value="student">Student</option>
+                                    <option value="researcher">Academic</option>
+                                    <option value="business">Business</option>
+                                    <option value="ngo">Organization</option>
                                     <option value="community">Local Community</option>
+                                    <option value="other">Other</option>
                                 </select>
                                 @if ($errors->has('institution_type'))
                                     <label class="error" for="institution_type">{{ $errors->first('institution_type') }}</label>
@@ -53,32 +54,22 @@
                             </div>
 
                             <div class="form-group">
-                                <label>Your institution</label>
-                                <input type="text" class="form-control form-control-sm" placeholder="Institution name" value="@if(!empty($institution)){{ $institution }}@else{{ old('institution') }}@endif" name="institution">
+                                <label class="required">Your institution</label>
+                                <select class="custom-select" name="institution" id="institution">
+                                    <option value=""></option>
+                                    @foreach($institutions as $institution)
+                                        <option value="{{$institution->id}}">{{$institution->name}}</option>
+                                    @endforeach
+                                </select>
+{{--                                <input required type="text" class="form-control form-control-sm" placeholder="Institution name" value="@if(!empty($institution)){{ $institution }}@else{{ old('institution') }}@endif" name="institution">--}}
                                 @if ($errors->has('institution'))
                                     <label class="error" for="institution">{{ $errors->first('institution') }}</label>
                                 @endif
                             </div>
 
                             <div class="form-group">
-                                <label>What type of institution is it?</label>
-                                <select class="custom-select" name="institution_types" id="institution_types">
-                                    <option value=""></option>
-                                    <option value="university">University</option>
-                                    <option value="college">College</option>
-                                    <option value="industry">Industrial</option>
-                                    <option value="business">Business</option>
-                                    <option value="ngo">Non-government Organization</option>
-                                    <option value="community">Local Community</option>
-                                </select>
-                                @if ($errors->has('institution_type'))
-                                    <label class="error" for="institution_type">{{ $errors->first('institution_type') }}</label>
-                                @endif
-                            </div>
-
-                            <div class="form-group">
-                                <label>Email ID</label>
-                                <input type="text" class="form-control form-control-sm" placeholder="Email ID" value="@if(!empty($name)){{ $email }}@else{{ old('email') }}@endif" name="email">
+                                <label class="required">Email ID</label>
+                                <input required type="text" class="form-control form-control-sm" placeholder="Email ID" value="@if(!empty($name)){{ $email }}@else{{ old('email') }}@endif" name="email">
                                 @if ($errors->has('email'))
                                 <label class="error" for="email">{{ $errors->first('email') }}</label>
                                 @endif
@@ -94,26 +85,19 @@
                             </div>
 
                             <div class="form-group">
-                                <label>Password</label>
-                                <input type="password" class="form-control form-control-sm" placeholder="Password" name="password" id="password">
+                                <label class="required">Password</label>
+                                <input required type="password" class="form-control form-control-sm" placeholder="Password" name="password" id="password">
                                 @if ($errors->has('password'))
                                 <label class="error" for="password">{{ $errors->first('password') }}</label>
                                 @endif
                             </div>
 
                             <div class="form-group">
-                                <label>Confirm password</label>
-                                <input type="password" class="form-control form-control-sm" placeholder="Confirm password" name="password_confirmation">
+                                <label class="required">Confirm password</label>
+                                <input required type="password" class="form-control form-control-sm" placeholder="Confirm password" name="password_confirmation">
                                 @if ($errors->has('password_confirmation'))
                                 <label class="error" for="password_confirmation">{{ $errors->first('password_confirmation') }}</label>
                                 @endif
-                            </div>
-
-                            <div class="form-group">
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="offer" name="offer" {{ old('offer') ? 'checked' : '' }}>
-                                    <label class="custom-control-label" for="offer">Receive relevant offers & communications</label>
-                                </div>
                             </div>
 
                             <div class="form-group mt-4">

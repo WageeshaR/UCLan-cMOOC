@@ -69,8 +69,8 @@
                 @endif
                 <div class="form-group col-md-4">
                     <label class="form-control-label">Attached Lecture</label>
-                    <div class="select-div">
-                        <select class="lec-select" name="{{$type}}_lecture" id="cars" placeholder="Select a lecture">
+                    <div class="">
+                        <select name="{{$type}}_lecture" id="cars" placeholder="Select a lecture">
                             <option class="lec-select-option" value="0">Select a lecture</option>
                             @foreach($lecs as $lec)
                                 <option class="lec-select-option" value="{{$lec->lecture_quiz_id}}">{{$lec->title}}</option>

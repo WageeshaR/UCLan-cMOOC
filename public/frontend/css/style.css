@@ -24,9 +24,9 @@ if it's not present, don't show loader */
     height: 60px;
 }
 @media  (max-width: 768px) {
-.navbar-default {
-    /*background: #fafafa;*/
-}
+    .navbar-default {
+        /*background: #fafafa;*/
+    }
 }
 .about-ul >li{
     padding-left: 17px;
@@ -72,8 +72,8 @@ if it's not present, don't show loader */
     top: 60px !important;
     transition: 0.1s;
 }
-.noscroll { 
-  overflow: hidden;
+.noscroll {
+    overflow: hidden;
 }
 
 #logo{
@@ -120,7 +120,7 @@ if it's not present, don't show loader */
     cursor: pointer;
 }
 .dropdown-menu{
-    font-size: 0.9rem;    
+    font-size: 0.9rem;
 }
 .dropdown-item:hover{
     background-color: #f0f0f5;
@@ -403,8 +403,8 @@ footer .c-row{
     font-weight: bold;
 }
 .breadcrumb-item + .breadcrumb-item::before {
-   content: "»";
-   padding-right: 0.2rem;
+    content: "»";
+    padding-right: 0.2rem;
 }
 .breadcrumb-item + .breadcrumb-item {
     padding-left: 0.2rem;
@@ -625,24 +625,24 @@ a.social-btn{
 }
 
 .preview-time{
- float: right;   
+    float: right;
 }
 
 @media (max-width: 992px){
-.preview-time{
-    float: left;
-}
+    .preview-time{
+        float: left;
+    }
 }
 @media (max-width: 576px){
 
-.breadcrumb{
-    padding:20px;
-}
+    .breadcrumb{
+        padding:20px;
+    }
 }
 @media (max-width: 768px){
-#logo img{
-    margin-bottom: 5px;
-}
+    #logo img{
+        margin-bottom: 5px;
+    }
 }
 /*accordian*/
 .card{
@@ -693,7 +693,7 @@ a.social-btn{
     font-weight: 500;
 }
 .cf-pricing{
-margin: 17px 0px 17px 25px;
+    margin: 17px 0px 17px 25px;
 }
 .cf-pricing-btn{
     color: #fff;
@@ -879,7 +879,7 @@ div.aligncenter{margin:0 auto 1.2em;}
 .inst-block{
     border-bottom: 1px solid #e8e8e8;
     padding-bottom: 12px;
-    margin-top: 10px; 
+    margin-top: 10px;
 }
 .instructor-contact i{
     color: #14bef0;
@@ -1030,7 +1030,7 @@ a.clear-filters,a.clear-filters:hover{
     right: auto;
 }
 #my-courses{
-    min-height: 192px; 
+    min-height: 192px;
 }
 
 /* new style additions by @WageeshaR */
@@ -1434,4 +1434,31 @@ a:link, a:hover, a:visited, a:active {text-decoration: none}
 }
 .sm-tags:hover {
     text-decoration: underline;
+}
+.required:after {
+    content: " *";
+    color: red;
+}
+.no-access-banner {
+    margin: auto;
+    width: 100%;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: lightgrey;
+    text-align: center;
+}
+.no-access-banner h1 {
+    font-size: 36px;
+}
+.no-access-banner span {
+    font-size: 20px;
+}
+.no-href-link {
+    color: #0b75b3;
+}
+.no-href-link:hover {
+    color: #054463;
 }

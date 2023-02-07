@@ -38,6 +38,12 @@
                 <span class="site-menu-title">Withdraw Requests</span>
             </a>
         </li>
+        <li class="site-menu-item {{ request()->is('instructor-access-grants') ? 'active' : '' }}">
+            <a href="{{ route('instructor.access.grants') }}">
+                <i class="site-menu-icon fas fa-address-card" aria-hidden="true"></i>
+                <span class="site-menu-title">Access Grants</span>
+            </a>
+        </li>
       </ul>
 
       

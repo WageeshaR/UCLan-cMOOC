@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models\Institution;
 use App\Models\User;
 use App\Models\Role;
 use App\Http\Controllers\Controller;
@@ -74,6 +75,11 @@ class RegisterController extends Controller
         $user->roles()
            ->attach(Role::where('name', 'student')->first());
         return $user;
+    }
+
+    public function getRegisterFormData() {
+        $institutions = Institution::all();
+        return view('auth.register', compact('institutions'));
     }
 }
     

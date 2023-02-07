@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\RoleUser;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Course;
@@ -11,6 +12,7 @@ use App\Models\Instructor;
 use App\Models\InstructionLevel;
 use App\Models\Credit;
 use App\Models\WithdrawRequest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use DB;
 use Illuminate\Support\Facades\Input;
@@ -211,5 +213,44 @@ class InstructorController extends Controller
 
         return view('instructor.withdraw_requests', compact('withdraw_requests'));
     }
-    
+
+    /**
+     * Responds with data required for backend's access grants page
+     * @param Request $request
+     */
+    public function getAccessGrantsData(Request $request) {
+        $user = \Auth::user();
+        $res = $this->fetchAccessGrantData($user);
+        return view('instructor.access-grants', $res);
+    }
+
+    public function saveAccessGrant(Request $request) {
+        if (RoleUser::where('role_id', 4)->where('user_id', $request->student_id)->exists()) {
+            $role_user = RoleUser::where('role_id', 4)->where('user_id', $request->student_id)->first();
+            if ($request->grant_value == 'off' or $request->grant_value == null) {
+                RoleUser::destroy($role_user->id);
+                return $this->getAccessGrantsData($request);
+            }
+        } else {
+            $role_user = new RoleUser();
+        }
+        $role_user->user_id = $request->student_id;
+        $role_user->role_id = 4;
+        $role_user->save();
+        $res = $this->fetchAccessGrantData(\Auth::user());
+        return view('instructor.access-grants', $res);
+    }
+
+    protected function fetchAccessGrantData($user) {
+        if ($user->hasRole('facilitator')) {
+            $facilitator = User::where('id', $user->id)->with('instructor')->first()->instructor;
+        }
+        $courses = Course::where('instructor_id', $facilitator->id)->get();
+        $students = array();
+        foreach ($courses as $course) {
+            $course_students = $course->get_all_students($course->id)->toArray();
+            $students = array_merge($students, $course_students);
+        }
+        return compact('courses', 'students');
+    }
 }
