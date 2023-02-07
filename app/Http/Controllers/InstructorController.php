@@ -225,18 +225,36 @@ class InstructorController extends Controller
     }
 
     public function saveAccessGrant(Request $request) {
-        if (RoleUser::where('role_id', 4)->where('user_id', $request->student_id)->exists()) {
-            $role_user = RoleUser::where('role_id', 4)->where('user_id', $request->student_id)->first();
-            if ($request->grant_value == 'off' or $request->grant_value == null) {
-                RoleUser::destroy($role_user->id);
-                return $this->getAccessGrantsData($request);
+        $course = Course::find($request->course_id);
+        if ($request->grant_value == 'on') {
+            if ($request->grant_all == 'on') {
+                $students = $course->get_all_students($course->id)->toArray();
+            } else {
+                $student = new \stdClass();
+                $student->id = $request->student_id;
+                $students = array($student);
             }
-        } else {
-            $role_user = new RoleUser();
+            foreach ($students as $student) {
+                $role_user = $this->doesRoleUserExist($student->id, 4) ? RoleUser::where('role_id', 4)->where('user_id', $student->id)->first() : new RoleUser();
+                $role_user->user_id = $student->id;
+                $role_user->role_id = 4;
+                $role_user->save();
+            }
         }
-        $role_user->user_id = $request->student_id;
-        $role_user->role_id = 4;
-        $role_user->save();
+        else {
+            if ($request->grant_all == 'on') {
+                $students = $course->get_all_students($course->id)->toArray();
+            } else {
+                $student = new \stdClass();
+                $student->id = $request->student_id;
+                $students = array($student);
+            }
+            foreach ($students as $student) {
+                if ($this->doesRoleUserExist($student->id, 4)) {
+                    RoleUser::where('role_id', 4)->where('user_id', $student->id)->delete();
+                }
+            }
+        }
         $res = $this->fetchAccessGrantData(\Auth::user());
         return view('instructor.access-grants', $res);
     }
@@ -252,5 +270,9 @@ class InstructorController extends Controller
             $students = array_merge($students, $course_students);
         }
         return compact('courses', 'students');
+    }
+
+    protected function doesRoleUserExist($user_id, $role_id) {
+        return RoleUser::where('role_id', $role_id)->where('user_id', $user_id)->exists();
     }
 }
