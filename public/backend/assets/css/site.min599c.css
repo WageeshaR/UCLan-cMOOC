@@ -2,7 +2,7 @@
 
 @charset "UTF-8";
     .site-navbar {
-    background-color: #3e8ef7;
+    background-color: #80e292;
 }
 .site-navbar .navbar-header {
     color: #fff;
@@ -20,8 +20,9 @@
 }
 .site-navbar .navbar-header .navbar-brand {
     font-family: Roboto, sans-serif;
-    color: #fff;
+    color: #346d3d;
     cursor: pointer;
+    font-size: 32px;
 }
 .site-navbar .navbar-container {
     background-color: #fff;
@@ -64,7 +65,7 @@ body {
     height: calc(100% - 66.01px);
     font-family: Roboto, sans-serif;
     color: rgba(163, 175, 183, .9);
-    background: #263238;
+    background: #244227;
     -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, .08);
     box-shadow: 0 2px 4px rgba(0, 0, 0, .08);
 }
@@ -201,7 +202,7 @@ body {
     padding: 0;
 }
 .site-menu>.site-menu-item.open {
-    background: #242f35;
+    background: #346d3d;
 }
 .site-menu>.site-menu-item.open>a {
     color: #fff;
@@ -215,7 +216,7 @@ body {
     background-color: rgba(255, 255, 255, .02);
 }
 .site-menu>.site-menu-item.active {
-    background: #242f35;
+    background: #346d3d;
     border-top: 1px solid rgba(0, 0, 0, .04);
     border-bottom: 1px solid rgba(0, 0, 0, .04);
 }
@@ -9966,4 +9967,7 @@ label.error{
     display: block;
     font-size: 12px;
     font-weight: 500;
+}
+.card-block {
+    border-radius: 20px;
 }

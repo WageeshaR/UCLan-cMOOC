@@ -61,8 +61,8 @@
         <i class="icon wb-more-horizontal" aria-hidden="true"></i>
       </button>
       <div class="navbar-brand navbar-brand-center">
-        <img class="navbar-brand-logo" src="{{ asset('backend/assets/images/b_logo.png') }}" title="IncluDE">
-        <span class="navbar-brand-text hidden-xs-down"> IncluDE</span>
+        <img class="navbar-brand-logo" src="{{ asset('backend/assets/images/include_logo.png') }}" title="INCLUDE">
+        <span class="navbar-brand-text hidden-xs-down"> INCLUDE</span>
       </div>
       <button type="button" class="navbar-toggler collapsed" data-target="#site-navbar-search"
         data-toggle="collapse">
@@ -132,7 +132,7 @@
 
   <!-- Footer -->
   <footer class="site-footer">
-    <div class="site-footer-legal">© {{ date('Y') }} <a href="javascript:void(0)">IncluDE</a></div>
+    <div class="site-footer-legal">© {{ date('Y') }} <a href="javascript:void(0)">INCLUDE</a></div>
   </footer>
   <!-- Core  -->
   <script src="{{ asset('backend/vendor/babel-external-helpers/babel-external-helpers599c.js?v4.0.2') }}"></script>

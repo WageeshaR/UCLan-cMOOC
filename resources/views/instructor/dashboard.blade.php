@@ -7,7 +7,7 @@
     <div class="row">
     <div class="col-md-4">
           <!-- Card -->
-          <div class="card card-block p-30 bg-red-600">
+          <div class="card card-block p-30 bg-grey-700">
             <div class="card-watermark darker font-size-80 m-15"><i class="fa fa-chalkboard" aria-hidden="true"></i></div>
             <div class="counter counter-md counter-inverse text-left">
               <div class="counter-number-group">
@@ -22,7 +22,7 @@
 
         <div class="col-md-4">
           <!-- Card -->
-          <div class="card card-block p-30 bg-blue-600">
+          <div class="card card-block p-30 bg-grey-700">
             <div class="card-watermark darker font-size-80 m-15"><i class="fas fa-bullhorn" aria-hidden="true"></i></div>
             <div class="counter counter-md counter-inverse text-left">
               <div class="counter-number-group">
@@ -37,8 +37,8 @@
 
         <div class="col-md-4">
           <!-- Card -->
-          <div class="card card-block p-30 bg-green-600">
-            <div class="card-watermark darker font-size-60 m-15"><i class="far fa-play-circle" aria-hidden="true"></i></div>
+          <div class="card card-block p-30 bg-grey-700">
+            <div class="card-watermark darker font-size-80 m-15"><i class="far fa-play-circle" aria-hidden="true"></i></div>
             <div class="counter counter-md counter-inverse text-left">
               <div class="counter-number-group">
                 <span class="counter-number">{{ $metrics['videos'] }}</span>

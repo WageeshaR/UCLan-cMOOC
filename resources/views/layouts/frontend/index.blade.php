@@ -22,11 +22,13 @@
     <div class="se-pre-con"></div>
     <!-- Header -->
 
-    <nav class="navbar navbar-default fixed-top">
-        <div class="row" style="flex-grow: 1;">
+    <nav class="navbar navbar-default fixed-top" style="height: 60px">
+        <div class="row" style="flex-grow: 1; height: 100%">
             <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2" id="logo">
                 <i class="fa fa-bars d-inline-block d-md-none mobile-nav"></i>
-                <a href="{{ route('home') }}" class="float-xl-right"><img src="{{ asset('frontend/img/logo.png') }}" width="70" height="25" /></a>
+                <a href="{{ route('home') }}" class="float-xl-right"><img src="{{ asset('frontend/img/Erasmas_logo.png') }}" width="auto" height="48" /></a>
+                <i class="fa fa-bars d-inline-block d-md-none mobile-nav"></i>
+                <a href="{{ route('home') }}" class="float-xl-none"><img src="{{ asset('frontend/img/include_logo.png') }}" width="auto" height="48" /></a>
             </div>
             <div class="col-md-3 col-lg-6 col-xl-6 d-none d-md-block">
                 <div class="dropdown float-left" >
@@ -130,10 +132,11 @@
                 </ul>
             </div>
             <div class="col-lg-6 col-md-12 col-sm-12 text-center mt-4">
-                <img src="{{ asset('frontend/img/logo.png') }}" class="img-fluid" width="180" height="40">
+                <img src="{{ asset('frontend/img/include_logo.png') }}" class="img-fluid" width="60px" height="60px">
+                <img src="{{ asset('frontend/img/Erasmas_logo.png') }}" class="img-fluid" width="200px" height="60px">
                 <br>
                 <span style="font-size: 12px" id="c-copyright">
-                    Copyright © 2022, IncluDE. All rights reserved.
+                    Copyright © 2022, INCLUDE. All rights reserved.
                 </span>
             </div>
         </div>

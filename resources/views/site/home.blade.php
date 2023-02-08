@@ -3,7 +3,7 @@
 <!-- content start -->
     <div class="container-fluid p-0 home-content">
         <!-- banner start -->
-        <div class="homepage-slide-blue">
+        <div class="homepage-slide-green">
             <h1 style="font-size: 62px">{{ Sitehelpers::get_option('pageHome', 'banner_title') }}</h1>
             <span class="title-sub-header">{{ Sitehelpers::get_option('pageHome', 'banner_text') }}</span>
             <form method="GET" action="{{ route('course.list') }}">
