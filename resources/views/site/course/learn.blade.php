@@ -120,8 +120,11 @@
                           	@endphp
                             <div class="row lecture-container">
                                 <div class="col-6 my-auto ml-4">
-                                    <i class="{{ $icon_class }} mr-2"></i>
-                                    <span>{{ $curriculum_lecture->l_title }}</span>
+                                    <button class="btn btn-acc-head" type="button" data-toggle="collapse" data-target="#collapseTwo-{{ $curriculum_lecture->lecture_quiz_id }}" aria-expanded="true" aria-controls="collapseTwo-{{ $curriculum_lecture->lecture_quiz_id }}">
+                                        <i class="fas fa-plus accordian-icon mr-2" ></i>
+                                        <i class="{{ $icon_class }} mr-2"></i>
+                                        <span>{{ $curriculum_lecture->l_title }}</span>
+                                    </button>
                                 </div>
                                 @php
                                     $is_completed = SiteHelpers::getCoursecompletedStatus($curriculum_lecture->lecture_quiz_id);
@@ -158,6 +161,11 @@
                                 @endif
                                 </div>
                             </div>
+                            @if($curriculum_lecture->description)
+                                <div id="collapseTwo-{{ $curriculum_lecture->lecture_quiz_id }}" class="collapse lec-desc">
+                                    <span>{!! $curriculum_lecture->description !!}</span>
+                                </div>
+                            @endif
                           @endforeach  
                           </div>
                         </div>

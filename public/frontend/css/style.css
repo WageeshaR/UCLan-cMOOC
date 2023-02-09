@@ -678,6 +678,18 @@ a.social-btn{
 .btn-acc-head:focus{
     box-shadow: none;
 }
+.lec-desc {
+    margin: auto;
+    width: 104%;
+    padding-left: 55px;
+    padding-right: 55px;
+    padding-top: 5px;
+    height: auto;
+    color: rgb(85,85,85);
+    border-bottom: 1px solid rgb(230,230,230);
+    margin-left: -2%;
+    text-align: justify;
+}
 .lecture-container{
     min-height: 35px;
 }
@@ -1110,7 +1122,7 @@ a:link, a:hover, a:visited, a:active {text-decoration: none}
 .subscribe {
     margin-top: 10px;
     width: 100%;
-    background-color: rgb(40,50,140);
+    background-color: #346d3d;
     font-size: 16px;
     color: white;
     border-radius: 5px;
@@ -1145,7 +1157,7 @@ a:link, a:hover, a:visited, a:active {text-decoration: none}
 .colored-icon {
     margin-left: 5px;
     font-weight: bold;
-    color: rgb(40,50,140);
+    color: #346d3d;
     cursor: pointer;
 }
 .editor-expanded-container {

@@ -1192,6 +1192,8 @@ if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {               $ffmpeg_path = b
             $url = $request->yt_content;
             if (strpos($url, "watch?v=") !== false) {
                 $url = str_replace("watch?v=", "embed/", $url);
+            } else if (strpos($url, "youtu.be") !== false) {
+                $url = str_replace("youtu.be/", "youtube.com/embed/", $url);
             }
             $post->video_url = $url;
         }

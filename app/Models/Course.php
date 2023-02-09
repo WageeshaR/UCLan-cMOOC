@@ -105,6 +105,7 @@ class Course extends Model
               	'curriculum_sections.title as s_title', 
                 'curriculum_lectures_quiz.lecture_quiz_id',
               	'curriculum_lectures_quiz.title as l_title',
+                'curriculum_lectures_quiz.description',
               	'curriculum_sections.sort_order as s_sort_order', 
               	'curriculum_lectures_quiz.sort_order as l_sort_order',
                 'curriculum_lectures_quiz.media_type'
