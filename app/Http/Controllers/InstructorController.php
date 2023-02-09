@@ -74,7 +74,7 @@ class InstructorController extends Controller
     public function becomeInstructor(Request $request)
     {
         if(!\Auth::check()){
-            return $this->return_output('flash', 'error', 'Please login to become an Instructor', 'back', '422');
+            return $this->return_output('flash', 'error', 'Please login to become a course facilitator', 'back', '422');
         }
 
         $instructor = new Instructor();
@@ -91,7 +91,7 @@ class InstructorController extends Controller
         $slug = $first_name.'-'.$last_name;
         $slug = str_slug($slug, '-');
 
-        $results = DB::select(DB::raw("SELECT count(*) as total from instructors where instructor_slug REGEXP '^{$slug}(-[0-9]+)?$' "));
+        $results = DB::select(DB::raw("SELECT count(*) as total from instructors where instructor_slug ~ '^{$slug}(-[0-9]+)?$' "));
 
         $finalSlug = ($results['0']->total > 0) ? "{$slug}-{$results['0']->total}" : $slug;
         $instructor->instructor_slug = $finalSlug;
@@ -103,7 +103,7 @@ class InstructorController extends Controller
 
         $user = User::find(\Auth::user()->id);
 
-        $role = Role::where('name', 'instructor')->first();
+        $role = Role::where('name', 'facilitator')->first();
         $user->roles()->attach($role);
         
         return redirect()->route('instructor.dashboard') ;

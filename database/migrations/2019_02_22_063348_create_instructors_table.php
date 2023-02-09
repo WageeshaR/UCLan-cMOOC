@@ -23,7 +23,7 @@ class CreateInstructorsTable extends Migration
             $table->string('contact_email');
             $table->string('telephone');
             $table->string('mobile')->nullable();
-            $table->string('paypal_id');
+            $table->string('paypal_id')->nullable();
 
             $table->string('link_facebook')->nullable();
             $table->string('link_linkedin')->nullable();

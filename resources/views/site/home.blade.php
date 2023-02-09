@@ -4,11 +4,22 @@
     <div class="container-fluid p-0 home-content">
         <!-- banner start -->
         <div class="homepage-slide-green">
-            <h1 style="font-size: 62px">{{ Sitehelpers::get_option('pageHome', 'banner_title') }}</h1>
-            <span class="title-sub-header">{{ Sitehelpers::get_option('pageHome', 'banner_text') }}</span>
-            <form method="GET" action="{{ route('course.list') }}">
-            <span class="title-sub-desc">A joint initiative by the University of A, the University of B, the University of C and the University of D</span>
-            </form>
+            <div class="row">
+                <div class="col-md-4 col-lg-4 col-xl-4">
+                    <img class="float-right" src="{{ asset("frontend/img/include_logo.png") }}">
+                </div>
+                <div class="col-md-4 col-lg-4 col-xl-4">
+                    <h1 style="font-size: 62px">{{ Sitehelpers::get_option('pageHome', 'banner_title') }}</h1>
+                    <span class="title-sub-header">{{ Sitehelpers::get_option('pageHome', 'banner_text') }}</span>
+                    <div class="title-sub-desc">
+                        A joint initiative by the University of Huddersfield and the University of Central Lancashire from the UK,
+                        the Keio University, Japan, Vilniaus Gedimino Technikos Universitetas, Lithuania and the Lund University, Sweden.
+                    </div>
+                </div>
+                <div class="col-md-4 col-lg-4 col-xl-4 my-auto">
+                    <img class="float-left" src="{{ url("frontend/img/Erasmas_logo_2.png") }}">
+                </div>
+            </div>
         </div>
         <!-- banner end -->
 
@@ -37,7 +48,7 @@
                         <div class="course-block mx-auto">
                             <a href="{{ route('course.view', $course->course_slug) }}">
                                 <main>
-                                    <img src="@if(Storage::exists($course->thumb_image)){{ asset('backend/assets/images/'.$course->thumb_image) }}@else{{ asset('backend/assets/images/course1_thumb.jpg') }}@endif">
+                                    <img src="@if(Storage::exists($course->thumb_image)){{ url('storage/'.$course->thumb_image) }}@else{{ asset('backend/assets/images/course1_thumb.jpg') }}@endif">
                                     <div class="col-md-12"><h6 class="course-title">{{ $course->course_title }}</h6></div>
                                     
                                     <div class="instructor-clist">
@@ -92,36 +103,6 @@
             </div>
         </article>
         <!-- dummy block end -->
-
-        <!-- instructor block start -->
-        <article class="instructor-block">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12 text-center seperator-head mt-3">
-                        <h3>Facilitators</h3>
-                        <p class="mt-3">{{ Sitehelpers::get_option('pageHome', 'instructor_text') }}</p>
-                    </div>
-                </div>
-                
-                <div class="row mt-4 mb-5">
-                    @foreach ($instructors as $instructor) 
-                    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
-                        <div class="instructor-box mx-auto text-center">
-                        <a href="{{ route('instructor.view', $instructor->instructor_slug) }}">
-                            <main>
-                                <img src="@if(Storage::exists($instructor->instructor_image)){{ asset('backend/assets/images/'.$instructor->instructor_image) }}@else{{ asset('backend/assets/images/woman_1.png') }}@endif">
-                                <div class="col-md-12">
-                                    <h6 class="instructor-title">{{ $instructor->first_name.' '.$instructor->last_name }}</h6>
-                                </div>
-                            </main>
-                        </a>
-                        </div>
-                    </div>
-                @endforeach
-                </div>
-            </div>
-        </article>
-        <!-- instructor block end -->
 
     </div>
     <!-- content end -->

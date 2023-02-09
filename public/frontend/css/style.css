@@ -219,11 +219,13 @@ nav.secondary-nav ul li a.active{color:#80e292;font-weight:bold;}
 }
 
 .homepage-slide-green {
-    color: #fff;
-    background-color: #346d3d;
-    height: 220px;
+    color: #ffffff;
+    background-image: url("/storage/cover_image.jpg");
+    height: 370px;
+    width: 100%;
     position: relative;
     text-align: center;
+    padding-top: 70px;
 }
 
 .homepage-slide-green h1{
@@ -235,6 +237,9 @@ nav.secondary-nav ul li a.active{color:#80e292;font-weight:bold;}
 }
 .title-sub-desc {
     font-size: 12px;
+    margin-top: 30px;
+    max-width: 800px;
+    margin: auto;
 }
 
 .homepage-slide-green .searchbox-contrainer{line-height:50px;padding:0 0 0 20px;margin-top:20px;margin-bottom: 20px}
@@ -983,9 +988,19 @@ a.clear-filters,a.clear-filters:hover{
     color: #787887;
 }
 .become-instructor{
-    color: #80e292;
+    color: #ffffff;
     font-weight: 500;
     cursor: pointer;
+    height: 35px;
+    width: 200px;
+    border-radius: 17px;
+    background-color: #80e292;
+}
+.become-instructor:hover {
+    background-color: #346d3d;
+}
+.become-instructor:focus {
+    outline: none;
 }
 .becomeInstructorForm{
     border: 1px solid rgba(216,216,216,0.5);

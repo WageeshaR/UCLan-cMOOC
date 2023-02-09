@@ -22,34 +22,21 @@
     <div class="se-pre-con"></div>
     <!-- Header -->
 
-    <nav class="navbar navbar-default fixed-top" style="height: 60px">
-        <div class="row" style="flex-grow: 1; height: 100%">
-            <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2" id="logo">
+    <nav class="navbar navbar-default fixed-top" style="height: 70px">
+        <div class="row align-items-center d-flex" style="flex-grow: 1; height: 100%">
+            <div class="col-6 col-sm-4 col-md-3 col-lg-8 col-xl-8" id="logo">
                 <i class="fa fa-bars d-inline-block d-md-none mobile-nav"></i>
-                <a href="{{ route('home') }}" class="float-xl-right"><img src="{{ asset('frontend/img/Erasmas_logo.png') }}" width="auto" height="48" /></a>
+                <a href="{{ route('home') }}" class="float-xl-left"><img src="{{ asset('frontend/img/include_logo.png') }}" width="auto" height="48" /></a>
                 <i class="fa fa-bars d-inline-block d-md-none mobile-nav"></i>
-                <a href="{{ route('home') }}" class="float-xl-none"><img src="{{ asset('frontend/img/include_logo.png') }}" width="auto" height="48" /></a>
+                <a class="float-xl-none" style="margin-left: 15px"><img src="{{ asset('frontend/img/Erasmas_logo.png') }}" width="auto" height="48" /></a>
             </div>
-            <div class="col-md-3 col-lg-6 col-xl-6 d-none d-md-block">
-                <div class="dropdown float-left" >
-                  <span id="dropdownMenuButton" data-toggle="dropdown">Categories &nbsp;<i class="fa fa-caret-down"></i></span>
-                    <?php 
-                        $categories = SiteHelpers::active_categories();
-                    ?>
-                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    @foreach ($categories as $category)
-                        <a class="dropdown-item" href="{{ route('course.list','category_id[]='.$category->id) }}">
-                            <i class="fa {{ $category->icon_class }} category-menu-icon"></i>
-                            {{ $category->name}}
-                        </a>
-                    @endforeach
-                  </div>
-                </div>
-            </div>
+            <?php
+                $categories = SiteHelpers::active_categories();
+            ?>
 
             <div class="col-sm-5 col-md-3 col-lg-2 col-xl-2 d-none d-sm-block">
                 @if(Auth::check() && !Auth::user()->hasRole('facilitator') && !Auth::user()->hasRole('admin'))
-                <span class="become-instructor" href="{{ route('login') }}" data-toggle="modal" data-target="#myModal">Become A Facilitator</span>
+                <button class="become-instructor" href="{{ route('login') }}" data-toggle="modal" data-target="#myModal">Become A Facilitator</button>
                 @endif
             </div>
 
@@ -135,8 +122,8 @@
                 <img src="{{ asset('frontend/img/include_logo.png') }}" class="img-fluid" width="60px" height="60px">
                 <img src="{{ asset('frontend/img/Erasmas_logo.png') }}" class="img-fluid" width="200px" height="60px">
                 <br>
-                <span style="font-size: 12px" id="c-copyright">
-                    Copyright © 2022, INCLUDE. All rights reserved.
+                <span style="font-size: 12px; color: white" id="c-copyright">
+                    Copyright © 2023, INCLUDE. All rights reserved.
                 </span>
             </div>
         </div>
@@ -148,7 +135,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
         <div class="modal-header bi-header ">
-            <h5 class="col-12 modal-title text-center bi-header-seperator-head">Become an Instructor</h5>
+            <h5 class="col-12 modal-title text-center bi-header-seperator-head">Become a Course Facilitator</h5>
             <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
            
@@ -176,11 +163,6 @@
                     <div class="form-group">
                         <label>Telephone</label>
                         <input type="text" class="form-control form-control-sm" placeholder="Telephone" name="telephone">
-                    </div>
-
-                    <div class="form-group">
-                        <label>Paypal ID</label>
-                        <input type="text" class="form-control form-control-sm" placeholder="Paypal ID" name="paypal_id">
                     </div>
 
                     <div class="form-group">

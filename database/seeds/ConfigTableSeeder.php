@@ -33,14 +33,14 @@ class ConfigTableSeeder extends Seeder
             'id'=>3,
             'code'=>'pageHome',
             'option_key'=>'instructor_text',
-            'option_value'=>'Join our open, large pool of Instructors'
+            'option_value'=>'Join our open, large pool of Facilitators'
             ] );
                         
             Config::create( [
             'id'=>4,
             'code'=>'pageHome',
             'option_key'=>'learn_block_title',
-            'option_value'=>'Learn every topic, everytime.'
+            'option_value'=>'Contribute to our knowledge pool on inclusive disaster education.'
             ] );
                         
             Config::create( [
@@ -104,7 +104,7 @@ class ConfigTableSeeder extends Seeder
             'id'=>7,
             'code'=>'pageContact',
             'option_key'=>'telephone',
-            'option_value'=>'+61 (800) 123-54323'
+            'option_value'=>'+44 0012354323'
             ] );
                         
             Config::create( [
@@ -118,7 +118,7 @@ class ConfigTableSeeder extends Seeder
             'id'=>9,
             'code'=>'pageContact',
             'option_key'=>'address',
-            'option_value'=>'8432 Newyork United States'
+            'option_value'=>'8432 London United Kingdom'
             ] );
                         
             Config::create( [
@@ -132,14 +132,14 @@ class ConfigTableSeeder extends Seeder
             'id'=>11,
             'code'=>'settingGeneral',
             'option_key'=>'application_name',
-            'option_value'=>'Ulearn'
+            'option_value'=>'INCLUDE CMOOC'
             ] );
                         
             Config::create( [
             'id'=>12,
             'code'=>'settingGeneral',
             'option_key'=>'meta_key',
-            'option_value'=>'Learn courses online'
+            'option_value'=>'Collaboratively learn courses online'
             ] );
                         
             Config::create( [
@@ -160,7 +160,7 @@ class ConfigTableSeeder extends Seeder
                 'id'=>15,
                 'code'=>'settingGeneral',
                 'option_key'=>'admin_email',
-                'option_value'=>'admin@ulearn.com'
+                'option_value'=>'admin@include.com'
                 ] );
                         
             Config::create( [
