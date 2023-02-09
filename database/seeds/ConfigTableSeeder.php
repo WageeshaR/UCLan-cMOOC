@@ -26,7 +26,7 @@ class ConfigTableSeeder extends Seeder
             'id'=>2,
             'code'=>'pageHome',
             'option_key'=>'banner_text',
-            'option_value'=>'Inclusive Disaster Education'
+            'option_value'=>'INCLUsive Disaster Education'
             ] );
                         
             Config::create( [

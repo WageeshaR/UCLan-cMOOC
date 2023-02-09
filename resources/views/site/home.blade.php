@@ -9,11 +9,12 @@
                     <img class="float-right" src="{{ asset("frontend/img/include_logo.png") }}">
                 </div>
                 <div class="col-md-4 col-lg-4 col-xl-4">
-                    <h1 style="font-size: 62px">{{ Sitehelpers::get_option('pageHome', 'banner_title') }}</h1>
+                    <a class="fe-home-banner" target="_blank" href="http://includeresearchproject.org/">{{ Sitehelpers::get_option('pageHome', 'banner_title') }}</a><br>
                     <span class="title-sub-header">{{ Sitehelpers::get_option('pageHome', 'banner_text') }}</span>
                     <div class="title-sub-desc">
-                        A joint initiative by the University of Huddersfield and the University of Central Lancashire from the UK,
-                        the Keio University, Japan, Vilniaus Gedimino Technikos Universitetas, Lithuania and the Lund University, Sweden.
+                        This platform provides an online medium for collaborative, inclusive disaster education.
+                        This new model prototype contains features from both traditional learning management systems and collaborative massive open online course,
+                        tailored to the objectives of INCLUDE project. The target audience of this platform is currently limited to disaster risk reduction (DRR) and related disciplines.
                     </div>
                 </div>
                 <div class="col-md-4 col-lg-4 col-xl-4 my-auto">

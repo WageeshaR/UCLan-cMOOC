@@ -176,6 +176,16 @@ nav.secondary-nav ul li a.active{color:#80e292;font-weight:bold;}
     background-color: #80e292;
 }
 
+.fe-home-banner {
+    font-size: 62px;
+    color: white;
+}
+.fe-home-banner:hover {
+    color: #80e292;
+}
+.fe-home-banner:focus {
+    color: white;
+}
 .dropdown i{
     color: #787887;
 }
