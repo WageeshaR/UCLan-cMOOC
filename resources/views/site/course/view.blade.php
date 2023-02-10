@@ -60,13 +60,7 @@
                             </div>
                         </div>
 
-                        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-6">
-                            <div class="cv-category-detail cv-price">
-                            	@php $course_price = $course->price ? $course->price : '0.00'; @endphp
-                                <h4>{{  config('config.default_currency').$course_price }}</h4>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-lg-3 col-md-6 float-md-right col-sm-6 float-sm-right col-6">
+                        <div class="col-xl-6 col-lg-6 col-md-6 float-md-right col-sm-6 float-sm-right col-6">
                             <div class="cv-category-detail cv-enroll float-lg-right float-md-right float-sm-right">
                                 @if($is_enrolled == "1")
                                     <a href="{{ route('course.learn', $course->course_slug) }}" class="btn btn-ulearn-cview mt-1">GO TO COURSE</a>
@@ -209,11 +203,6 @@
                     <header>
                         <h6>COURSE FEATURES</h6>
                     </header>
-
-                    <div class="cf-pricing">
-                        <span>PRICING:</span>
-                        <button class="cf-pricing-btn btn">{{ $course->price ? 'PAID' : 'FREE' }}</button>
-                    </div>
 
                     <ul class="list-unstyled cf-pricing-li">
                         <li><i class="far fa-user"></i>199 Students</li>

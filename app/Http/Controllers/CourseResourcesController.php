@@ -177,7 +177,9 @@ class CourseResourcesController extends Controller
             ->select('clq.*')
             ->join('curriculum_sections as cs', 'cs.section_id', '=', 'clq.section_id')
             ->where('cs.course_id', $course_id)->get();
-        $tw_content = SMContent::where('sm_type', 'tw')->where('course_id', $course_id)->get();
+        $tw_content = SMContent::selectRaw("*,
+                                (CASE WHEN sm_content.is_hashtag = true THEN CONCAT('#', sm_content.title) ELSE sm_content.title END) AS title")
+                                ->where('sm_type', 'tw')->where('course_id', $course_id)->get();
         $fb_content = SMContent::where('sm_type', 'fb')->where('course_id', $course_id)->get();
         return view('instructor.course.resources.smcontent', compact('course', 'tw_content', 'fb_content', 'lecs'));
     }
@@ -196,9 +198,12 @@ class CourseResourcesController extends Controller
         }
         $sm_content->course_id = $request->course_id;
         $sm_content->sm_type = $res;
-        $sm_content->title = $request->{$res.'_title'};
-        $sm_content->url = $request->{$res.'_url'};
         $sm_content->is_hashtag = $request->{$res.'_is_hashtag'} == 'on' ? 1 : 0;
+        $sm_content->title = $request->{$res.'_title'};
+        if ($sm_content->is_hashtag and str_starts_with($sm_content->title, "#")) {
+            $sm_content->title = substr($sm_content->title, 1);
+        }
+        $sm_content->url = $request->{$res.'_url'};
         $sm_content->lecture_id = $request->{$res.'_lecture'};
         $sm_content->save();
         $return_url = 'instructor-course-sm-content/'.$request->course_id;
