@@ -621,7 +621,10 @@ class CourseController extends Controller
         $discussion = DB::table('curriculum_lectures_quiz')
                         ->select('*')
                         ->where('lecture_quiz_id', SiteHelpers::encrypt_decrypt($lecture_slug, 'd'))->first();
-        $posts = Post::where('lecture_id', SiteHelpers::encrypt_decrypt($lecture_slug, 'd'))->orderBy('created_at', 'DESC')->get();
+        $posts = Post::select('posts.*', DB::raw("CONCAT(users.first_name, ' ', users.last_name) as name"), 'institution.name as institution')
+                        ->join('users', 'users.id', '=', 'posts.author_id')
+                        ->leftJoin('institution', 'institution.id', '=', 'users.institution_id')
+                        ->where('lecture_id', SiteHelpers::encrypt_decrypt($lecture_slug, 'd'))->orderBy('created_at', 'DESC')->get();
         $tw_content = SMContent::where('course_id', $course->id)
                                 ->where('lecture_id', SiteHelpers::encrypt_decrypt($lecture_slug, 'd'))
                                 ->where('sm_type', 'tw')->get();

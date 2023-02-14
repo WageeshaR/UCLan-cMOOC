@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration {
 			$table->string('email', 120)->nullable();
             $table->string('email_hash', 255)->nullable();
 			$table->string('password', 60)->nullable();
+			$table->string('institution_id')->nullable();
 			$table->boolean('is_active')->default(1);
 			$table->string('remember_token', 100)->nullable();
 			$table->timestamps();

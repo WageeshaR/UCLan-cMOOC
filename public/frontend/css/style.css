@@ -4,6 +4,28 @@ body{
     line-height: 1.6;
 }
 
+/* Scrollbar setting */
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: none;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 2px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #888;
+}
+
 /* Paste this css to your style sheet file or under head tag */
 /* This only works with JavaScript, 
 if it's not present, don't show loader */
@@ -1274,6 +1296,17 @@ a:link, a:hover, a:visited, a:active {text-decoration: none}
 }
 .post-footer {
     margin-left: 5px;
+}
+.post-button {
+    height: 32px;
+    width: 100px;
+    font-size: 11pt;
+    background-color: #80e292;
+    color: white;
+    border-radius: 16px;
+}
+.post-button:focus {
+    outline: none;
 }
 .popup-backdrop {
     position: fixed;

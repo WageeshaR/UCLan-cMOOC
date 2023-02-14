@@ -10,9 +10,9 @@
                 <span>Popular within this course</span><br>
                 @foreach($tw_content as $tc)
                     @if($tc->is_hashtag)
-                        <a class="sm-tags" target="_blank" href="https://twitter.com/hashtag/{{$tc->title}}?src=hashtag_click">{{$tc->title}}</a>
+                        <a class="sm-tags" target="_blank" href="https://twitter.com/hashtag/{{$tc->title}}?src=hashtag_click">{{$tc->title}}</a><br>
                     @else
-                        <a class="sm-tags" target="_blank" href="{{$tc->url}}">{{$tc->title}}</a>
+                        <a class="sm-tags" target="_blank" href="{{$tc->url}}">{{$tc->title}}</a><br>
                     @endif
                 @endforeach
                 <div style="margin-top: 10px">Follow the <a style="font-weight: bold" href="www.twitter.com">course profile</a></div>
@@ -27,7 +27,7 @@
                 <div>
                     <span>Join discussions on below spaces</span><br>
                     @foreach($fb_content as $tc)
-                        <a class="sm-tags" target="_blank" href="{{$tc->url}}">{{$tc->title}}</a>
+                        <a class="sm-tags" target="_blank" href="{{$tc->url}}">{{$tc->title}}</a><br>
                     @endforeach
                     <div style="margin-top: 10px">Follow the official <a style="font-weight: bold" href="www.facebook.com">course page</a></div>
                 </div>

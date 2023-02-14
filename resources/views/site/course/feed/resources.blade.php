@@ -131,7 +131,7 @@
             let collection = document.getElementsByClassName("resource_tab_item_vertical");
             for (element of collection) {
                 const e = element;
-                if (!e.querySelector("#title-tag").innerText.includes(val)) {
+                if (!e.querySelector("#title-tag").innerText.toLowerCase().includes(val.toLowerCase())) {
                     e.style.display = 'none';
                 } else {
                     if (e.style.display == 'none') {

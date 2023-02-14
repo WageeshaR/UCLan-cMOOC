@@ -46,9 +46,10 @@
                         <div id="contents"></div>
                         <input placeholder="tweet url" type="hidden" id="tweet_content" name="tweet_content" class="form-control">
                         <input placeholder="video url" type="hidden" id="yt_content" name="yt_content" class="form-control">
+                        <span id="empty-tag" style="color: red; margin-left: 5px; display: none">Form is empty</span>
                     </div>
                     <div class="post-button-group">
-                        <button type="submit" class="btn btn-primary" style="height: 35px">Post</button>
+                        <button type="submit" class="post-button">Post</button>
                         <img src="{{asset('frontend/icons/textbox.jpg')}}" height="40px" class="post-clickable-icon" onclick="openContents()">
                         <img src="{{asset('frontend/icons/Twitter.png')}}" height="40px" class="post-clickable-icon" onclick="openTweet()">
                         <img src="{{asset('frontend/icons/YT.png')}}" height="40px" class="post-clickable-icon" onclick="openYT()">
@@ -58,11 +59,23 @@
                     <div class="published-post-frame" id="{{$post->id}}">
                         <div class="post-header">
                             <div>
-                                {{$post->author_id}}
-                                <span style="font-weight: normal; font-size: 12px; color: rgb(200,200,200); margin-left: 5px">@Sample Institution Name &bull; 31 Oct &bull; {{$post->location}}</span>
+                                {{$post->name}}
+                                <span style="font-weight: normal; font-size: 12px; color: rgb(200,200,200); margin-left: 5px">
+                                    <?php
+                                        $timestamp = strtotime($post->created_at);
+                                        $strTime = array("second", "minute", "hour", "day", "month", "year");
+                                        $length = array("60","60","24","30","12","10");
+                                        $diff     = time()- $timestamp;
+                                        for($i = 0; $diff >= $length[$i] && $i < count($length)-1; $i++) {
+                                            $diff = $diff / $length[$i];
+                                        }
+                                        $diff = round($diff);
+                                        echo $post->institution . " &bull; " . $diff . " " . $strTime[$i] . "(s) ago". " &bull; " . $post->location;
+                                    ?>
+                                </span>
                             </div>
                             <div class="dropdown">
-                                <span title="edit post" class="material-icons grayed-out-icon" onclick="showEditOptions({{$post->id}})">more_vert</span>
+                                <span style="user-select: none" title="edit post" class="material-icons grayed-out-icon" onclick="showEditOptions({{$post->id}})">more_vert</span>
                                 <div class="dropdown-content" id="edit-dropdown-{{$post->id}}">
                                     <a href="#" onclick="editPost({{$post->id}})">Edit</a>
                                     <a href="#" onclick="deletePost({{$post->id}})">Delete</a>
@@ -232,9 +245,16 @@
             placeholder: 'Share your ideas...',
             theme: 'snow'  // or 'bubble'
         });
-        $("#post-form").on("submit",function(){
+        $("#post-form").on("submit",function(e){
             var $input = $(this).find("input[name=quill_content]");
             var $qc = quill.root.innerHTML;
+            if (quill.getLength() <= 1 && $("#tweet_content").val() == '' && $("#yt_content").val() == '') {
+                e.preventDefault();
+                $("#empty-tag").show();
+                setTimeout(() => {
+                    $("#empty-tag").hide();
+                }, 5000);
+            }
             $input.attr('value', $qc);
         });
         function editPost(postId) {

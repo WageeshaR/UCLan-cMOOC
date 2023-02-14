@@ -71,6 +71,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'email_hash' => sha1($data['email']),
             'password' => bcrypt($data['password']),
+            'institution_id' => $data['institution']
         ]);
 
         $user->roles()
