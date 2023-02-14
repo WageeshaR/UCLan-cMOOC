@@ -40,11 +40,18 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
+    private function getCredentials(\Illuminate\Http\Request $request) {
+        $credentials = [];
+        $credentials['email_hash'] = sha1($request['email']);
+        $credentials['password'] = $request['password'];
+        return $credentials;
+    }
+
     public function login(\Illuminate\Http\Request $request) {
         $this->validateLogin($request);
 
         // This section is the only change
-        if ($this->guard()->validate($this->credentials($request))) {
+        if ($this->guard()->validate($this->getCredentials($request))) {
             $user = $this->guard()->getLastAttempted();
 
             // Make sure the user is active
@@ -65,7 +72,7 @@ class LoginController extends Controller
 
     public function authenticated($request , $user){
 
-        if($user->hasRole('instructor')){
+        if($user->hasRole('facilitator')){
             return redirect()->route('instructor.dashboard') ;
         }
         elseif($user->hasRole('admin')){
