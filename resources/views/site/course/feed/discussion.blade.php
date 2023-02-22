@@ -59,7 +59,9 @@
                     <div class="published-post-frame" id="{{$post->id}}">
                         <div class="post-header">
                             <div>
-                                {{$post->name}}
+                                <a href="{{ url('course-feed/'.$course->course_slug.'/'.SiteHelpers::encrypt_decrypt($discussion->lecture_quiz_id).'/user-profile/'.$post->user_id) }}">
+                                    {{$post->name}}
+                                </a>
                                 <span style="font-weight: normal; font-size: 12px; color: rgb(200,200,200); margin-left: 5px">
                                     <?php
                                         $timestamp = strtotime($post->created_at);

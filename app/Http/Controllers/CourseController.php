@@ -621,7 +621,7 @@ class CourseController extends Controller
         $discussion = DB::table('curriculum_lectures_quiz')
                         ->select('*')
                         ->where('lecture_quiz_id', SiteHelpers::encrypt_decrypt($lecture_slug, 'd'))->first();
-        $posts = Post::select('posts.*', DB::raw("CONCAT(users.first_name, ' ', users.last_name) as name"), 'institution.name as institution')
+        $posts = Post::select('posts.*', DB::raw("CONCAT(users.first_name, ' ', users.last_name) as name"), 'users.id as user_id', 'institution.name as institution')
                         ->join('users', 'users.id', '=', 'posts.author_id')
                         ->leftJoin('institution', 'institution.id', '=', 'users.institution_id')
                         ->where('lecture_id', SiteHelpers::encrypt_decrypt($lecture_slug, 'd'))->orderBy('created_at', 'DESC')->get();
@@ -1246,5 +1246,16 @@ if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {               $ffmpeg_path = b
         $cmnt->parent_id = $request->parent_id;
         $cmnt->save();
         return response("Success", 200);
+    }
+
+    public function userProfile($course_slug = '', $lecture_slug = '', $user_id = '', Request $request) {
+        $user = User::select('users.*', 'institution.name as institution')
+                    ->join('institution', 'institution.id', '=', 'users.institution_id')
+                    ->where('users.id', $user_id)->first();
+        $course = Course::where('course_slug', $course_slug)->first();
+        $discussion = DB::table('curriculum_lectures_quiz')
+            ->select('*')
+            ->where('lecture_quiz_id', SiteHelpers::encrypt_decrypt($lecture_slug, 'd'))->first();
+        return view('site.course.user-profile', compact('user', 'course', 'discussion'));
     }
 }

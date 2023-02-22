@@ -3,7 +3,7 @@
         <i style="font-size: 32px; color: #346d3d" class="material-icons">home</i>
         <span style="font-size: 20px; color: #346d3d; margin-left: 20px">Feed</span>
     </a>
-    <a class="left-menu-item" id="profile">
+    <a class="left-menu-item" id="profile" href="{{ url('course-feed/'.$course->course_slug.'/'.SiteHelpers::encrypt_decrypt($discussion->lecture_quiz_id).'/user-profile/'.Auth::user()->id) }}">
         <i style="font-size: 32px; color: #346d3d" class="material-icons">person</i>
         <span style="font-size: 20px; color: #346d3d; margin-left: 20px">Profile</span>
     </a>

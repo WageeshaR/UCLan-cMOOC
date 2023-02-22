@@ -150,6 +150,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('delete-post', 'CourseController@deletePost')->name('course.deletePost');
         Route::get('load-comments/{post_id}', 'CourseController@loadComments')->name('course.post.comments');
         Route::post('save-comment', 'CourseController@saveComment')->name('course.saveComment');
+
+        Route::get('course-feed/{course_slug}/{lecture_slug}/user-profile/{user_id}', 'CourseController@userProfile')->name('course.userProfile');
     });
 
     // Functions access by only facilitators
