@@ -621,10 +621,10 @@ class CourseController extends Controller
         $discussion = DB::table('curriculum_lectures_quiz')
                         ->select('*')
                         ->where('lecture_quiz_id', SiteHelpers::encrypt_decrypt($lecture_slug, 'd'))->first();
-        $posts = Post::select('posts.*', DB::raw("CONCAT(users.first_name, ' ', users.last_name) as name"), 'users.id as user_id', 'institution.name as institution')
+        $posts = Post::select('posts.*', 'users.*', 'users.id as author_id', 'institution.name as institution')
                         ->join('users', 'users.id', '=', 'posts.author_id')
                         ->leftJoin('institution', 'institution.id', '=', 'users.institution_id')
-                        ->where('lecture_id', SiteHelpers::encrypt_decrypt($lecture_slug, 'd'))->orderBy('created_at', 'DESC')->get();
+                        ->where('lecture_id', SiteHelpers::encrypt_decrypt($lecture_slug, 'd'))->orderBy('posts.created_at', 'DESC')->get();
         $tw_content = SMContent::where('course_id', $course->id)
                                 ->where('lecture_id', SiteHelpers::encrypt_decrypt($lecture_slug, 'd'))
                                 ->where('sm_type', 'tw')->get();
@@ -1257,5 +1257,17 @@ if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {               $ffmpeg_path = b
             ->select('*')
             ->where('lecture_quiz_id', SiteHelpers::encrypt_decrypt($lecture_slug, 'd'))->first();
         return view('site.course.user-profile', compact('user', 'course', 'discussion'));
+    }
+
+    public function userProfilePicUpload($course_slug = '', $lecture_slug = '', Request $request) {
+        $name = null;
+        if ($request->file('profile-pic')) {
+            $name = 'profile_pic';
+            $request->file('profile-pic')->storeAs('user_resources/'.\Auth::user()->id, $name);
+        }
+        $user = User::find(Auth::user()->id);
+        $user->profile_pic = $name;
+        $user->save();
+        return $this->lectureDiscussion($course_slug, $lecture_slug, $request);
     }
 }

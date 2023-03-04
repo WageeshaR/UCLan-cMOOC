@@ -59,8 +59,8 @@
                     <div class="published-post-frame" id="{{$post->id}}">
                         <div class="post-header">
                             <div>
-                                <a href="{{ url('course-feed/'.$course->course_slug.'/'.SiteHelpers::encrypt_decrypt($discussion->lecture_quiz_id).'/user-profile/'.$post->user_id) }}">
-                                    {{$post->name}}
+                                <a style="cursor: pointer; color: #346d3d" onclick="openUserProfile({{$post->id}})">
+                                    {{$post->first_name . ' ' . $post->last_name}}
                                 </a>
                                 <span style="font-weight: normal; font-size: 12px; color: rgb(200,200,200); margin-left: 5px">
                                     <?php
@@ -120,7 +120,7 @@
                                 <div id="discussion-body-{{$post->id}}"></div>
                             </div>
                         </div>
-
+                        @include('site.course.user-profile', ['post' => $post, 'course_slug' => $course->course_slug, 'lecture_slug' => SiteHelpers::encrypt_decrypt($discussion->lecture_quiz_id)])
                     </div>
                 @endforeach
             </div>
@@ -143,6 +143,12 @@
 @endsection
 @section("javascript")
     <script>
+        function openUserProfile(id) {
+            $("#user-profile-model-"+id).show();
+        }
+        function closeUserProfile(id) {
+            $("#user-profile-model-"+id).hide();
+        }
         function loadReloadPopUp(post_id, reload=false) {
             document.getElementById("popup-backdrop-"+post_id).style.display = 'block';
             const xmlHttp = new XMLHttpRequest();
