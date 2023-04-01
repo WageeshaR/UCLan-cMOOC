@@ -27,8 +27,8 @@ class UserTableSeeder extends Seeder
 
         $admin = new User();
         $admin->first_name = 'Admin';
-        $admin->last_name = 'A';
-        $admin->email = 'admin@ulearn.com';
+        $admin->last_name = 'Admin';
+        $admin->email = 'admin@include.co.uk';
         $admin->password = bcrypt('secret');
         $admin->is_active = 1;
         $admin->save();

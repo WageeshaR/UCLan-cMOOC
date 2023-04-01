@@ -3,7 +3,8 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>ULEARN LMS</title>
+        <title>INCLUDE cMOOC</title>
+        <link rel="icon" type="image/png" href="frontend/img/include_logo.png"/>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="robots" content="all,follow">
