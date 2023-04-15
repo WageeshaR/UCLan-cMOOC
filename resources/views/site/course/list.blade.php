@@ -99,33 +99,6 @@
                         </li>
                         @endforeach
                     </ul>
-
-                    <h6 class="mt-3 underline-heading">Price</h6>
-                    <?php $levels = array(
-                                            '0-0' => 'Free',
-                                            '1-50' => 'Less than USD 50',
-                                            '50-99' => 'USD 50 - USD 99',
-                                            '100-199' => 'USD 100 - USD 199',
-                                            '200-299' => 'USD 200 - USD 299',
-                                            '300-399' => 'USD 300 - USD 399',
-                                            '400-499' => 'USD 400 - USD 499',
-                                            '500' => 'More than USD 500',
-                                            );
-                    ?>
-                    <ul class="ul-no-padding">
-                        <?php foreach ($levels as $l_key => $l_value) { ?>
-                        <li> 
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input filter-results" id="{{ $l_key }}" name="price_id[]" value="{{ $l_key }}"
-                                @if(isset($_GET['price_id']))
-                                    {{ in_array($l_key, $_GET['price_id']) ? 'checked' : '' }}
-                                @endif
-                                >
-                                <label class="custom-control-label" for="{{ $l_key }}">{{ $l_value }}</label>
-                            </div>
-                        </li>
-                        <?php }?>
-                    </ul>
                 </form>
                 </div>
                 <!-- filter end -->

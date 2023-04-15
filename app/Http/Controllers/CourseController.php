@@ -505,7 +505,7 @@ class CourseController extends Controller
             $slug = $request->input('course_title');
             $slug = str_slug($slug, '-');
 
-            $results = DB::select(DB::raw("SELECT count(*) as total from courses where course_slug REGEXP '^{$slug}(-[0-9]+)?$' "));
+            $results = DB::select(DB::raw("SELECT count(*) as total from courses"));
 
             $finalSlug = ($results['0']->total > 0) ? "{$slug}-{$results['0']->total}" : $slug;
             $course->course_slug = $finalSlug;
