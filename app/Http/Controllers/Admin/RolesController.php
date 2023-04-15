@@ -44,6 +44,12 @@ class RolesController extends Controller
 
     public function saveRole($role_id='', Request $request)
     {
+        $data = $request->all();
+        $role = new Role();
+        $role->name = $data['name'];
+        $role->description = $data['description'];
+        $role->is_active = $data['is_active'];
+        $role->save();
         $success_message = "Role saved successfully";
         return $this->return_output('flash', 'success', $success_message, 'admin/roles', '200');
     }

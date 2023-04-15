@@ -66,8 +66,12 @@
                 <label for="inputCheckboxStudent">Student</label>
               </div>
               <div class="checkbox-custom checkbox-default checkbox-inline">
-                <input type="checkbox" id="inputCheckboxInstructor" name="roles[]" value="instructor" @if($user->id &&  $user->hasRole('facilitator')) checked @endif>
+                <input type="checkbox" id="inputCheckboxInstructor" name="roles[]" value="facilitator" @if($user->id &&  $user->hasRole('facilitator')) checked @endif>
                 <label for="inputCheckboxInstructor">Facilitator</label>
+              </div>
+              <div class="checkbox-custom checkbox-default checkbox-inline">
+                  <input type="checkbox" id="inputCheckboxInstructor" name="roles[]" value="privileged student" @if($user->id &&  $user->hasRole('privileged student')) checked @endif>
+                  <label for="inputCheckboxInstructor">Privileged Student</label>
               </div>
               <div id="role-div-error">
               @if ($errors->has('roles'))

@@ -55,6 +55,8 @@
                         <span class="badge badge-primary">{{ ucfirst($role->name) }}</span>
                     @elseif($role->name == 'facilitator')
                         <span class="badge badge-warning">{{ ucfirst($role->name) }}</span>
+                    @elseif($role->name == 'privileged student')
+                        <span class="badge badge-info">{{ ucfirst($role->name) }}</span>
                     @endif
                     @if(!$loop->last)
                     <br>
