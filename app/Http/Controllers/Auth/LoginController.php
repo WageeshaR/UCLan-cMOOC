@@ -51,7 +51,7 @@ class LoginController extends Controller
         $this->validateLogin($request);
 
         // This section is the only change
-        if ($this->guard()->validate($this->getCredentials($request))) {
+        if ($this->guard()->validate($this->credentials($request))) {
             $user = $this->guard()->getLastAttempted();
 
             // Make sure the user is active
