@@ -100,7 +100,7 @@ class BlogController extends Controller
             $slug = $request->input('blog_title');
             $slug = str_slug($slug, '-');
 
-            $results = DB::select(DB::raw("SELECT count(*) as total from blogs where blog_slug REGEXP '^{$slug}(-[0-9]+)?$' "));
+            $results = DB::select(DB::raw("SELECT count(*) as total from blogs"));
 
             $finalSlug = ($results['0']->total > 0) ? "{$slug}-{$results['0']->total}" : $slug;
             $blog->blog_slug = $finalSlug;
