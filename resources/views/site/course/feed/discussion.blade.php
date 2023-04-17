@@ -56,10 +56,10 @@
                     </div>
                 </form>
                 @foreach($posts as $post)
-                    <div class="published-post-frame" id="{{$post->id}}">
+                    <div class="published-post-frame" id="{{$post->post_id}}">
                         <div class="post-header">
                             <div>
-                                <a style="cursor: pointer; color: #346d3d" onclick="openUserProfile({{$post->id}})">
+                                <a style="cursor: pointer; color: #346d3d" onclick="openUserProfile({{$post->post_id}})">
                                     {{$post->first_name . ' ' . $post->last_name}}
                                 </a>
                                 <span style="font-weight: normal; font-size: 12px; color: rgb(200,200,200); margin-left: 5px">
@@ -77,10 +77,10 @@
                                 </span>
                             </div>
                             <div class="dropdown">
-                                <span style="user-select: none" title="edit post" class="material-icons grayed-out-icon" onclick="showEditOptions({{$post->id}})">more_vert</span>
-                                <div class="dropdown-content" id="edit-dropdown-{{$post->id}}">
-                                    <a href="#" onclick="editPost({{$post->id}})">Edit</a>
-                                    <a href="#" onclick="deletePost({{$post->id}})">Delete</a>
+                                <span style="user-select: none" title="edit post" class="material-icons grayed-out-icon" onclick="showEditOptions({{$post->post_id}})">more_vert</span>
+                                <div class="dropdown-content" id="edit-dropdown-{{$post->post_id}}">
+                                    <a href="#" onclick="editPost({{$post->post_id}})">Edit</a>
+                                    <a href="#" onclick="deletePost({{$post->post_id}})">Delete</a>
                                 </div>
                             </div>
                         </div>
@@ -104,20 +104,20 @@
                         </div>
                         <div class="post-footer">
                             <span title="make trending" class="material-icons grayed-out-icon">trending_up</span>
-                            <span onclick="loadReloadPopUp({{$post->id}})" id="discussion" title="discussion" class="material-icons grayed-out-icon">comment</span>
+                            <span onclick="loadReloadPopUp({{$post->post_id}})" id="discussion" title="discussion" class="material-icons grayed-out-icon">comment</span>
                             <span title="share" class="material-icons grayed-out-icon">share</span>
                             <span onclick="openChat()" title="send to a chat" class="material-icons grayed-out-icon">send</span>
                         </div>
-                        <div class="popup-backdrop" id="popup-backdrop-{{$post->id}}">
-                            <div id="discussion-popup-{{$post->id}}" class="discussion-popup-frame">
+                        <div class="popup-backdrop" id="popup-backdrop-{{$post->post_id}}">
+                            <div id="discussion-popup-{{$post->post_id}}" class="discussion-popup-frame">
                                 <div style="margin-top: 0px">
-                                    <button onclick="closePopUp({{$post->id}})" class="popup-close-button">close</button>
+                                    <button onclick="closePopUp({{$post->post_id}})" class="popup-close-button">close</button>
                                 </div>
                                 <div id="comment-container" class="comment-container">
-                                    <textarea type="text" placeholder="what are your thoughts.." id="comment_box_{{$post->id}}" name="comment_box_{{$post->id}}" class="comment-box"></textarea>
-                                    <button onclick="submitComment({{$post->id}})" class="comment-button">comment</button>
+                                    <textarea type="text" placeholder="what are your thoughts.." id="comment_box_{{$post->post_id}}" name="comment_box_{{$post->post_id}}" class="comment-box"></textarea>
+                                    <button onclick="submitComment({{$post->post_id}})" class="comment-button">comment</button>
                                 </div>
-                                <div id="discussion-body-{{$post->id}}"></div>
+                                <div id="discussion-body-{{$post->post_id}}"></div>
                             </div>
                         </div>
                         @include('site.course.user-profile', ['post' => $post, 'course_slug' => $course->course_slug, 'lecture_slug' => SiteHelpers::encrypt_decrypt($discussion->lecture_quiz_id)])
