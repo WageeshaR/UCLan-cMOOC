@@ -102,7 +102,7 @@ figure figcaption {
       <div class="row">
           <div class="form-group col-md-7">
               <label class="form-control-label">Attached Lecture <span class="required">*</span></label>
-              <input type="text" class="form-control" name="lecture" placeholder="Attached Lecture" value="{{ $blog->lecture_quiz_id }}" />
+              <input type="text" class="form-control" name="lecture" placeholder="Attached Lecture" />
               @if ($errors->has('lecture'))
                   <label class="error" for="lecture">{{ $errors->first('lecture') }}</label>
               @endif

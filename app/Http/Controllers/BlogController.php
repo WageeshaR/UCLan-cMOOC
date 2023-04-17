@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use DB;
 use Illuminate\Support\Facades\Input;
@@ -142,6 +143,7 @@ class BlogController extends Controller
 
         }
 
+        $blog->author_id = Auth::user()->id;
         $blog->save();
 
         return $this->return_output('flash', 'success', $success_message, 'common-blogs', '200');
