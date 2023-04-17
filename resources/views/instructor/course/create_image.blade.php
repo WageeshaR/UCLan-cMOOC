@@ -82,7 +82,7 @@ figure figcaption {
             <label class="cabinet center-block">
                 <figure class="course-image-container">
                     <i data-toggle="tooltip" data-original-title="Delete" data-id="course_image" class="fa fa-trash remove-lp" data-content="{{  Crypt::encryptString(json_encode(array('model'=>'courses', 'field'=>'course_image', 'pid' => 'id', 'id' => $course->id, 'photo'=>$course->course_image))) }}" style="display: @if(Storage::exists($course->course_image)){{ 'block' }} @else {{ 'none' }} @endif"></i>
-                    <img src="@if(Storage::exists($course->course_image)){{ asset('backend/assets/images/'.$course->thumb_image) }}@else{{ asset('backend/assets/images/course1_detail.jpg') }}@endif" class="gambar img-responsive" id="course_image-output" name="course_image-output" />
+                    <img src="@if(Storage::exists($course->course_image)){{ url('storage/'.$course->course_image) }}@else{{ asset('backend/assets/images/course1_detail.jpg') }}@endif" class="gambar img-responsive" id="course_image-output" name="course_image-output" />
                 </figure>
             </label>
         </div>
