@@ -33,7 +33,7 @@
                     
                     <div class="row mb-1">
                         <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-4">
-                            <img src="@if(Storage::exists($course->thumb_image)){{ Storage::url($course->thumb_image) }}@else{{ asset('backend/assets/images/course1_thumb.jpg') }}@endif" width="120" height="90">
+                            <img src="@if(Storage::exists($course->thumb_image)){{ url('storage/'.$course->thumb_image) }}@else{{ asset('backend/assets/images/course1_thumb.jpg') }}@endif" width="120" height="90">
                         </div>
                         <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-8">
                             <h6 class="mb-xl-0">{{ $course->course_title }}</h6>
@@ -63,24 +63,38 @@
                     <input type="hidden" name="payment_method" value="paypal_express_checkout">
                     <input type="hidden" name="course_title" value="{{ $course->course_title }}">
 
-                    <div class="form-group mt-4">
-                        <button type="submit" class="btn btn-lg btn-block social-btn facebook-btn">
-                            <div class="row">
-                                <div class="col-3">
-                                    <i class="@if($course->price == 0.00) fas fa-cart-arrow-down @else fab fa-paypal  @endif float-right"></i>
-                                </div>
-                                <div class="col-9">
-                                    <span>
-                                    @if($course->price == 0.00)
-                                    Subscribe to the course
+                    @if(\Auth::user()->institution_id == 1 || \Auth::user()->institution_id == 2)
+                        <div class="form-group mt-4">
+                            <button type="submit" class="btn btn-lg btn-block social-btn facebook-btn">
+                                <div class="row">
+                                    <div class="col-3">
+                                        <i class="@if($course->price == 0.00) fas fa-cart-arrow-down @else fab fa-paypal  @endif float-right"></i>
+                                    </div>
+                                    <div class="col-9">
+                                <span>
+                                @if($course->price == 0.00)
+                                        Subscribe to the course
                                     @else
-                                    Pay with Paypal Account
+                                        Pay with Paypal Account
                                     @endif
-                                    </span>
+                                </span>
+                                    </div>
                                 </div>
-                            </div>
-                        </button>
-                    </div>
+                            </button>
+                        </div>
+                    @else
+                        <div class="form-group mt-4">
+                            <button disabled type="submit" class="btn btn-lg btn-block social-btn google-btn">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <span style="color: black">
+                                            This course is unavailable for your institution
+                                        </span>
+                                    </div>
+                                </div>
+                            </button>
+                        </div>
+                    @endif
                     </form>
                     </div>
                </div>
