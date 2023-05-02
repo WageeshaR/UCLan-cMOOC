@@ -74,6 +74,11 @@
                                         $diff = round($diff);
                                         echo $post->institution . " &bull; " . $diff . " " . $strTime[$i] . "(s) ago". " &bull; " . $post->location;
                                     ?>
+                                    @if($post->approved)
+                                        <span class="approved-icon">APPROVED</span>
+                                    @else
+                                        <span class="to-be-approved-icon">NOT APPROVED YET</span>
+                                    @endif
                                 </span>
                             </div>
                             <div class="dropdown">
@@ -81,6 +86,9 @@
                                 <div class="dropdown-content" id="edit-dropdown-{{$post->post_id}}">
                                     <a href="#" onclick="editPost({{$post->post_id}})">Edit</a>
                                     <a href="#" onclick="deletePost({{$post->post_id}})">Delete</a>
+                                    @if(Auth::user()->hasRole('facilitator') && $post->approved == false)
+                                        <a href="#" onclick="approvePost({{$post->post_id}})">Approve</a>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -265,6 +273,17 @@
             }
             $input.attr('value', $qc);
         });
+        function approvePost(postId) {
+            fetch("/approve-post", {
+                method: "POST",
+                headers: {'Content-Type': 'application/json', "X-CSRF-Token": '{{csrf_token()}}'},
+                body: JSON.stringify({
+                    post_id: postId
+                })
+            }).then(res => {
+                location.reload();
+            });
+        }
         function editPost(postId) {
             var post = document.getElementById(postId);
             var content = post.childNodes.item(3).innerHTML;

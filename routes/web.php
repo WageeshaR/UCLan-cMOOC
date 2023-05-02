@@ -170,6 +170,9 @@ Route::group(['middleware' => 'auth'], function () {
         // Access grants related routes
         Route::get('instructor-access-grants', 'InstructorController@getAccessGrantsData')->name('instructor.access.grants');
         Route::post('instructor-access-grants-save', 'InstructorController@saveAccessGrant')->name('instructor.access.grants.save');
+
+        // Approve posts (content moderation)
+        Route::post('approve-post', 'CourseController@approvePost')->name('course.approvePost');
     });
 
     

@@ -621,10 +621,23 @@ class CourseController extends Controller
         $discussion = DB::table('curriculum_lectures_quiz')
                         ->select('*')
                         ->where('lecture_quiz_id', SiteHelpers::encrypt_decrypt($lecture_slug, 'd'))->first();
-        $posts = Post::select('posts.*', 'posts.id as post_id', 'users.*', 'users.id as author_id', 'institution.name as institution')
-                        ->join('users', 'users.id', '=', 'posts.author_id')
-                        ->leftJoin('institution', 'institution.id', '=', 'users.institution_id')
-                        ->where('lecture_id', SiteHelpers::encrypt_decrypt($lecture_slug, 'd'))->orderBy('posts.created_at', 'DESC')->get();
+        if (\Auth::user()->hasRole('facilitator') && $course->instructor_id == \Auth::user()->instructor->id) {
+            $posts = Post::select('posts.*', 'posts.id as post_id', 'users.*', 'users.id as author_id', 'institution.name as institution')
+                ->join('users', 'users.id', '=', 'posts.author_id')
+                ->leftJoin('institution', 'institution.id', '=', 'users.institution_id')
+                ->where('lecture_id', SiteHelpers::encrypt_decrypt($lecture_slug, 'd'))
+                ->orderBy('posts.created_at', 'DESC')->get();
+        } else {
+            $posts = Post::select('posts.*', 'posts.id as post_id', 'users.*', 'users.id as author_id', 'institution.name as institution')
+                ->join('users', 'users.id', '=', 'posts.author_id')
+                ->leftJoin('institution', 'institution.id', '=', 'users.institution_id')
+                ->where('lecture_id', SiteHelpers::encrypt_decrypt($lecture_slug, 'd'))
+                ->where(function($query) {
+                    $query->where('posts.approved', true)
+                        ->orWhere('posts.author_id', Auth::user()->id);
+                })
+                ->orderBy('posts.created_at', 'DESC')->get();
+        }
         $tw_content = SMContent::where('course_id', $course->id)
                                 ->where('lecture_id', SiteHelpers::encrypt_decrypt($lecture_slug, 'd'))
                                 ->where('sm_type', 'tw')->get();
@@ -1201,6 +1214,14 @@ if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {               $ffmpeg_path = b
             $post->video_url = $url;
         }
         $post->location = $request->location;
+        $post->save();
+        $return_url = 'course-enroll/'.$request->course.'/'.SiteHelpers::encrypt_decrypt($request->lecture);
+        return redirect($return_url)->with('status', "Success");
+    }
+
+    public function approvePost(Request $request) {
+        $post = Post::find($request->post_id);
+        $post->approved = true;
         $post->save();
         $return_url = 'course-enroll/'.$request->course.'/'.SiteHelpers::encrypt_decrypt($request->lecture);
         return redirect($return_url)->with('status', "Success");
