@@ -60,7 +60,11 @@
                         <div class="post-header">
                             <div>
                                 <a style="cursor: pointer; color: #346d3d" onclick="openUserProfile({{$post->post_id}})">
-                                    {{$post->first_name . ' ' . $post->last_name}}
+                                    @if($post->anonymize)
+                                        Anonymous User
+                                    @else
+                                        {{$post->first_name . ' ' . $post->last_name}}
+                                    @endif
                                 </a>
                                 <span style="font-weight: normal; font-size: 12px; color: rgb(200,200,200); margin-left: 5px">
                                     <?php

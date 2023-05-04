@@ -622,7 +622,7 @@ class CourseController extends Controller
                         ->select('*')
                         ->where('lecture_quiz_id', SiteHelpers::encrypt_decrypt($lecture_slug, 'd'))->first();
         if (\Auth::user()->hasRole('facilitator') && $course->instructor_id == \Auth::user()->instructor->id) {
-            $posts = Post::select('posts.*', 'posts.id as post_id', 'users.*', 'users.id as author_id', 'institution.name as institution')
+            $posts = Post::select('posts.*', 'posts.id as post_id', 'users.*', 'users.id as author_id', 'users.anonymize', 'institution.name as institution')
                 ->join('users', 'users.id', '=', 'posts.author_id')
                 ->leftJoin('institution', 'institution.id', '=', 'users.institution_id')
                 ->where('lecture_id', SiteHelpers::encrypt_decrypt($lecture_slug, 'd'))

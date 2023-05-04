@@ -17,6 +17,7 @@ use App\Models\User;
 use App\Models\Role;
 use DataTables;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 /**
  * Class contain functions for admin
@@ -138,6 +139,13 @@ class UserController extends Controller
         
         
         return $this->return_output('flash', 'success', $success_message, 'admin/users', '200');
+    }
+
+    public function anonymizeUser(Request $request) {
+        $user = User::find(Auth::user()->id);
+        $user->anonymize = $request->input('anonymize');
+        $user->save();
+        return response("Success", 200);
     }
 
     public function getData()
