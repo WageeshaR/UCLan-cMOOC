@@ -23,7 +23,7 @@
             </div>
             <div class="text-center">
                 <span style="font-size: 30px; font-weight: bolder">
-                    @if($post->author_id == Auth::user()->id)
+                    @if(!$post->anonymize)
                         {{ $post->first_name . ' ' . $post->last_name }}
                     @else
                         Anonymous User
@@ -32,13 +32,13 @@
             </div>
             <hr>
             <div class="row justify-content-center">
-                @if($post->author_id == Auth::user()->id)
+                @if(!$post->anonymize)
                     <h5>Institution: {{ $post->institution }}</h5>
                 @else
                     Anonymous Institution
                 @endif
             </div>
-            @if($post->author_id == Auth::user()->id)
+            @if(!$post->anonymize)
                 <div class="row justify-content-center">
                     <h5>Email: {{ $post->email }}</h5>
                 </div>
