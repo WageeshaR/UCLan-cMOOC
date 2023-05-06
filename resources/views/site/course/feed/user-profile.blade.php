@@ -30,7 +30,7 @@
             @include('site.course.feed.feed-column-left', ['course' => $course, 'discussion' => $discussion]);
             <div class="user-profile-container" style="margin-top: 200px">
                 <div class="user-profile-pic">
-                    <img height="200px" src="@if(Storage::exists('user_resources/'.$user->id.'/profile_pic')){{ url('storage/user_resources/'.$post->author_id.'/profile_pic') }}@else{{ asset('frontend/img/avatar.png') }}@endif">
+                    <img height="200px" src="@if(Storage::exists('user_resources/'.$user->id.'/profile_pic')){{ url('storage/user_resources/'.$user->id.'/profile_pic') }}@else{{ asset('frontend/img/avatar.png') }}@endif">
                 </div>
                 <div class="text-center">
                     <span style="font-size: 30px; font-weight: bolder">
