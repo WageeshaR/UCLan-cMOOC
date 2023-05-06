@@ -1277,7 +1277,7 @@ if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {               $ffmpeg_path = b
         $discussion = DB::table('curriculum_lectures_quiz')
             ->select('*')
             ->where('lecture_quiz_id', SiteHelpers::encrypt_decrypt($lecture_slug, 'd'))->first();
-        return view('site.course.user-profile', compact('user', 'course', 'discussion'));
+        return view('site.course.feed.user-profile', compact('user', 'course', 'discussion'));
     }
 
     public function userProfilePicUpload($course_slug = '', $lecture_slug = '', Request $request) {

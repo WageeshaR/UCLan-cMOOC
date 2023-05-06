@@ -132,7 +132,7 @@
                                 <div id="discussion-body-{{$post->post_id}}"></div>
                             </div>
                         </div>
-                        @include('site.course.user-profile', ['post' => $post, 'course_slug' => $course->course_slug, 'lecture_slug' => SiteHelpers::encrypt_decrypt($discussion->lecture_quiz_id)])
+                        @include('site.course.user-profile-popup', ['post' => $post, 'course_slug' => $course->course_slug, 'lecture_slug' => SiteHelpers::encrypt_decrypt($discussion->lecture_quiz_id)])
                     </div>
                 @endforeach
             </div>
