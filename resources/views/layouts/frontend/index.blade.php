@@ -12,6 +12,8 @@
         <link rel="stylesheet" href="{{ asset('frontend/css/bootstrap.css') }}">
         <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
         <link rel="stylesheet" href="{{ asset('frontend/css/fancybox.css') }}">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="{{ asset('frontend/vendor/rating/rateyo.css') }}">
         
         <link rel="stylesheet" href="{{ asset('frontend/css/font-awesome.css') }}">
 
@@ -25,11 +27,22 @@
 
     <nav class="navbar navbar-default fixed-top" style="height: 70px">
         <div class="row align-items-center d-flex" style="flex-grow: 1; height: 100%">
-            <div class="col-6 col-sm-4 col-md-3 col-lg-8 col-xl-8" id="logo">
+            <div class="col-6 col-sm-4 col-md-3 col-lg-8 col-xl-8">
                 <i class="fa fa-bars d-inline-block d-md-none mobile-nav"></i>
                 <a href="{{ route('home') }}" class="float-xl-left"><img src="{{ asset('frontend/img/include_logo.png') }}" width="auto" height="48" /></a>
                 <i class="fa fa-bars d-inline-block d-md-none mobile-nav"></i>
                 <a class="float-xl-none" style="margin-left: 15px"><img src="{{ asset('frontend/img/Erasmas_logo.png') }}" width="auto" height="48" /></a>
+                @if(Auth::check())
+                    <a href="http://iti4.vgtu.lt/include/" target="_blank">
+                        <button
+                                class="become-instructor bg-warning"
+                                style="min-width: 300px"
+                        >
+                            <span>Visit External Research Repository</span>
+                            <i class="pl-2 far fa-share-square"></i>
+                        </button>
+                    </a>
+                @endif
             </div>
             <?php
                 $categories = SiteHelpers::active_categories();
